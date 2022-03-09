@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "godsend:soulpaper"
+    },
+    {
+      "item": "godsend:soulpaper"
+    },
+    {
+      "item": "godsend:soulpaper"
+    },
+    {
+    "item": "minecraft:emerald"
+    },
+    {
+      "item": "minecraft:leather"
+    }
+  ],
+  "result": {
+    "item": "godsend:spellbook"
+  }
+}

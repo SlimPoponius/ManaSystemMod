@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#$#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "godsend:monstersoul"
+    },
+    "$": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "godsend:soulpaper"
+  }
+}
