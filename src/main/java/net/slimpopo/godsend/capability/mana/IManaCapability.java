@@ -6,6 +6,7 @@ public interface IManaCapability {
     int getManaLevel();
     int getSoulNeeded();
     int getSoulGiven();
+    int getSoulCalculatedNeeded();
 
     boolean spellBookCrafted();
 
@@ -13,7 +14,7 @@ public interface IManaCapability {
     void setMaxMana(int mana);
     void setSoulNeeded(int soul);
     void setLevel(int level);
-    void addMana(int mana);
+    void addMana();
     void addManaLevel();
     void increaseMaxMana(int amount);
     void setSoulGiven(int soul);

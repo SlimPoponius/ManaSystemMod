@@ -6,6 +6,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.slimpopo.godsend.capability.mana.ManaCapability;
+import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.manasystem.network.PacketManaPlayerHandler;
 import net.slimpopo.godsend.setup.Messages;
 
@@ -17,7 +19,7 @@ public class MonsterSoulItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        if(!pPlayer.isCreative() && !pPlayer.level.isClientSide){
+        if(!pPlayer.level.isClientSide){
             pPlayer.getItemInHand(pUsedHand).shrink(1);
             Messages.sendToServer(new PacketManaPlayerHandler());
         }

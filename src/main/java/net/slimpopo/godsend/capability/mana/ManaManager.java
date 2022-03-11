@@ -25,7 +25,7 @@ public class ManaManager extends SavedData {
 
     public ManaManager(CompoundTag tag){
         mc = new ManaCapability(tag.getInt("mana"),tag.getInt("maxmana"),
-                tag.getInt("manalevel"),tag.getInt("soulgiven"),tag.getInt("soulneeded"),tag.getBoolean("hasbook") );
+                tag.getInt("manalevel"),tag.getInt("soulgiven"),tag.getInt("souln"),tag.getBoolean("hasbook") );
     }
 
     public int getMana(){
@@ -53,24 +53,31 @@ public class ManaManager extends SavedData {
     }
 
     public int levelUp(){
-        int soulLeft = mc.getSoulNeeded() - (mc.getSoulGiven() + 1);
+        mc.addSoulGiven(1);
+        int soulLeft = mc.getSoulCalculatedNeeded() - mc.getSoulGiven();
         if(soulLeft <= 0){
             mc.addManaLevel();
+            //mana
+
+            //manaMax
+            //manaLevel
+            //soulNeeded
             setDirty();
             return 0;
         }
-        else{
-            mc.addSoulGiven(1);
-            setDirty();
-            soulLeft = mc.getSoulNeeded() - mc.getSoulGiven();
-            return soulLeft;
-        }
+        setDirty();
+        return soulLeft;
+    }
+
+    public int getSoulCalculatedNeeded(){
+        return mc.getSoulCalculatedNeeded();
     }
 
     public boolean setupSpellBook(){
         if(mc.spellBookCrafted() == false){
             mc.setup();
             setDirty();
+            return false;
         }
         return true;
 
@@ -91,14 +98,13 @@ public class ManaManager extends SavedData {
         tag.putInt("maxmana",mc.getMaxMana());
         tag.putInt("manalevel",mc.getManaLevel());
         tag.putInt("soulgiven",mc.getSoulGiven());
-        tag.putInt("soulneeded",mc.getSoulNeeded());
+        //tag.putInt("souln",mc.getSoulNeeded());
         tag.putBoolean("hasbook",mc.spellBookCrafted());
         return tag;
     }
 
     public void tick(Level world) {
         counter--;
-        regenCounter--;
 
         if(counter <= 0){
             counter = 10;
@@ -112,40 +118,66 @@ public class ManaManager extends SavedData {
                             .orElse(0);
                     int manaMax = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
                             .map(ManaCapability::getMaxMana)
-                            .orElse(manaLvl * 100);
+                            .orElse(0);
+                    int soul = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
+                            .map(ManaCapability::getSoulGiven)
+                            .orElse(0);
+                    int soulN = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
+                            .map(ManaCapability::getSoulCalculatedNeeded)
+                            .orElse(0);
+
+
+                    if(soulN <= 0){
+                        soulN = (int)(Math.round(Math.pow(2, manaLvl) * 1.3));
+                    }
+
+                    System.out.println("Mana: " + mana +
+                            "\nMana Max: " + manaMax +
+                            "\nMana Level: " + manaLvl +
+                            "\nSoul Given: " + soul +
+                            "\nSoul Need: " + soulN );
+                    Messages.sendToPlayer(new PacketSyncManaToClient(mana,manaMax,manaLvl,soul,soulN),sPlayer);
+                }
+            });
+        }
+
+
+    }
+
+    public void RegenTick(Level world){
+        regenCounter--;
+        if(regenCounter <= 0){
+            regenCounter = 300;
+            world.players().forEach(player -> {
+                if(player instanceof ServerPlayer sPlayer) {
+                    int mana = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
+                            .map(ManaCapability::getMana)
+                            .orElse(0);
+                    int manaLvl = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
+                            .map(ManaCapability::getManaLevel)
+                            .orElse(0);
+                    int manaMax = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
+                            .map(ManaCapability::getMaxMana)
+                            .orElse(0);
                     int soul = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
                             .map(ManaCapability::getSoulGiven)
                             .orElse(0);
                     int soulN = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
                             .map(ManaCapability::getSoulNeeded)
                             .orElse(0);
-                    boolean hasBook = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
-                            .map(ManaCapability::spellBookCrafted)
-                            .orElse(false);
-                    System.out.println("Mana: " + mana +
-                            "\nMana Max: " + manaMax +
-                            "\nMana Level: " + manaLvl +
-                            "\nSoul Given: " + soul +
-                            "\nSoul Need: " + soulN +
-                            "\nhas Spell Book: " + hasBook);
-                    Messages.sendToPlayer(new PacketSyncManaToClient(mana,manaMax,manaLvl,soul,soulN,hasBook),sPlayer);
+
+
+                    if(mana <= manaMax) {
+                        int rand = (int) (Math.random() * 10 + 1);
+                        mana += rand;
+                    }
+                    if(mana > manaMax){
+                        mana = manaMax;
+                    }
+
+                    Messages.sendToPlayer(new PacketSyncManaToClient(mana,manaMax,manaLvl,soul,soulN),sPlayer);
                 }
             });
         }
-
-//        if(regenCounter <= 0){
-//            regenCounter = 300;
-//            world.players().forEach(player -> {
-//                if(player instanceof ServerPlayer sPlayer) {
-//                    int manaLvl = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
-//                            .map(ManaCapability::getManaLevel)
-//                            .orElse(1);
-//
-//                    int rand = (int)(Math.random()+manaLvl);
-//
-//
-//                }
-//            });
-//        }
     }
 }

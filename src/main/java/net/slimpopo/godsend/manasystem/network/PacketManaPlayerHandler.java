@@ -29,39 +29,35 @@ public class PacketManaPlayerHandler {
             ServerPlayer player = ctx.getSender();
 
 
-            boolean spellbook = ManaManager.get(player.level).getSpellBook();
+            int sNdd = ManaManager.get(player.level).getSoulCalculatedNeeded();
+            int canLevelUp = ManaManager.get(player.level).levelUp();
             int mCur = ManaManager.get(player.level).getMana();
             int mMax = ManaManager.get(player.level).getManaMax();
             int mLvl = ManaManager.get(player.level).getManaLevel();
             int sGiv = ManaManager.get(player.level).getSoulGiven();
-            int sNdd = ManaManager.get(player.level).getSoulNeeded();
-            int canLevelUp = ManaManager.get(player.level).levelUp();
 
 
-            if(spellbook == true && !player.level.isClientSide){
+            if(!player.level.isClientSide){
                 player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
-                    if(canLevelUp <= 0) {
+                    if(canLevelUp == 0) {
                         playerMana.setMana(mCur);
                         playerMana.setMaxMana(mMax);
                         playerMana.setLevel(mLvl);
-                        playerMana.setSoulGiven(sGiv);
+                        playerMana.setSoulGiven(0);
                         playerMana.setSoulNeeded(sNdd);
                         player.sendMessage(new TextComponent("You have now reached LEVEL " + playerMana.getManaLevel()),
                                 player.getUUID());
                     }
                     else{
                         playerMana.setSoulGiven(sGiv);
-                        player.sendMessage(new TextComponent("To next Level: " + canLevelUp),
+                        playerMana.setSoulNeeded(sNdd);
+
+                        player.sendMessage(new TextComponent("To next Level: " + (sNdd - sGiv)),
                                 player.getUUID());
-                        playerMana.setSoulNeeded(canLevelUp);
                     }
 
                 });
             }
-            else{
-                player.sendMessage(new TextComponent("You don't have access to you SpellBook yet to gain power."),player.getUUID());
-            }
-
         });
         return true;
     }

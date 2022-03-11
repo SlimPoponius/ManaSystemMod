@@ -2,6 +2,9 @@ package net.slimpopo.godsend.capability.mana;
 
 import net.minecraft.nbt.CompoundTag;
 
+import javax.annotation.Nonnull;
+import java.util.Random;
+
 public class ManaCapability implements IManaCapability{
     protected int mana;
     protected int maxMana;
@@ -13,7 +16,11 @@ public class ManaCapability implements IManaCapability{
     protected  boolean hasSpellBook;
 
     public ManaCapability(){
-
+        mana = 100;
+        maxMana =100;
+        manaLevel = 1;
+        monsterSoulGiven = 0;
+        monsterSoulNeeded = getSoulCalculatedNeeded();
     }
 
     public ManaCapability(int mana, int maxMana,int manaLevel,
@@ -21,7 +28,7 @@ public class ManaCapability implements IManaCapability{
         this.mana = mana;
         this.maxMana = maxMana;
         this.manaLevel = manaLevel;
-        this.monsterSoulNeeded = monsterSoulNeeded;
+        this.monsterSoulNeeded = getSoulCalculatedNeeded();
         this.monsterSoulGiven = monsterSoulGiven;
         this.hasSpellBook = hasSpellBook;
     }
@@ -49,6 +56,11 @@ public class ManaCapability implements IManaCapability{
     @Override
     public int getSoulGiven() {
         return monsterSoulGiven;
+    }
+
+    @Override
+    public int getSoulCalculatedNeeded() {
+        return (int) (Math.round(Math.pow(2, this.manaLevel) * 1.3));
     }
 
     @Override
@@ -81,16 +93,16 @@ public class ManaCapability implements IManaCapability{
         manaLevel = level;
     }
 
+    @Nonnull
     @Override
-    public void addMana(int mana) {
-        if(this.mana + mana >= maxMana) this.mana = maxMana;
-        else this.mana += mana;
+    public void addMana() {
+        mana += (int)(Math.random()*(9)+1);
     }
 
     @Override
     public void addManaLevel() {
-        this.manaLevel++;
-        this.maxMana += 100;
+        this.manaLevel += 1;
+        this.maxMana = this.manaLevel * 100;
         this.mana += 25;
         this.monsterSoulGiven = 0;
         this.monsterSoulNeeded += (int) (Math.round(Math.pow(2, this.manaLevel) * 1.3));
@@ -116,11 +128,10 @@ public class ManaCapability implements IManaCapability{
 
     @Override
     public void setup() {
-        maxMana = 100;
-        mana = 100;
         manaLevel = 1;
-        monsterSoulNeeded = 4;
-        hasSpellBook = true;
+        this.setMana(100);
+        this.setMaxMana(100);
+        monsterSoulNeeded = this.getSoulCalculatedNeeded();
     }
 
     @Override
@@ -133,25 +144,25 @@ public class ManaCapability implements IManaCapability{
         compound.putInt("maxmana",maxMana);
         compound.putInt("manalevel",manaLevel);
         compound.putInt("soulgiven",monsterSoulGiven);
-        compound.putInt("soulneeded",monsterSoulNeeded);
+        //compound.putInt("souln",monsterSoulNeeded);
         compound.putBoolean("hasbook",hasSpellBook);
     }
 
     public void loadNBTData(CompoundTag compound){
         mana = compound.getInt("mana");
-        maxMana = compound.getInt("manamax");
+        maxMana = compound.getInt("maxmana");
         manaLevel = compound.getInt("manalevel");
         monsterSoulGiven = compound.getInt("soulgiven");
-        monsterSoulNeeded = compound.getInt("soulneeded");
+        //monsterSoulNeeded = compound.getInt("souln");
         hasSpellBook = compound.getBoolean("hasbook");
     }
 
     public void copy(ManaCapability mc){
-        mana = mc.mana;
-        maxMana = mc.maxMana;
-        manaLevel=mc.manaLevel;
-        monsterSoulGiven=mc.monsterSoulGiven;
-        monsterSoulNeeded=mc.monsterSoulNeeded;
-        hasSpellBook=mc.hasSpellBook;
+        this.mana = mc.mana;
+        this.maxMana = mc.maxMana;
+        this.manaLevel=mc.manaLevel;
+        this.monsterSoulGiven=mc.monsterSoulGiven;
+        this.monsterSoulNeeded=mc.getSoulCalculatedNeeded();
+        this.hasSpellBook=mc.hasSpellBook;
     }
 }

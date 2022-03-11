@@ -41,6 +41,7 @@ public class ManaEvents {
         }
         ManaManager manager = ManaManager.get(event.world);
         manager.tick(event.world);
+        manager.RegenTick(event.world);
 
     }
 }

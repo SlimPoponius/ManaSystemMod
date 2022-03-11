@@ -16,7 +16,7 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, GodSend.MOD_ID);
 
     public static final RegistryObject<Item> MONSTERSOUL = ITEMS.register("monstersoul",
-            () -> new MonsterSoulItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).durability(1)));
+            () -> new MonsterSoulItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
     public static final RegistryObject<Item> SOULPAPER = ITEMS.register("soulpaper",
             () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
