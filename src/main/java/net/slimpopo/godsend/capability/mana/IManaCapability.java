@@ -11,6 +11,7 @@ public interface IManaCapability {
     boolean spellBookCrafted();
 
     void setMana(int mana);
+    void addMana(int mana);
     void setMaxMana(int mana);
     void setSoulNeeded(int soul);
     void setLevel(int level);

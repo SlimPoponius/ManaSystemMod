@@ -131,11 +131,11 @@ public class ManaManager extends SavedData {
                         soulN = (int)(Math.round(Math.pow(2, manaLvl) * 1.3));
                     }
 
-                    System.out.println("Mana: " + mana +
-                            "\nMana Max: " + manaMax +
-                            "\nMana Level: " + manaLvl +
-                            "\nSoul Given: " + soul +
-                            "\nSoul Need: " + soulN );
+//                    System.out.println("Mana: " + mana +
+//                            "\nMana Max: " + manaMax +
+//                            "\nMana Level: " + manaLvl +
+//                            "\nSoul Given: " + soul +
+//                            "\nSoul Need: " + soulN );
                     Messages.sendToPlayer(new PacketSyncManaToClient(mana,manaMax,manaLvl,soul,soulN),sPlayer);
                 }
             });

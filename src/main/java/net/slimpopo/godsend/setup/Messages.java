@@ -8,6 +8,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.slimpopo.godsend.GodSend;
 import net.slimpopo.godsend.manasystem.network.PacketManaPlayerHandler;
+import net.slimpopo.godsend.manasystem.network.PacketManaSyncToServer;
 import net.slimpopo.godsend.manasystem.network.PacketSyncManaToClient;
 
 public class Messages {
@@ -31,6 +32,12 @@ public class Messages {
                 .decoder(PacketManaPlayerHandler::new)
                 .encoder(PacketManaPlayerHandler::toBytes)
                 .consumer(PacketManaPlayerHandler::handle)
+                .add();
+
+        net.messageBuilder(PacketManaSyncToServer.class,id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PacketManaSyncToServer::new)
+                .encoder(PacketManaSyncToServer::toBytes)
+                .consumer(PacketManaSyncToServer::handle)
                 .add();
 
         net.messageBuilder(PacketSyncManaToClient.class,id(), NetworkDirection.PLAY_TO_CLIENT)

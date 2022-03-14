@@ -71,7 +71,23 @@ public class ManaCapability implements IManaCapability{
     @Override
     public void setMana(int mana) {
         if(mana <= 0) return;
-        this.mana = mana;
+        else if(mana > maxMana)
+            this.mana = maxMana;
+        else
+            this.mana = mana;
+    }
+
+    @Override
+    public void addMana(int mana) {
+        if(this.mana + mana < 0){
+            this.mana = 0;
+        }
+        else if(this.mana +mana >maxMana){
+            this.mana = maxMana;
+        }
+        else{
+            this.mana += mana;
+        }
     }
 
     @Override

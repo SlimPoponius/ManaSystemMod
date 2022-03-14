@@ -10,15 +10,18 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.slimpopo.godsend.entity.ModEntityType;
 import net.slimpopo.godsend.item.ModItems;
 import net.slimpopo.godsend.setup.ClientSetup;
 import net.slimpopo.godsend.setup.Config;
 import net.slimpopo.godsend.setup.ModSetup;
+import net.slimpopo.godsend.util.ModItemProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,17 +40,23 @@ public class GodSend
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(eventBus);
+        ModEntityType.register(eventBus);
         ModSetup.setup();
         Config.register();
 
 
         eventBus.addListener(this::setup);
+        eventBus.addListener(this::clientSetup);
         eventBus.addListener(ModSetup::init);
         eventBus.addListener(ClientSetup::init);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> eventBus.addListener(ClientSetup::init));
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event){
+        ModItemProperties.addCustomItemProperties();
     }
 
     private void setup(final FMLCommonSetupEvent event)

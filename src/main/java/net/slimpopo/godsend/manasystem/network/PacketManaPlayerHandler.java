@@ -11,12 +11,20 @@ import java.util.function.Supplier;
 
 public class PacketManaPlayerHandler {
 
+    private int manaCost;
+    private String spellName;
+
     public PacketManaPlayerHandler(){
 
     }
 
     public PacketManaPlayerHandler(FriendlyByteBuf buf){
 
+    }
+
+    public void encode(int num, String word){
+        manaCost = num;
+        spellName = word;
     }
 
     public void toBytes(FriendlyByteBuf buf){
@@ -55,6 +63,7 @@ public class PacketManaPlayerHandler {
                         player.sendMessage(new TextComponent("To next Level: " + (sNdd - sGiv)),
                                 player.getUUID());
                     }
+
 
                 });
             }

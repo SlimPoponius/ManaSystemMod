@@ -1,5 +1,17 @@
 {
   "item.godsend.monstersoul": "Monster Soul",
   "item.godsend.soulpaper": "Soul Paper",
-  "item.godsend.spellbook": "Spell Book"
+  "item.godsend.spellbook": "Spell Book",
+
+  "itemGroup.magictab": "Mana Mod",
+
+  "item.godsend.flame_helmet": " Flame Helmet",
+  "item.godsend.flame_chest": " Flame Chest",
+  "item.godsend.flame_legs": " Flame Legs",
+  "item.godsend.flame_boots": " Flame Boots",
+  "item.godsend.flame_greatswd": "Flame Greatsword",
+  "item.godsend.firebow": "Flame Bow",
+  "item.godsend.firearrow": "Flame Arrow",
+  "item.godsend.flame_armor_spell": "Flame Armor Spell",
+  "item.godsend.flame_spell_weaponize": "Flame Weapon Spell"
 }
