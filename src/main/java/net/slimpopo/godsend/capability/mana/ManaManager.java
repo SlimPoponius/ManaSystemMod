@@ -150,32 +150,9 @@ public class ManaManager extends SavedData {
             regenCounter = 300;
             world.players().forEach(player -> {
                 if(player instanceof ServerPlayer sPlayer) {
-                    int mana = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
-                            .map(ManaCapability::getMana)
-                            .orElse(0);
-                    int manaLvl = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
-                            .map(ManaCapability::getManaLevel)
-                            .orElse(0);
-                    int manaMax = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
-                            .map(ManaCapability::getMaxMana)
-                            .orElse(0);
-                    int soul = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
-                            .map(ManaCapability::getSoulGiven)
-                            .orElse(0);
-                    int soulN = sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
-                            .map(ManaCapability::getSoulNeeded)
-                            .orElse(0);
-
-
-                    if(mana <= manaMax) {
-                        int rand = (int) (Math.random() * 10 + 1);
-                        mana += rand;
-                    }
-                    if(mana > manaMax){
-                        mana = manaMax;
-                    }
-
-                    Messages.sendToPlayer(new PacketSyncManaToClient(mana,manaMax,manaLvl,soul,soulN),sPlayer);
+                    sPlayer.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
+                        playerMana.addMana();
+                    } );
                 }
             });
         }

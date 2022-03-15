@@ -1,4 +1,4 @@
-package net.slimpopo.godsend.manasystem.client.screen;
+package net.slimpopo.godsend.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

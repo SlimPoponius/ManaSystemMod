@@ -16,8 +16,12 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.slimpopo.godsend.block.ModBlocks;
+import net.slimpopo.godsend.container.ModContainerEntity;
+import net.slimpopo.godsend.entity.ModBlockEntity;
 import net.slimpopo.godsend.entity.ModEntityType;
 import net.slimpopo.godsend.item.ModItems;
+import net.slimpopo.godsend.other.SpellList;
 import net.slimpopo.godsend.setup.ClientSetup;
 import net.slimpopo.godsend.setup.Config;
 import net.slimpopo.godsend.setup.ModSetup;
@@ -40,7 +44,10 @@ public class GodSend
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(eventBus);
+        ModBlocks.register(eventBus);
         ModEntityType.register(eventBus);
+        ModBlockEntity.register(eventBus);
+        ModContainerEntity.register(eventBus);
         ModSetup.setup();
         Config.register();
 

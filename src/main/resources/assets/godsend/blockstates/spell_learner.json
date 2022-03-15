@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": {"model": "godsend:block/spell_learner"}
+  }
+}

@@ -21,7 +21,8 @@ import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
 public class FlameArmorSpell extends Item {
-    private static final Spell FLAMEARMORSPELL = new Spell("Flame Armor Spell",25);
+    private static final Spell FLAMEARMORSPELL = new Spell("Flame Armor Spell",25,1,
+            "A basic armor spell that covers you in flame armor. Can be removed with either the spell or removing the helmet.");
 
     public FlameArmorSpell(Properties pProperties) {
         super(pProperties);
@@ -101,14 +102,24 @@ public class FlameArmorSpell extends Item {
                 }
                 else {
                     //if they do, remove armor pieces and add to inventory
+                    ItemStack headPc = sPlayer.getInventory().getArmor(3) != ItemStack.EMPTY ?
+                            sPlayer.getInventory().getArmor(3).copy() : ItemStack.EMPTY;
+                    ItemStack chestPc = sPlayer.getInventory().getArmor(2) != ItemStack.EMPTY ?
+                            sPlayer.getInventory().getArmor(2).copy() : ItemStack.EMPTY;
+                    ItemStack legsPc = sPlayer.getInventory().getArmor(1) != ItemStack.EMPTY ?
+                            sPlayer.getInventory().getArmor(1).copy() : ItemStack.EMPTY;
+                    ItemStack boostPc = sPlayer.getInventory().getArmor(0) != ItemStack.EMPTY ?
+                            sPlayer.getInventory().getArmor(0).copy() : ItemStack.EMPTY;
+
+
                     if (sPlayer.getInventory().getArmor(0) != ItemStack.EMPTY)
-                        sPlayer.getInventory().add(sPlayer.getInventory().getArmor(0));
+                        sPlayer.getInventory().add(boostPc);
                     if (sPlayer.getInventory().getArmor(1) != ItemStack.EMPTY)
-                        sPlayer.getInventory().add(sPlayer.getInventory().getArmor(1));
+                        sPlayer.getInventory().add(legsPc);
                     if (sPlayer.getInventory().getArmor(2) != ItemStack.EMPTY)
-                        sPlayer.getInventory().add(sPlayer.getInventory().getArmor(2));
+                        sPlayer.getInventory().add(chestPc);
                     if (sPlayer.getInventory().getArmor(3) != ItemStack.EMPTY)
-                        sPlayer.getInventory().add(sPlayer.getInventory().getArmor(3));
+                        sPlayer.getInventory().add(headPc);
                 }
             }
 

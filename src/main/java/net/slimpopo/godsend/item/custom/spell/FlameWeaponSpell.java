@@ -14,7 +14,8 @@ import net.slimpopo.godsend.other.Spell;
 import org.lwjgl.system.CallbackI;
 
 public class FlameWeaponSpell extends Item {
-    public static final Spell FLAMEWEAPONSPELL = new Spell("Flame Weapon Spell",15);
+    public static final Spell FLAMEWEAPONSPELL = new Spell("Flame Weapon Spell",15,1,
+            "A spell that allows you to conjure weapons of the fire element. using the spell will conjure a different weapon each time.");
     public static int weaponMode = 0;
 
     public FlameWeaponSpell(Properties pProperties) {

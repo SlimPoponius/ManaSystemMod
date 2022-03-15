@@ -1,4 +1,8 @@
 {
+  "container.godsend.spell_learner": "SPELL LOADER",
+
+  "block.godsend.spell_learner": "Spell Learner",
+
   "item.godsend.monstersoul": "Monster Soul",
   "item.godsend.soulpaper": "Soul Paper",
   "item.godsend.spellbook": "Spell Book",
