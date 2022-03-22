@@ -6,6 +6,8 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class ManaCapability implements IManaCapability{
+    private final int MAXLEVEL = 30;
+
     protected int mana;
     protected int maxMana;
     protected int manaLevel;
@@ -60,7 +62,7 @@ public class ManaCapability implements IManaCapability{
 
     @Override
     public int getSoulCalculatedNeeded() {
-        return (int) (Math.round(Math.pow(2, this.manaLevel) * 1.3));
+        return 25;
     }
 
     @Override
@@ -106,7 +108,8 @@ public class ManaCapability implements IManaCapability{
     @Override
     public void setLevel(int level) {
         if(level <= 0) return;
-        manaLevel = level;
+        else if(level > MAXLEVEL) manaLevel = MAXLEVEL;
+        else manaLevel = level;
     }
 
     @Nonnull
@@ -120,11 +123,13 @@ public class ManaCapability implements IManaCapability{
 
     @Override
     public void addManaLevel() {
-        this.manaLevel += 1;
-        this.maxMana = this.manaLevel * 100;
-        this.mana += 25;
-        this.monsterSoulGiven = 0;
-        this.monsterSoulNeeded += (int) (Math.round(Math.pow(2, this.manaLevel) * 1.3));
+        if(manaLevel < MAXLEVEL) {
+            this.manaLevel += 1;
+            this.maxMana = this.manaLevel * 100;
+            this.mana += 25;
+            this.monsterSoulGiven = 0;
+            this.monsterSoulNeeded += (int) (Math.round(Math.pow(2, this.manaLevel) * 1.3));
+        }
     }
 
     @Override
