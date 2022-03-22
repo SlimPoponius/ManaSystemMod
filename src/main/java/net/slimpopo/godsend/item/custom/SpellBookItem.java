@@ -86,19 +86,6 @@ public class SpellBookItem extends Item {
     public void initSpells(Player player){
         if(mySpells.size() > 0)
             mySpells.clear();
-//
-//            String i1 = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
-//                    .map(SpellBookCapability::getSpellOne)
-//                    .orElse("");
-//            String i2 = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
-//                    .map(SpellBookCapability::getSpellTwo)
-//                    .orElse("");
-//            String i3 = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
-//                    .map(SpellBookCapability::getSpellThree)
-//                    .orElse("");
-//
-//        player.sendMessage(new TextComponent("Spells loaded: " + i1 + " \n" + i2 + "\n" + i3),
-//                player.getUUID());
 
         Item spell1 = SpellList.getByItemStack(sp1Nm);
         Item spell2 = SpellList.getByItemStack(sp2Nm);
@@ -120,9 +107,6 @@ public class SpellBookItem extends Item {
 
         spellIndex = 0;
         spellSet = true;
-
-        player.sendMessage(new TextComponent("Spell currently equipped: " + mySpells.get(spellIndex).getDisplayName().getString()),
-                player.getUUID());
 
         Messages.sendToServer(new PacketSpellBookPlayerHandler(sp1Nm,sp2Nm,sp3Nm));
 
