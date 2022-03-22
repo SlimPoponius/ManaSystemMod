@@ -14,10 +14,12 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.widget.ExtendedButton;
 import net.slimpopo.godsend.GodSend;
+import net.slimpopo.godsend.capability.spellbook.SpellBookManager;
 import net.slimpopo.godsend.container.SpellLearnerContainer;
 import net.slimpopo.godsend.entity.block.SpellLearnerEntity;
 import net.slimpopo.godsend.item.ModItems;
 import net.slimpopo.godsend.item.custom.SpellBookItem;
+import net.slimpopo.godsend.util.InventoryUtil;
 
 public class SpellLearnerScreen extends AbstractContainerScreen<SpellLearnerContainer> {
 
@@ -41,31 +43,24 @@ public class SpellLearnerScreen extends AbstractContainerScreen<SpellLearnerCont
     @Override
     protected void init() {
         super.init();
-        this.addRenderableWidget(new ExtendedButton(leftPos+40,topPos+20,40,16,new TextComponent("<--"),
+        this.addRenderableWidget(new ExtendedButton(leftPos+130,topPos+20,40,16,new TextComponent("Load"),
                 btn -> {
             Player player = Minecraft.getInstance().player;
-            ItemStack spell = this.menu.slots.get(0).getItem() != ItemStack.EMPTY ? this.menu.slots.get(0).getItem() : ItemStack.EMPTY;
-            ItemStack slot1 = this.menu.slots.get(1).getItem() != ItemStack.EMPTY ? this.menu.slots.get(1).getItem() : ItemStack.EMPTY;
-            ItemStack slot2 = this.menu.slots.get(2).getItem() != ItemStack.EMPTY ? this.menu.slots.get(2).getItem() : ItemStack.EMPTY;
-            ItemStack slot3 = this.menu.slots.get(3).getItem() != ItemStack.EMPTY ? this.menu.slots.get(3).getItem() : ItemStack.EMPTY;
+            ItemStack slot1 = this.menu.slots.get(0).getItem() != ItemStack.EMPTY ? this.menu.slots.get(0).getItem() : ItemStack.EMPTY;
+            ItemStack slot2 = this.menu.slots.get(1).getItem() != ItemStack.EMPTY ? this.menu.slots.get(1).getItem() : ItemStack.EMPTY;
+            ItemStack slot3 = this.menu.slots.get(2).getItem() != ItemStack.EMPTY ? this.menu.slots.get(2).getItem() : ItemStack.EMPTY;
 
-            if(spell.getItem() == ModItems.SPELLBOOK.get()){
+            int spellBookSlot = InventoryUtil.getFirstInventoryIndex(player, ModItems.SPELLBOOK.get());
+
+
+            if(spellBookSlot > -1){
                 if(slot1 != ItemStack.EMPTY || slot2 != ItemStack.EMPTY ||
                         slot3 != ItemStack.EMPTY){
-                    ((SpellBookItem)spell.getItem())
-                            .addNbtDataToBook(player,spell,slot1,slot2,slot3);
+                    ((SpellBookItem)player.getInventory().getItem(spellBookSlot).getItem())
+                            .UpdateSpellList(player,slot1,slot2,slot3);
                     player.sendMessage(new TextComponent("You have spells loaded"),player.getUUID());
-
-                    this.menu.slots.get(1).set(ItemStack.EMPTY);
-                    this.menu.slots.get(1).setChanged();
-                    this.menu.slots.get(2).set(ItemStack.EMPTY);
-                    this.menu.slots.get(2).setChanged();
-                    this.menu.slots.get(3).set(ItemStack.EMPTY);
-                    this.menu.slots.get(3).setChanged();
-                    player.getInventory().add(spell);
-                    this.menu.slots.get(0).set(ItemStack.EMPTY);
-                    this.menu.slots.get(0).setChanged();
                     this.menu.updateSlotContainers();
+                    this.menu.resetSlotContainers();
 
                 }
                 else{
@@ -73,8 +68,9 @@ public class SpellLearnerScreen extends AbstractContainerScreen<SpellLearnerCont
                 }
             }
             else{
-                player.sendMessage(new TextComponent("You have to connect your Spellbook"),player.getUUID());
+                player.sendMessage(new TextComponent("You have to have a spellBook in your inventory"),player.getUUID());
             }
+            this.menu.broadcastChanges();
             //whatever you want
         }));
     }

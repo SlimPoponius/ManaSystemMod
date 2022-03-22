@@ -15,5 +15,13 @@ public class InventoryUtil {
         return false;
     }
 
-    //public static int getFirstInventoryIndex()
+    public static int getFirstInventoryIndex(Player player, Item item){
+        for(int i = 0;i < player.getInventory().getContainerSize();i++){
+            ItemStack currentStack = player.getInventory().getItem(i);
+            if(!currentStack.isEmpty() && currentStack.sameItem(new ItemStack(item))){
+                return i;
+            }
+        }
+        return -1;
+    }
 }

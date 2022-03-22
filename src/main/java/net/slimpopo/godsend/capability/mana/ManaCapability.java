@@ -112,7 +112,10 @@ public class ManaCapability implements IManaCapability{
     @Nonnull
     @Override
     public void addMana() {
-        mana += (int)(Math.random()*(9)+1);
+        if(mana < maxMana)
+            mana += (int)(Math.random()*(9)+1);
+        else
+            mana = maxMana;
     }
 
     @Override

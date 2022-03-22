@@ -14,12 +14,16 @@ import net.slimpopo.godsend.entity.block.SpellLearnerEntity;
 import net.slimpopo.godsend.item.ModItems;
 import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.other.SpellList;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class SpellLearnerContainer extends AbstractContainerMenu {
     private final ContainerLevelAccess containerAccess;
+    private int spellBookSlot;
 
-    //Clien Constructor
+    //Client Constructor
     public SpellLearnerContainer(int pContainerId, Inventory playerInv) {
         this(pContainerId,playerInv,new ItemStackHandler(29),BlockPos.ZERO);
         updateSlotContainers();
@@ -30,13 +34,13 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
     public SpellLearnerContainer(int id, Inventory playerInv, IItemHandler slots, BlockPos bpos) {
         super(ModContainerEntity.SPELLLEARN_CONTAINER.get(),id);
         this.containerAccess = ContainerLevelAccess.create(playerInv.player.level,bpos);
+
         final int slotSizePlus2 = 18,startX=18,startY=19,hotbarY=144, spellY = 42;
 
 
         //Top Part (SpellBook and Spell Slot holder)
-        addSlot(new SlotItemHandler(slots,0,startX,startY));
         for(int col = 0; col < 3; col++){
-            addSlot(new SlotItemHandler(slots,col+1,93+col*(slotSizePlus2+7),startY));
+            addSlot(new SlotItemHandler(slots,col+1,53+col*(slotSizePlus2+7),startY));
         }
         //Middle Section(Spell Inventory) -- slot index == 5
         for(int row = 0; row < 5; row++) {
@@ -56,6 +60,7 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
         for(int column = 0; column < 9; column++){
             addSlot(new Slot(playerInv,column,8 + column * slotSizePlus2,hotbarY));
         }
+        resetSlotContainers();
         updateSlotContainers();
 
     }
@@ -87,26 +92,16 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
             final ItemStack stack = slot.getItem();
             retStack = stack.copy();
             //Our Inventory(not player's)
-            if( pIndex < 29){
-                if(pIndex == 0) {
-                    //Move SpellBook Back to player Inventory
-                    if (!moveItemStackTo(stack, 29, this.slots.size(), false)) {
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else{
-                    if (!moveItemStackTo(stack, 1, 3, false)) {
-                        updateSlotContainers();
-                        return ItemStack.EMPTY;
-                    }
+            if( pIndex < 28){
+                if (!moveItemStackTo(stack, 29, 37, false)) {
+                    updateSlotContainers();
+                    return ItemStack.EMPTY;
                 }
             }
             //Player Inventory, not ours
-            else if(pIndex >= 29){
-                if(stack.getItem() == ModItems.SPELLBOOK.get()) {
-                    if (!moveItemStackTo(stack, 0, 0, false))
-                        return ItemStack.EMPTY;
-                }
+            else if(pIndex >= 28){
+                if (!moveItemStackTo(stack, 28, this.slots.size(), false))
+                    return ItemStack.EMPTY;
             }
 
             if(stack.isEmpty()){
@@ -127,27 +122,37 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
 
     public void updateSlotContainers() {
         int spellListCounter = 0;
-        for(int i = 4; i < 29;i++){
-            Slot slot = this.getSlot(i);
-
-            if(spellListCounter < SpellList.Spells.size()){
-                slot.set(SpellList.Spells.get(spellListCounter));
-                spellListCounter++;
+        for(int i = 0; i < 28;i++){
+            if(i > 2) {
+                if (spellListCounter < SpellList.Spells.size()) {
+                    this.getSlot(i).set(SpellList.getStack(spellListCounter));
+                    spellListCounter++;
+                }
             }
-
-            slot.setChanged();
-
-
+            this.getSlot(i).setChanged();
             if(spellListCounter >= SpellList.Spells.size()){
                 break;
             }
         }
+        this.broadcastChanges();
+    }
+
+    public void resetSlotContainers() {
+        for(int i = 0; i < 2;i++){
+            this.getSlot(i).set(ItemStack.EMPTY);
+        }
+        updateSlotContainers();
+        this.broadcastChanges();
     }
 
     @Override
     public void slotsChanged(Container pInventory) {
         updateSlotContainers();
         super.slotsChanged(pInventory);
+    }
+
+    public int findInstanceOfSpellBook(Player player){
+        return player.getInventory().findSlotMatchingItem(new ItemStack(ModItems.SPELLBOOK.get()));
     }
 
 //    @Override

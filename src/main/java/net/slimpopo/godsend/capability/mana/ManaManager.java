@@ -24,8 +24,12 @@ public class ManaManager extends SavedData {
     }
 
     public ManaManager(CompoundTag tag){
-        mc = new ManaCapability(tag.getInt("mana"),tag.getInt("maxmana"),
-                tag.getInt("manalevel"),tag.getInt("soulgiven"),tag.getInt("souln"),tag.getBoolean("hasbook") );
+        mc = new ManaCapability(tag.getInt("mana"),
+                tag.getInt("maxmana"),
+                tag.getInt("manalevel"),
+                tag.getInt("soulgiven"),
+                tag.getInt("souln"),
+                tag.getBoolean("hasbook") );
     }
 
     public int getMana(){

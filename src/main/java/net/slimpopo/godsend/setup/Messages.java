@@ -7,9 +7,10 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.slimpopo.godsend.GodSend;
-import net.slimpopo.godsend.manasystem.network.PacketManaPlayerHandler;
-import net.slimpopo.godsend.manasystem.network.PacketManaSyncToServer;
-import net.slimpopo.godsend.manasystem.network.PacketSyncManaToClient;
+import net.slimpopo.godsend.manasystem.network.*;
+import net.slimpopo.godsend.manasystem.network.spellbook.PacketSpellBookPlayerHandler;
+import net.slimpopo.godsend.manasystem.network.spellbook.PacketSpellBookSyncToClient;
+import net.slimpopo.godsend.manasystem.network.spellbook.PacketSpellBookSyncToServer;
 
 public class Messages {
 
@@ -28,6 +29,7 @@ public class Messages {
 
         CHANNEL = net;
 
+        //MANA SYSTEM
         net.messageBuilder(PacketManaPlayerHandler.class,id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(PacketManaPlayerHandler::new)
                 .encoder(PacketManaPlayerHandler::toBytes)
@@ -45,6 +47,27 @@ public class Messages {
                 .encoder(PacketSyncManaToClient::toBytes)
                 .consumer(PacketSyncManaToClient::handle)
                 .add();
+
+        //SPELLBOOK
+        net.messageBuilder(PacketSpellBookPlayerHandler.class,id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PacketSpellBookPlayerHandler::new)
+                .encoder(PacketSpellBookPlayerHandler::toBytes)
+                .consumer(PacketSpellBookPlayerHandler::handle)
+                .add();
+
+        net.messageBuilder(PacketSpellBookSyncToServer.class,id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PacketSpellBookSyncToServer::new)
+                .encoder(PacketSpellBookSyncToServer::toBytes)
+                .consumer(PacketSpellBookSyncToServer::handle)
+                .add();
+
+        net.messageBuilder(PacketSpellBookSyncToClient.class,id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(PacketSpellBookSyncToClient::new)
+                .encoder(PacketSpellBookSyncToClient::toBytes)
+                .consumer(PacketSpellBookSyncToClient::handle)
+                .add();
+
+
     }
 
     public static <MSG> void sendToServer(MSG message){
