@@ -20,12 +20,12 @@ import net.slimpopo.godsend.manasystem.network.PacketManaPlayerHandler;
 import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
-public class FlameArmorSpell extends Item {
+public class FlameArmorSpell extends SpellItem {
     private static final Spell FLAMEARMORSPELL = new Spell("Flame Armor Spell",25,1,
             "A basic armor spell that covers you in flame armor. Can be removed with either the spell or removing the helmet.");
 
     public FlameArmorSpell(Properties pProperties) {
-        super(pProperties);
+        super(pProperties, FLAMEARMORSPELL);
     }
 
     @Override

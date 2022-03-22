@@ -1,25 +1,30 @@
 package net.slimpopo.godsend.item.custom.spell;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.slimpopo.godsend.capability.mana.ManaManager;
 import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.item.ModItems;
 import net.slimpopo.godsend.other.Spell;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.system.CallbackI;
 
-public class FlameWeaponSpell extends Item {
+import java.util.List;
+
+public class FlameWeaponSpell extends SpellItem {
     public static final Spell FLAMEWEAPONSPELL = new Spell("Flame Weapon Spell",15,1,
             "A spell that allows you to conjure weapons of the fire element. using the spell will conjure a different weapon each time.");
     public static int weaponMode = 0;
 
     public FlameWeaponSpell(Properties pProperties) {
-        super(pProperties);
+        super(pProperties, FLAMEWEAPONSPELL);
     }
 
     @Override

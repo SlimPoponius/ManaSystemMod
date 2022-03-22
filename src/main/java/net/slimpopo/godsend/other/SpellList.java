@@ -3,6 +3,7 @@ package net.slimpopo.godsend.other;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.slimpopo.godsend.item.ModItems;
+import net.slimpopo.godsend.item.custom.spell.SpellItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,18 @@ public class SpellList {
             put("flamearmor",ModItems.FLAMESPELL_ARMOR.get());
             put("flameweapon",ModItems.FLAMESPELL_WEAPONIZE.get());
         }
+    };
+
+    public static int getSpellLevelReq(int index){
+        int counter = 0;
+        for(Map.Entry<String, Item> item: Spells.entrySet()){
+            if(counter == index){
+                if(item.getValue() instanceof SpellItem si)
+                    return si.spell.getManaLvlReq();
+            }
+            counter++;
+        }
+        return -1;
     };
 
     public static boolean isSpell(Item a){

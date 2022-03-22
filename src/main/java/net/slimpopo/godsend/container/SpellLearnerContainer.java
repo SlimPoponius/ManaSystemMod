@@ -1,5 +1,6 @@
 package net.slimpopo.godsend.container;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -10,6 +11,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.slimpopo.godsend.block.ModBlocks;
+import net.slimpopo.godsend.capability.mana.ManaCapability;
+import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.entity.block.SpellLearnerEntity;
 import net.slimpopo.godsend.item.ModItems;
 import net.slimpopo.godsend.other.Spell;
@@ -121,11 +124,17 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
     }
 
     public void updateSlotContainers() {
+        Player player = Minecraft.getInstance().player;
+
+        int manaLevel = player.getCapability(PlayerManaProvider.PLAYER_MANA)
+                .map(ManaCapability::getManaLevel).orElse(1);
+
         int spellListCounter = 0;
         for(int i = 0; i < 28;i++){
             if(i > 2) {
                 if (spellListCounter < SpellList.Spells.size()) {
-                    this.getSlot(i).set(SpellList.getStack(spellListCounter));
+                    if(manaLevel >= SpellList.getSpellLevelReq(spellListCounter))
+                        this.getSlot(i).set(SpellList.getStack(spellListCounter));
                     spellListCounter++;
                 }
             }
