@@ -44,6 +44,11 @@ public class SpellBookCapability implements ISpellBook {
     }
 
     @Override
+    public boolean hasSpells() {
+        return spellOne!="" ||spellTwo !=""||spellThree!="";
+    }
+
+    @Override
     public void setSp1(String spell) {
         spellOne = spell;
     }

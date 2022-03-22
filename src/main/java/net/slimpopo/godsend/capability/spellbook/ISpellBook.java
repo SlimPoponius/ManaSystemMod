@@ -6,7 +6,7 @@ public interface ISpellBook {
     String getSpellOne();
     String getSpellTwo();
     String getSpellThree();
-
+    boolean hasSpells();
     void setSp1(String spell);
     void setSp2(String spell);
     void setSp3(String spell);

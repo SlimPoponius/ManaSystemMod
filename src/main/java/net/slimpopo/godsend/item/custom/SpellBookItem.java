@@ -43,11 +43,36 @@ public class SpellBookItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 
         if(!pLevel.isClientSide) {
-            SpellBookManager.get(pLevel).setSpellsForInfo(sp1Nm,sp2Nm,sp3Nm);
-            if(spellSet == false)
-                initSpells(pPlayer);
-            nextSpell(pPlayer);
+            boolean hasSpells =pPlayer.getCapability(SpellBookProvider.SPELLBOOK_CAP)
+                    .map(SpellBookCapability::hasSpells)
+                    .orElse(false);
 
+            if(!hasSpells){
+                //Check if spNm(1,2,3) has any string in it
+                if(sp1Nm !="" ||sp2Nm != "" || sp3Nm != ""){
+                    SpellBookManager.get(pPlayer.level).setSpellsForInfo(sp1Nm,sp2Nm,sp3Nm);
+                }
+                else{
+                    //no spells set to player
+                    pPlayer.sendMessage(new TextComponent("no spells found. Load some spells into the book."),pPlayer.getUUID());
+                }
+            }
+            else{
+                sp1Nm = pPlayer.getCapability(SpellBookProvider.SPELLBOOK_CAP)
+                        .map(SpellBookCapability::getSpellOne)
+                        .orElse("");
+                sp2Nm = pPlayer.getCapability(SpellBookProvider.SPELLBOOK_CAP)
+                        .map(SpellBookCapability::getSpellTwo)
+                        .orElse("");
+                sp3Nm = pPlayer.getCapability(SpellBookProvider.SPELLBOOK_CAP)
+                        .map(SpellBookCapability::getSpellThree)
+                        .orElse("");
+
+                if(spellSet == false)
+                    initSpells(pPlayer);
+                nextSpell(pPlayer);
+
+            }
             Messages.sendToServer(new PacketSpellBookPlayerHandler());
         }
         return super.use(pLevel, pPlayer, pUsedHand);
@@ -61,19 +86,19 @@ public class SpellBookItem extends Item {
     public void initSpells(Player player){
         if(mySpells.size() > 0)
             mySpells.clear();
-
-            String i1 = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
-                    .map(SpellBookCapability::getSpellOne)
-                    .orElse("");
-            String i2 = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
-                    .map(SpellBookCapability::getSpellTwo)
-                    .orElse("");
-            String i3 = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
-                    .map(SpellBookCapability::getSpellThree)
-                    .orElse("");
-
-        player.sendMessage(new TextComponent("Spells loaded: " + i1 + " \n" + i2 + "\n" + i3),
-                player.getUUID());
+//
+//            String i1 = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
+//                    .map(SpellBookCapability::getSpellOne)
+//                    .orElse("");
+//            String i2 = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
+//                    .map(SpellBookCapability::getSpellTwo)
+//                    .orElse("");
+//            String i3 = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
+//                    .map(SpellBookCapability::getSpellThree)
+//                    .orElse("");
+//
+//        player.sendMessage(new TextComponent("Spells loaded: " + i1 + " \n" + i2 + "\n" + i3),
+//                player.getUUID());
 
         Item spell1 = SpellList.getByItemStack(sp1Nm);
         Item spell2 = SpellList.getByItemStack(sp2Nm);
@@ -150,7 +175,6 @@ public class SpellBookItem extends Item {
     }
 
     public void UpdateSpellList(Player player,ItemStack i1, ItemStack i2, ItemStack i3){
-
         if (i1 != ItemStack.EMPTY)
             sp1Nm = SpellList.ItemKey(i1.getItem());
         else
@@ -165,11 +189,6 @@ public class SpellBookItem extends Item {
             sp3Nm = SpellList.ItemKey(i3.getItem());
         else
             sp3Nm = "";
-
-        player.getCapability(SpellBookProvider.SPELLBOOK_CAP).ifPresent(spells -> {
-            spells.setSpells(sp1Nm,sp2Nm,sp3Nm);
-        });
-
     }
 
     @Override
