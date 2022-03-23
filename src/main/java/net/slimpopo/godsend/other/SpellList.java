@@ -15,6 +15,7 @@ public class SpellList {
         {
             put("flamearmor",ModItems.FLAMESPELL_ARMOR.get());
             put("flameweapon",ModItems.FLAMESPELL_WEAPONIZE.get());
+            put("flamefireball",ModItems.FLAMESPELL_FIREBALL.get());
         }
     };
 

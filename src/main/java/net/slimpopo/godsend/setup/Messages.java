@@ -36,6 +36,12 @@ public class Messages {
                 .consumer(PacketManaPlayerHandler::handle)
                 .add();
 
+        net.messageBuilder(PacketManaManagePlayerHandler.class,id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PacketManaManagePlayerHandler::new)
+                .encoder(PacketManaManagePlayerHandler::toBytes)
+                .consumer(PacketManaManagePlayerHandler::handle)
+                .add();
+
         net.messageBuilder(PacketManaSyncToServer.class,id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(PacketManaSyncToServer::new)
                 .encoder(PacketManaSyncToServer::toBytes)

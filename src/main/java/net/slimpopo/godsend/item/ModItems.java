@@ -12,6 +12,7 @@ import net.slimpopo.godsend.item.custom.FlameArrowItem;
 import net.slimpopo.godsend.item.custom.MonsterSoulItem;
 import net.slimpopo.godsend.item.custom.SpellBookItem;
 import net.slimpopo.godsend.item.custom.spell.FlameArmorSpell;
+import net.slimpopo.godsend.item.custom.spell.FlameFireBallSpell;
 import net.slimpopo.godsend.item.custom.spell.FlameWeaponSpell;
 import net.slimpopo.godsend.item.custom.weapons.FlameBowItem;
 import net.slimpopo.godsend.item.custom.weapons.FlameSwordItem;
@@ -30,12 +31,20 @@ public class ModItems {
             () -> new SpellBookItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
     //PROJECTILES
+    public static final RegistryObject<Item> FLAME_ARROW = ITEMS.register("firearrow",
+            () -> new FlameArrowItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1),1.5f));
+    public static final RegistryObject<Item> FIREBALLSMALL = ITEMS.register("smallfireball",
+            () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
+    public static final RegistryObject<Item> FIREBALLBIG = ITEMS.register("bigfireball",
+            () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
 
     //SPELL
     public static final RegistryObject<Item> FLAMESPELL_ARMOR = ITEMS.register("flame_spell_armor",
             () -> new FlameArmorSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
     public static final RegistryObject<Item> FLAMESPELL_WEAPONIZE = ITEMS.register("flame_spell_weaponize",
             () -> new FlameWeaponSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> FLAMESPELL_FIREBALL = ITEMS.register("flame_spell_fireball",
+            () -> new FlameFireBallSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
 
     //WEAPONS
     public static final RegistryObject<Item> FLAME_GREATSWORD = ITEMS.register("flame_greatswd",
@@ -43,8 +52,7 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
     public static final RegistryObject<Item> FLAME_BOW = ITEMS.register("firebow",
             () -> new FlameBowItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1).durability(150)));
-    public static final RegistryObject<Item> FLAME_ARROW = ITEMS.register("firearrow",
-            () -> new FlameArrowItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1),1.5f));
+
 
     //ARMORS
     public static final RegistryObject<Item> FLAME_HELMET = ITEMS.register("flame_helmet",

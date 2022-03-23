@@ -34,11 +34,11 @@ public class FlameBowItem extends BowItem {
         if(!pLevel.isClientSide){
             if(pEntityLiving instanceof  Player){
                 Player player = (Player) pEntityLiving;
+                int mCur = ManaManager.get(player.level).getMana();
 
-                player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
-                    playerMana.addMana(-10);
-                });
-                player.sendMessage(new TextComponent("shoot bow"),player.getUUID());
+                ManaManager.get(player.level).loseMana(mCur - 10);
+
+                //player.sendMessage(new TextComponent("shoot bow"),player.getUUID());
             }
         }
         super.releaseUsing(pStack, pLevel, pEntityLiving, pTimeLeft);

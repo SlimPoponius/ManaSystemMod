@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class SpellItem extends Item {
-    public static Spell spell;
+    public final Spell spell;
 
     public SpellItem(Properties pProperties,Spell spell) {
         super(pProperties);

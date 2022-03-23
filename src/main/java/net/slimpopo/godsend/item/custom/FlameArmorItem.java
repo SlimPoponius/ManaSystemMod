@@ -58,7 +58,7 @@ public class FlameArmorItem  extends ArmorItem {
 
                 }
 
-                System.out.println(BaseFireBlock.getState(world, blockPos));
+                //System.out.println(BaseFireBlock.getState(world, blockPos));
                 BlockState blockstate1 = BaseFireBlock.getState(world, blockPos);
                 world.setBlock(blockPos.above().south(), blockstate1, 11);
 

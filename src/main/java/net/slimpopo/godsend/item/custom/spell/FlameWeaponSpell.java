@@ -12,7 +12,10 @@ import net.minecraft.world.level.Level;
 import net.slimpopo.godsend.capability.mana.ManaManager;
 import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.item.ModItems;
+import net.slimpopo.godsend.manasystem.network.PacketManaManagePlayerHandler;
+import net.slimpopo.godsend.manasystem.network.PacketManaPlayerHandler;
 import net.slimpopo.godsend.other.Spell;
+import net.slimpopo.godsend.setup.Messages;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.system.CallbackI;
 
@@ -39,13 +42,14 @@ public class FlameWeaponSpell extends SpellItem {
         ItemStack BOW = new ItemStack(ModItems.FLAME_BOW.get());
 
         if(!pLevel.isClientSide) {
+            int mCur = ManaManager.get(pPlayer.level).getMana();
+
             int availableSlot = findNextAvailableSlot(pPlayer);
             if(availableSlot == -1){
                 pPlayer.sendMessage(new TextComponent("Spell not working. Free up some space"),pPlayer.getUUID());
             }
             else {
                 int weaponSlot = findWeaponType(pPlayer);
-                int mCur = ManaManager.get(pPlayer.level).getMana();
 
                 //No weapon of type found
                 if (weaponSlot == -1) {
@@ -54,12 +58,8 @@ public class FlameWeaponSpell extends SpellItem {
                     weaponMode = 1;
 
 
-                    pPlayer.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
-                        playerMana.setMana(mCur - FLAMEWEAPONSPELL.getManaCost());
-                        pPlayer.sendMessage(new TextComponent("You summoned a Greatsword using the " + FLAMEWEAPONSPELL.getSpellName()),
-                                pPlayer.getUUID());
+                    ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEWEAPONSPELL.getManaCost());
 
-                    });
                 }
                 //WeaponType is found
                 else {
@@ -67,12 +67,8 @@ public class FlameWeaponSpell extends SpellItem {
                     if(weaponMode == 1){
                         replaceWeaponToSlot(pPlayer,BOW);
                         weaponMode = 2;
-                        pPlayer.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
-                            playerMana.setMana(-FLAMEWEAPONSPELL.getManaCost());
-                            pPlayer.sendMessage(new TextComponent("You summoned a Bow using the " + FLAMEWEAPONSPELL.getSpellName()),
-                                    pPlayer.getUUID());
+                        ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEWEAPONSPELL.getManaCost());
 
-                        });
 
                     }
                     else if(weaponMode == 2){
@@ -89,12 +85,10 @@ public class FlameWeaponSpell extends SpellItem {
                     }
 
                 }
+
             }
 
-
-            //If Item exists already change the Item that already exists
-
-            //Else make Itemstack empty
+            Messages.sendToServer(new PacketManaManagePlayerHandler());
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }

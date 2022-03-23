@@ -87,6 +87,11 @@ public class ManaManager extends SavedData {
 
     }
 
+    public void loseMana(int mana){
+        mc.setMana(mana);
+        setDirty();
+    }
+
     @Nonnull
     public static ManaManager get(Level level){
         if(level.isClientSide){

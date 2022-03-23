@@ -9,6 +9,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.slimpopo.godsend.GodSend;
 import net.slimpopo.godsend.entity.projectile.FireArrowEntity;
+import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicLongCharge;
+import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicSmallCharge;
 
 public class ModEntityType {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, GodSend.MOD_ID);
@@ -16,6 +18,11 @@ public class ModEntityType {
     public static final RegistryObject<EntityType<FireArrowEntity>> FLAMEARROW = ENTITIES.register("firearrow",()-> EntityType.Builder.<FireArrowEntity>of(FireArrowEntity::new,
             MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"firearrow").toString()));
 
+    public static final RegistryObject<EntityType<FireballMagicSmallCharge>> SMALLFIREBALL = ENTITIES.register("smallfireball",()-> EntityType.Builder.<FireballMagicSmallCharge>of(FireballMagicSmallCharge::new,
+            MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"smallfireball").toString()));
+
+    public static final RegistryObject<EntityType<FireballMagicLongCharge>> BIGFIREBALL = ENTITIES.register("bigfireball",()-> EntityType.Builder.<FireballMagicLongCharge>of(FireballMagicLongCharge::new,
+            MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"bigfireball").toString()));
 
     public static void register(IEventBus eventBus){
         ENTITIES.register(eventBus);

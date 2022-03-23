@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level;
 import net.slimpopo.godsend.capability.mana.ManaManager;
 import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.item.ModItems;
+import net.slimpopo.godsend.manasystem.network.PacketManaManagePlayerHandler;
 import net.slimpopo.godsend.manasystem.network.PacketManaPlayerHandler;
 import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
@@ -36,6 +37,8 @@ public class FlameArmorSpell extends SpellItem {
         ItemStack head = new ItemStack(ModItems.FLAME_HELMET.get());
 
         if(!pLevel.isClientSide){
+            int mCur = ManaManager.get(pPlayer.level).getMana();
+
             //1. Check if player has armor currently on...
             if(hasArmorOn(pPlayer)){
                 if(AlreadyHasArmorOn(pPlayer)){
@@ -65,11 +68,9 @@ public class FlameArmorSpell extends SpellItem {
             pPlayer.getInventory().armor.set(2,chest);
             pPlayer.getInventory().armor.set(3,head);
 
-            pPlayer.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
-                playerMana.addMana(-FLAMEARMORSPELL.getManaCost());
-                pPlayer.sendMessage(new TextComponent("You activate the  " + FLAMEARMORSPELL.getSpellName() + "!"),
-                        pPlayer.getUUID());
-            });
+            ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEARMORSPELL.getManaCost());
+
+            Messages.sendToServer(new PacketManaManagePlayerHandler());
 
         }
         return super.use(pLevel, pPlayer, pUsedHand);
