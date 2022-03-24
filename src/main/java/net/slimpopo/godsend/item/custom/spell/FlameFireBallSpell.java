@@ -9,10 +9,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.slimpopo.godsend.capability.mana.ManaCapability;
 import net.slimpopo.godsend.capability.mana.ManaManager;
 import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicLongCharge;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicSmallCharge;
+import net.slimpopo.godsend.manasystem.client.ClientManaData;
 import net.slimpopo.godsend.manasystem.network.PacketManaManagePlayerHandler;
 import net.slimpopo.godsend.manasystem.network.PacketManaPlayerHandler;
 import net.slimpopo.godsend.other.Spell;
@@ -37,30 +39,37 @@ public class FlameFireBallSpell extends SpellItem{
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if(!pLevel.isClientSide) {
-            int mCur = ManaManager.get(pPlayer.level).getMana();
+            int mCur = pPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
+                    .map(ManaCapability::getMana)
+                    .orElse(0);
 
-            Random random = new Random();
-            float charge = random.nextFloat();
+            if(mCur >= FLAMEBALLSPELL.getManaCost()) {
+                Random random = new Random();
+                float charge = random.nextFloat();
 
-            //small fBall
-            if (charge < 0.5f) {
-                FireballMagicSmallCharge smallfireball = new FireballMagicSmallCharge(pPlayer,pLevel);
-                smallfireball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
-                pLevel.addFreshEntity(smallfireball);
+                //small fBall
+                if (charge < 0.5f) {
+                    FireballMagicSmallCharge smallfireball = new FireballMagicSmallCharge(pPlayer, pLevel);
+                    smallfireball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
+                    pLevel.addFreshEntity(smallfireball);
 
-                ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEBALLSPELL.getManaCost());
+                    ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEBALLSPELL.getManaCost());
+                }
+                //big fBall
+                else {
+                    FireballMagicLongCharge bigfireball = new FireballMagicLongCharge(pPlayer, pLevel);
+                    bigfireball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
+                    pLevel.addFreshEntity(bigfireball);
+
+                    pPlayer.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
+                        ManaManager.get(pPlayer.level).loseMana(mCur - (int) (FLAMEBALLSPELL.getManaCost() * 1.67));
+                    });
+                }
+                Messages.sendToServer(new PacketManaManagePlayerHandler());
             }
-            //big fBall
-            else {
-                FireballMagicLongCharge bigfireball = new FireballMagicLongCharge(pPlayer,pLevel);
-                bigfireball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
-                pLevel.addFreshEntity(bigfireball);
-
-                pPlayer.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
-                    ManaManager.get(pPlayer.level).loseMana(mCur - (int)(FLAMEBALLSPELL.getManaCost() * 1.67));
-                });
+            else{
+                pPlayer.sendMessage(new TextComponent("Insufficient mana cost"),pPlayer.getUUID());
             }
-            Messages.sendToServer(new PacketManaManagePlayerHandler());
         }
         return super.use(pLevel,pPlayer,pUsedHand);
     }

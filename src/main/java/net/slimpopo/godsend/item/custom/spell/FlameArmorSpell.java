@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.slimpopo.godsend.capability.mana.ManaCapability;
 import net.slimpopo.godsend.capability.mana.ManaManager;
 import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.item.ModItems;
@@ -37,40 +38,46 @@ public class FlameArmorSpell extends SpellItem {
         ItemStack head = new ItemStack(ModItems.FLAME_HELMET.get());
 
         if(!pLevel.isClientSide){
-            int mCur = ManaManager.get(pPlayer.level).getMana();
+            int mCur = pPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
+                    .map(ManaCapability::getMana)
+                    .orElse(0);
 
-            //1. Check if player has armor currently on...
-            if(hasArmorOn(pPlayer)){
-                if(AlreadyHasArmorOn(pPlayer)){
-                    //remove Armor Pieces
-                    pPlayer.getInventory().armor.set(0,ItemStack.EMPTY);
-                    pPlayer.getInventory().armor.set(1,ItemStack.EMPTY);
-                    pPlayer.getInventory().armor.set(2,ItemStack.EMPTY);
-                    pPlayer.getInventory().armor.set(3,ItemStack.EMPTY);
-                    pPlayer.removeEffect(MobEffects.FIRE_RESISTANCE);
-                    pPlayer.sendMessage(new TextComponent("Spell has been deactivated"),pPlayer.getUUID());
-                    return super.use(pLevel, pPlayer, pUsedHand);
+            if(mCur >= FLAMEARMORSPELL.getManaCost() || AlreadyHasArmorOn(pPlayer)) {
+                //1. Check if player has armor currently on...
+                if (hasArmorOn(pPlayer)) {
+                    if (AlreadyHasArmorOn(pPlayer)) {
+                        //remove Armor Pieces
+                        pPlayer.getInventory().armor.set(0, ItemStack.EMPTY);
+                        pPlayer.getInventory().armor.set(1, ItemStack.EMPTY);
+                        pPlayer.getInventory().armor.set(2, ItemStack.EMPTY);
+                        pPlayer.getInventory().armor.set(3, ItemStack.EMPTY);
+                        pPlayer.removeEffect(MobEffects.FIRE_RESISTANCE);
+                        pPlayer.sendMessage(new TextComponent("Spell has been deactivated"), pPlayer.getUUID());
+                        return super.use(pLevel, pPlayer, pUsedHand);
+                    } else {
+                        //if they do, remove armor pieces and add to inventory
+                        if (pPlayer.getInventory().getArmor(0) != ItemStack.EMPTY)
+                            pPlayer.getInventory().add(pPlayer.getInventory().getArmor(0));
+                        if (pPlayer.getInventory().getArmor(1) != ItemStack.EMPTY)
+                            pPlayer.getInventory().add(pPlayer.getInventory().getArmor(1));
+                        if (pPlayer.getInventory().getArmor(2) != ItemStack.EMPTY)
+                            pPlayer.getInventory().add(pPlayer.getInventory().getArmor(2));
+                        if (pPlayer.getInventory().getArmor(3) != ItemStack.EMPTY)
+                            pPlayer.getInventory().add(pPlayer.getInventory().getArmor(3));
+                    }
                 }
-                else {
-                    //if they do, remove armor pieces and add to inventory
-                    if (pPlayer.getInventory().getArmor(0) != ItemStack.EMPTY)
-                        pPlayer.getInventory().add(pPlayer.getInventory().getArmor(0));
-                    if (pPlayer.getInventory().getArmor(1) != ItemStack.EMPTY)
-                        pPlayer.getInventory().add(pPlayer.getInventory().getArmor(1));
-                    if (pPlayer.getInventory().getArmor(2) != ItemStack.EMPTY)
-                        pPlayer.getInventory().add(pPlayer.getInventory().getArmor(2));
-                    if (pPlayer.getInventory().getArmor(3) != ItemStack.EMPTY)
-                        pPlayer.getInventory().add(pPlayer.getInventory().getArmor(3));
-                }
+                pPlayer.getInventory().armor.set(0, boots);
+                pPlayer.getInventory().armor.set(1, legs);
+                pPlayer.getInventory().armor.set(2, chest);
+                pPlayer.getInventory().armor.set(3, head);
+
+                ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEARMORSPELL.getManaCost());
+
+                Messages.sendToServer(new PacketManaManagePlayerHandler());
             }
-            pPlayer.getInventory().armor.set(0,boots);
-            pPlayer.getInventory().armor.set(1,legs);
-            pPlayer.getInventory().armor.set(2,chest);
-            pPlayer.getInventory().armor.set(3,head);
-
-            ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEARMORSPELL.getManaCost());
-
-            Messages.sendToServer(new PacketManaManagePlayerHandler());
+            else{
+                pPlayer.sendMessage(new TextComponent("Insufficient mana cost"),pPlayer.getUUID());
+            }
 
         }
         return super.use(pLevel, pPlayer, pUsedHand);

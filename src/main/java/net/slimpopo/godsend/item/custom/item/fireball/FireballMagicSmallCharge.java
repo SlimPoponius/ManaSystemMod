@@ -13,7 +13,9 @@ import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.slimpopo.godsend.entity.ModEntityType;
@@ -69,16 +71,14 @@ public class FireballMagicSmallCharge extends ThrowableItemProjectile {
         int sideWidth = width/2;
         int sideLength = length/2;
 
-        BlockState flameState = BaseFireBlock.getState(level, bPos);
 
         for(int i = -sideLength ; i < sideLength; i++){
             for(int j = -sideWidth ; j< sideWidth;j++) {
-                BlockPos pos = bPos.offset(i,j,-1);
+                BlockPos pos = bPos.relative(Direction.DOWN);
+                pos.offset(i,0,j);
+                BlockState flameState = BaseFireBlock.getState(level, pos);
 
-                Random random = new Random();
-                float rand = random.nextFloat();
-                if (rand > 0.5f)
-                    this.level.setBlock(pos, flameState, 11);
+                level.setBlock(pos.above(), flameState, 11);
 
             }
         }

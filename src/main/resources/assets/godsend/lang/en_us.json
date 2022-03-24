@@ -19,5 +19,10 @@
 
   "item.godsend.flame_spell_armor": "Flame Armor Spell",
   "item.godsend.flame_spell_weaponize": "Flame Weapon Spell",
-  "item.godsend.flame_spell_fireball": "Flame Ball Spell"
+  "item.godsend.flame_spell_fireball": "Flame Ball Spell",
+  "item.godsend.flame_spell_imbue": "Flame Imbue Spell",
+  "item.godsend.flame_spell_golem": "Flame Golem Spell",
+  "item.godsend.flame_spell_apocalypse": "Flame Apocalypse",
+
+  "enchantment.godsend.fireimbue": "Flame Imbue"
 }

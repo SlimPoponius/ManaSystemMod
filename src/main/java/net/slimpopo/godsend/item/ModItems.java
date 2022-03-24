@@ -11,9 +11,7 @@ import net.slimpopo.godsend.item.custom.FlameArmorItem;
 import net.slimpopo.godsend.item.custom.FlameArrowItem;
 import net.slimpopo.godsend.item.custom.MonsterSoulItem;
 import net.slimpopo.godsend.item.custom.SpellBookItem;
-import net.slimpopo.godsend.item.custom.spell.FlameArmorSpell;
-import net.slimpopo.godsend.item.custom.spell.FlameFireBallSpell;
-import net.slimpopo.godsend.item.custom.spell.FlameWeaponSpell;
+import net.slimpopo.godsend.item.custom.spell.*;
 import net.slimpopo.godsend.item.custom.weapons.FlameBowItem;
 import net.slimpopo.godsend.item.custom.weapons.FlameSwordItem;
 
@@ -39,12 +37,21 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
 
     //SPELL
+    //FIRE
     public static final RegistryObject<Item> FLAMESPELL_ARMOR = ITEMS.register("flame_spell_armor",
             () -> new FlameArmorSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
     public static final RegistryObject<Item> FLAMESPELL_WEAPONIZE = ITEMS.register("flame_spell_weaponize",
             () -> new FlameWeaponSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
     public static final RegistryObject<Item> FLAMESPELL_FIREBALL = ITEMS.register("flame_spell_fireball",
-            () -> new FlameFireBallSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
+            () -> new FlameFireBallSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> FLAMESPELL_GOLEM = ITEMS.register("flame_spell_golem",
+            () -> new FlameGolemSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> FLAMESPELL_IMBUE= ITEMS.register("flame_spell_imbue",
+            () -> new FlameImbueSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+
+    //APOCALYPSE
+    public static final RegistryObject<Item> FLAMESPELL_APOCALYPSE= ITEMS.register("flame_spell_apocalypse",
+            () -> new FlameSpellApocalypse(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
     //WEAPONS
     public static final RegistryObject<Item> FLAME_GREATSWORD = ITEMS.register("flame_greatswd",

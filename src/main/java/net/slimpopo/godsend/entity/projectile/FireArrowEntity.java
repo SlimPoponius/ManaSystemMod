@@ -43,7 +43,7 @@ public class FireArrowEntity extends AbstractArrow {
         if(!level.isClientSide){
             BlockPos bPos = pBlockRes.getBlockPos();
             BlockState blockstate1 = BaseFireBlock.getState(world, bPos);
-            world.setBlock(bPos.above(), blockstate1, 11);
+            world.setBlock(bPos.above(), blockstate1, 1);
         }
         super.onHitBlock(pBlockRes);
     }

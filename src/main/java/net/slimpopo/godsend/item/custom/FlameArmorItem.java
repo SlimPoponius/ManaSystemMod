@@ -18,7 +18,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.slimpopo.godsend.item.ModArmorMaterials;
@@ -44,7 +46,7 @@ public class FlameArmorItem  extends ArmorItem {
 
     @Override
     public void onArmorTick(ItemStack stack, Level world, Player player) {
-        BlockPos blockPos = player.blockPosition().below();
+        BlockPos blockPos = player.blockPosition();
         BlockState blockState = world.getBlockState(blockPos);
         Block below = blockState.getBlock();
 

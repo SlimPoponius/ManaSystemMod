@@ -35,7 +35,6 @@ public class FlameArrowItem extends ArrowItem {
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         Random rand = new Random();
         if(rand.nextFloat() > 0.25f) {
-            System.out.println("Set this place ablaze");
             pTarget.setSecondsOnFire(5);
         }
         return super.hurtEnemy(pStack, pTarget, pAttacker);

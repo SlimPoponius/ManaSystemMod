@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.slimpopo.godsend.capability.mana.ManaCapability;
 import net.slimpopo.godsend.capability.mana.ManaManager;
 import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.item.ModItems;
@@ -42,53 +43,57 @@ public class FlameWeaponSpell extends SpellItem {
         ItemStack BOW = new ItemStack(ModItems.FLAME_BOW.get());
 
         if(!pLevel.isClientSide) {
-            int mCur = ManaManager.get(pPlayer.level).getMana();
+            int mCur = pPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
+                    .map(ManaCapability::getMana)
+                    .orElse(0);
 
-            int availableSlot = findNextAvailableSlot(pPlayer);
-            if(availableSlot == -1){
-                pPlayer.sendMessage(new TextComponent("Spell not working. Free up some space"),pPlayer.getUUID());
-            }
-            else {
-                int weaponSlot = findWeaponType(pPlayer);
+            if(mCur >= spell.getManaCost()) {
+                int availableSlot = findNextAvailableSlot(pPlayer);
+                if (availableSlot == -1) {
+                    pPlayer.sendMessage(new TextComponent("Spell not working. Free up some space"), pPlayer.getUUID());
+                } else {
+                    int weaponSlot = findWeaponType(pPlayer);
 
-                //No weapon of type found
-                if (weaponSlot == -1) {
-                    //Add Item to PInventory
-                    setWeaponToSlot(pPlayer,GREATSWD);
-                    weaponMode = 1;
+                    //No weapon of type found
+                    if (weaponSlot == -1) {
+                        //Add Item to PInventory
+                        setWeaponToSlot(pPlayer, GREATSWD);
+                        weaponMode = 1;
 
 
-                    ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEWEAPONSPELL.getManaCost());
-
-                }
-                //WeaponType is found
-                else {
-                    weaponMode = checkWeaponMode(pPlayer);
-                    if(weaponMode == 1){
-                        replaceWeaponToSlot(pPlayer,BOW);
-                        weaponMode = 2;
                         ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEWEAPONSPELL.getManaCost());
 
-
                     }
-                    else if(weaponMode == 2){
-                        replaceWeaponToSlot(pPlayer,ItemStack.EMPTY);
+                    //WeaponType is found
+                    else {
+                        weaponMode = checkWeaponMode(pPlayer);
+                        if (weaponMode == 1) {
+                            replaceWeaponToSlot(pPlayer, BOW);
+                            weaponMode = 2;
+                            ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEWEAPONSPELL.getManaCost());
 
-                        weaponMode = 0;
-                        pPlayer.sendMessage(new TextComponent("You returned your weapon to the mana void"),
-                                pPlayer.getUUID());
-                    }
-                    else{
-                        deleteItem(pPlayer);
-                        pPlayer.sendMessage(new TextComponent("You returned your weapon to the mana void"),
-                                pPlayer.getUUID());
+
+                        } else if (weaponMode == 2) {
+                            replaceWeaponToSlot(pPlayer, ItemStack.EMPTY);
+
+                            weaponMode = 0;
+                            pPlayer.sendMessage(new TextComponent("You returned your weapon to the mana void"),
+                                    pPlayer.getUUID());
+                        } else {
+                            deleteItem(pPlayer);
+                            pPlayer.sendMessage(new TextComponent("You returned your weapon to the mana void"),
+                                    pPlayer.getUUID());
+                        }
+
                     }
 
                 }
-
+                Messages.sendToServer(new PacketManaManagePlayerHandler());
+            }
+            else{
+                pPlayer.sendMessage(new TextComponent("Insufficient mana cost"),pPlayer.getUUID());
             }
 
-            Messages.sendToServer(new PacketManaManagePlayerHandler());
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }

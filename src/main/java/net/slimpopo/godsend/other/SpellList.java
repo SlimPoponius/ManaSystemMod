@@ -5,17 +5,22 @@ import net.minecraft.world.item.ItemStack;
 import net.slimpopo.godsend.item.ModItems;
 import net.slimpopo.godsend.item.custom.spell.SpellItem;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SpellList {
-    public static Map<String,Item> Spells = new HashMap<String,Item>(){
+    public static Map<String,Item> Spells = new LinkedHashMap<String,Item>(){
         {
-            put("flamearmor",ModItems.FLAMESPELL_ARMOR.get());
+            //FLAME
+            put("flameimbue",ModItems.FLAMESPELL_IMBUE.get());
             put("flameweapon",ModItems.FLAMESPELL_WEAPONIZE.get());
+            put("flamearmor",ModItems.FLAMESPELL_ARMOR.get());
             put("flamefireball",ModItems.FLAMESPELL_FIREBALL.get());
+            put("flamegolem",ModItems.FLAMESPELL_GOLEM.get());
+
+
+            //APOCALYPSE
+            //put("apocalypseflame",null);
+
         }
     };
 
