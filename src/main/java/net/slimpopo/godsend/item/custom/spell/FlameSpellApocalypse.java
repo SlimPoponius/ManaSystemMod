@@ -47,18 +47,28 @@ public class FlameSpellApocalypse extends SpellItem{
 
                 for (int i = -7; i <= 7; i++) {
                     for (int j = -7; j <= 7; j++) {
-                        BlockPos newSpot = block.offset(i, 0, j);
-                        BlockState fBlock = BaseFireBlock.getState(pLevel, newSpot);
-                        float rand = random.nextFloat();
-                        if (rand >= 0.7F)
-                            pLevel.setBlock(newSpot.above(), fBlock, 11);
+                        for(int k = -3; k <= 0; k++) {
+                            BlockPos newSpot = block.offset(i, k, j);
+                            BlockState fBlock = BaseFireBlock.getState(pLevel, newSpot);
+                            BlockState thisState = pLevel.getBlockState(newSpot);
+                            if (!thisState.isAir()) {
+                                float rand = random.nextFloat();
+                                if (rand >= 0.7F)
+                                    pLevel.setBlock(newSpot.above(), fBlock, 11);
+                            }
 
-                        ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEAPOCALYPSESPELL.getManaCost());
-                        Messages.sendToServer(new PacketManaManagePlayerHandler());
+                            ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEAPOCALYPSESPELL.getManaCost());
+                            Messages.sendToServer(new PacketManaManagePlayerHandler());
+                        }
                     }
                 }
             }
         }
         return super.use(pLevel, pPlayer, pUsedHand);
+    }
+
+    @Override
+    public boolean onDroppedByPlayer(ItemStack item, Player player) {
+        return false;
     }
 }

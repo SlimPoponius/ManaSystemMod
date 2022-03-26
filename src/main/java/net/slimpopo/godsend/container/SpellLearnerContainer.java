@@ -15,6 +15,7 @@ import net.slimpopo.godsend.capability.mana.ManaCapability;
 import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.entity.block.SpellLearnerEntity;
 import net.slimpopo.godsend.item.ModItems;
+import net.slimpopo.godsend.manasystem.client.ClientManaData;
 import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.other.SpellList;
 import org.jetbrains.annotations.NotNull;
@@ -126,8 +127,7 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
     public void updateSlotContainers() {
         Player player = Minecraft.getInstance().player;
 
-        int manaLevel = player.getCapability(PlayerManaProvider.PLAYER_MANA)
-                .map(ManaCapability::getManaLevel).orElse(1);
+        int manaLevel = ClientManaData.getManaLvl();
 
         int spellListCounter = 0;
         for(int i = 0; i < 28;i++){

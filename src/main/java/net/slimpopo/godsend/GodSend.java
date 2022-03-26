@@ -18,6 +18,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.slimpopo.godsend.block.ModBlocks;
 import net.slimpopo.godsend.container.ModContainerEntity;
+import net.slimpopo.godsend.effects.ModEffects;
 import net.slimpopo.godsend.enchantment.ModEnchantments;
 import net.slimpopo.godsend.entity.ModBlockEntity;
 import net.slimpopo.godsend.entity.ModEntityType;
@@ -50,6 +51,7 @@ public class GodSend
         ModBlockEntity.register(eventBus);
         ModContainerEntity.register(eventBus);
         ModEnchantments.register(eventBus);
+        ModEffects.register(eventBus);
 
         ModSetup.setup();
         Config.register();

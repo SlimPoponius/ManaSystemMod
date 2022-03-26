@@ -23,7 +23,7 @@ import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
 public class FlameArmorSpell extends SpellItem {
-    private static final Spell FLAMEARMORSPELL = new Spell("Flame Armor Spell",25,1,
+    private static final Spell FLAMEARMORSPELL = new Spell("Flame Armor Spell",25,5,
             "A basic armor spell that covers you in flame armor. Can be removed with either the spell or removing the helmet.");
 
     public FlameArmorSpell(Properties pProperties) {
@@ -85,8 +85,7 @@ public class FlameArmorSpell extends SpellItem {
 
     @Override
     public boolean onDroppedByPlayer(ItemStack item, Player player) {
-        item = ItemStack.EMPTY;
-        return super.onDroppedByPlayer(item, player);
+        return false;
     }
 
     @Override

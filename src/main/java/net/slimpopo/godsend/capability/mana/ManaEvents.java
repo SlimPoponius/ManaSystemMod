@@ -8,6 +8,8 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.slimpopo.godsend.GodSend;
+import net.slimpopo.godsend.manasystem.network.PacketManaManagePlayerHandler;
+import net.slimpopo.godsend.setup.Messages;
 
 public class ManaEvents {
 

@@ -54,7 +54,6 @@ public class FlameGolemSpell extends SpellItem{
 
     @Override
     public boolean onDroppedByPlayer(ItemStack item, Player player) {
-        item = ItemStack.EMPTY;
-        return super.onDroppedByPlayer(item, player);
+        return false;
     }
 }

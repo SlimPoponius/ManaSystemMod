@@ -38,7 +38,6 @@ public class PacketManaManagePlayerHandler {
 
 
             int sNdd = ManaManager.get(player.level).getSoulCalculatedNeeded();
-            int canLevelUp = ManaManager.get(player.level).levelUp();
             int mCur = ManaManager.get(player.level).getMana();
             int mMax = ManaManager.get(player.level).getManaMax();
             int mLvl = ManaManager.get(player.level).getManaLevel();
@@ -50,7 +49,7 @@ public class PacketManaManagePlayerHandler {
                     playerMana.setMana(mCur);
                     playerMana.setMaxMana(mMax);
                     playerMana.setLevel(mLvl);
-                    playerMana.setSoulGiven(0);
+                    playerMana.setSoulGiven(sGiv);
                     playerMana.setSoulNeeded(sNdd);
                 });
             }

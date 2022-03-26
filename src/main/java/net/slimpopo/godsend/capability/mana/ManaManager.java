@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
+import net.slimpopo.godsend.manasystem.network.PacketManaManagePlayerHandler;
 import net.slimpopo.godsend.manasystem.network.PacketSyncManaToClient;
 import net.slimpopo.godsend.setup.Messages;
 
@@ -140,11 +141,11 @@ public class ManaManager extends SavedData {
                         soulN = (int)(Math.round(Math.pow(2, manaLvl) * 1.3));
                     }
 
-//                    System.out.println("Mana: " + mana +
-//                            "\nMana Max: " + manaMax +
-//                            "\nMana Level: " + manaLvl +
-//                            "\nSoul Given: " + soul +
-//                            "\nSoul Need: " + soulN );
+                    System.out.println("Mana: " + mana +
+                            "\nMana Max: " + manaMax +
+                            "\nMana Level: " + manaLvl +
+                            "\nSoul Given: " + soul +
+                            "\nSoul Need: " + soulN );
                     Messages.sendToPlayer(new PacketSyncManaToClient(mana,manaMax,manaLvl,soul,soulN),sPlayer);
                 }
             });

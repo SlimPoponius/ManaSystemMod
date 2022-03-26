@@ -45,7 +45,7 @@ public class FireballMagicSmallCharge extends ThrowableItemProjectile {
                 Entity entity1 = this.getOwner();
                 int i = entity.getRemainingFireTicks();
                 entity.setSecondsOnFire(5);
-                boolean flag = entity.hurt(DamageSource.thrown(this,entity1), 5.0F);
+                boolean flag = entity.hurt(DamageSource.playerAttack(Minecraft.getInstance().player), 5.0F);
                 if (!flag) {
                     entity.setRemainingFireTicks(i);
                 } else if (entity1 instanceof LivingEntity) {

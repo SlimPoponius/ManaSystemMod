@@ -23,7 +23,7 @@ import org.lwjgl.system.CallbackI;
 import java.util.List;
 
 public class FlameWeaponSpell extends SpellItem {
-    public static final Spell FLAMEWEAPONSPELL = new Spell("Flame Weapon Spell",15,1,
+    public static final Spell FLAMEWEAPONSPELL = new Spell("Flame Weapon Spell",15,3,
             "A spell that allows you to conjure weapons of the fire element. using the spell will conjure a different weapon each time.");
     public static int weaponMode = 0;
 
@@ -33,8 +33,7 @@ public class FlameWeaponSpell extends SpellItem {
 
     @Override
     public boolean onDroppedByPlayer(ItemStack item, Player player) {
-        item = ItemStack.EMPTY;
-        return super.onDroppedByPlayer(item, player);
+        return false;
     }
 
     @Override

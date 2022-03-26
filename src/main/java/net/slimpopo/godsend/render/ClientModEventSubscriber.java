@@ -12,6 +12,7 @@ import net.slimpopo.godsend.entity.ModEntityType;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicLongCharge;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicSmallCharge;
 import net.slimpopo.godsend.render.enitity.FlameArrowRenderer;
+import net.slimpopo.godsend.render.enitity.IceArrowRenderer;
 import net.slimpopo.godsend.screen.SpellLearnerScreen;
 
 @Mod.EventBusSubscriber(modid = GodSend.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD,value = Dist.CLIENT)
@@ -20,6 +21,8 @@ public class ClientModEventSubscriber {
     @SubscribeEvent
     public static void onClientSetup(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(ModEntityType.FLAMEARROW.get(), FlameArrowRenderer::new);
+        event.registerEntityRenderer(ModEntityType.ICEARROW.get(), IceArrowRenderer::new);
+
         event.registerEntityRenderer(ModEntityType.BIGFIREBALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntityType.SMALLFIREBALL.get(), ThrownItemRenderer::new);
 

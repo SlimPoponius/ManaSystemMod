@@ -22,7 +22,19 @@
   "item.godsend.flame_spell_fireball": "Flame Ball Spell",
   "item.godsend.flame_spell_imbue": "Flame Imbue Spell",
   "item.godsend.flame_spell_golem": "Flame Golem Spell",
-  "item.godsend.flame_spell_apocalypse": "Flame Apocalypse",
+  "item.godsend.flame_spell_apocalypse": "Flame Apocalypse: Burnout",
 
-  "enchantment.godsend.fireimbue": "Flame Imbue"
+  "item.godsend.ice_spell_armor": "Ice Armor Spell",
+  "item.godsend.ice_spell_weaponize": "Ice Weapon Spell",
+  "item.godsend.ice_spell_wall": "Ice Wall Spell",
+  "item.godsend.ice_spell_imbue": "Ice Imbue Spell",
+  "item.godsend.ice_spell_wolves": "Ice Wolves Spell",
+  "item.godsend.ice_spell_apocalypse": "Ice Apocalypse: Tundra",
+
+
+  "enchantment.godsend.flameimbue": "Flame Imbue",
+  "enchantment.godsend.iceimbue": "Ice Imbue",
+
+  "effect.godsend.freeze": "Frozen"
+
 }

@@ -9,6 +9,7 @@ import net.slimpopo.godsend.item.ModItems;
 public class ModItemProperties {
     public static void addCustomItemProperties(){
         makeBow(ModItems.FLAME_BOW.get());
+        makeBow(ModItems.ICE_BOW.get());
     }
 
     private static void makeBow(Item item){

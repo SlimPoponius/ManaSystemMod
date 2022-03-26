@@ -16,6 +16,7 @@ import net.slimpopo.godsend.entity.ModEntityType;
 import net.slimpopo.godsend.entity.mobs.FlameGolemEntity;
 import net.slimpopo.godsend.entity.models.FlameGolemModel;
 import net.slimpopo.godsend.entity.render.FlameGolemRenderer;
+import net.slimpopo.godsend.entity.render.IceWolfRenderer;
 import net.slimpopo.godsend.item.custom.MonsterSoulItem;
 import net.slimpopo.godsend.manasystem.client.ManaOverlay;
 import org.apache.logging.log4j.LogManager;
@@ -40,6 +41,8 @@ public class ClientSetup {
     @SubscribeEvent
     public static void setupRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(ModEntityType.FLAMEGOLEM.get(),FlameGolemRenderer::new);
+        event.registerEntityRenderer(ModEntityType.ICEWOLF.get(), IceWolfRenderer::new);
+
 
     }
 

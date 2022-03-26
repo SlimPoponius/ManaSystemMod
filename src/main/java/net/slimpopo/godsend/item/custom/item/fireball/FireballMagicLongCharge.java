@@ -1,5 +1,6 @@
 package net.slimpopo.godsend.item.custom.item.fireball;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -44,7 +45,7 @@ public class FireballMagicLongCharge extends ThrowableItemProjectile {
                 Entity entity1 = this.getOwner();
                 int i = entity.getRemainingFireTicks();
                 entity.setSecondsOnFire(5);
-                boolean flag = entity.hurt(DamageSource.thrown(this,entity1), 7.5F);
+                boolean flag = entity.hurt(DamageSource.playerAttack(Minecraft.getInstance().player), 7.5F);
                 if (!flag) {
                     entity.setRemainingFireTicks(i);
                 } else if (entity1 instanceof LivingEntity) {

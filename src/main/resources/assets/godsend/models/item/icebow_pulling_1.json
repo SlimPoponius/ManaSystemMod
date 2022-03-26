@@ -1,0 +1,6 @@
+{
+    "parent": "godsend:item/icebow",
+    "textures": {
+        "layer0": "godsend:item/icebow_pulling_1"
+    }
+}

@@ -11,6 +11,7 @@ import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.enchantment.ModEnchantments;
 import net.slimpopo.godsend.item.ModItems;
 import net.slimpopo.godsend.manasystem.network.PacketManaManagePlayerHandler;
+import net.slimpopo.godsend.other.MagicItemList;
 import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
@@ -54,9 +55,14 @@ public class FlameImbueSpell extends SpellItem{
 
     }
 
+    @Override
+    public boolean onDroppedByPlayer(ItemStack item, Player player) {
+        return false;
+    }
+
     private boolean checkIfWeapon(ItemStack item){
         return (item.getItem() instanceof SwordItem || item.getItem() instanceof PickaxeItem ||
                 item.getItem() instanceof ShovelItem || item.getItem() instanceof HoeItem) &&
-                (item.getItem() != ModItems.FLAME_GREATSWORD.get());
+                (item.getItem() != MagicItemList.Weapons);
     }
 }

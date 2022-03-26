@@ -18,6 +18,10 @@ public class ModEnchantments {
             ENCHANTMENTS.register("flameimbue",() -> new EnchantmentFireImbue(Enchantment.Rarity.VERY_RARE,
                     EnchantmentCategory.WEAPON, EquipmentSlot.MAINHAND));
 
+    public static final RegistryObject<Enchantment> ICEIMBUE =
+            ENCHANTMENTS.register("iceimbue",() -> new EnchantmentIceImbue(Enchantment.Rarity.VERY_RARE,
+                    EnchantmentCategory.WEAPON, EquipmentSlot.MAINHAND));
+
     public static void register(IEventBus eventBus){
         ENCHANTMENTS.register(eventBus);
     }

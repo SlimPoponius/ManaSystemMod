@@ -1,5 +1,6 @@
 package net.slimpopo.godsend.entity.mobs;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.damagesource.DamageSource;
@@ -26,11 +27,11 @@ import java.util.UUID;
 
 public class FlameGolemEntity extends IronGolem {
 
-    private static int flameTick;
+    private static final int flameTick = 1200;
+    private int timer = 0;
 
     public FlameGolemEntity(EntityType<? extends FlameGolemEntity> entity, Level level) {
         super(entity, level);
-        flameTick = 1200;
     }
 
     @Override
@@ -101,17 +102,15 @@ public class FlameGolemEntity extends IronGolem {
         BlockPos bPos = this.blockPosition().relative(Direction.DOWN);
         BlockState bs = BaseFireBlock.getState(level, bPos);
         if(level.isRaining()){
-            hurt(DamageSource.GENERIC,2.5F);
+            hurt(DamageSource.ON_FIRE,2.5F);
         }
 
         if(this.wasTouchingWater)
             hurt(DamageSource.DROWN,5F);
         else
             level.setBlock(bPos.above(), bs, 11);
-
-        flameTick--;
-        if(flameTick <= 0){
-            this.level.broadcastEntityEvent(this, (byte)60);
+        timer++;
+        if(timer >= flameTick){
             this.remove(RemovalReason.DISCARDED);
         }
     }

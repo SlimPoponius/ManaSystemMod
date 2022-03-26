@@ -13,7 +13,11 @@ import java.util.function.Supplier;
 public enum ModArmorMaterials implements ArmorMaterial {
     FLAME("flame", 25, new int[]{4, 6, 7, 5}, 14, SoundEvents.FIRE_AMBIENT, 0.0F, 0.0F, () -> {
         return Ingredient.of(ModItems.MONSTERSOUL.get());
+    }),
+    ICE("ice", 25, new int[]{4, 6, 7, 5}, 14, SoundEvents.SNOW_HIT, 0.0F, 0.0F, () -> {
+        return Ingredient.of(ModItems.MONSTERSOUL.get());
     });
+
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
     private final String name;

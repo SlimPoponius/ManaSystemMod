@@ -34,7 +34,7 @@ public class FireArrowEntity extends AbstractArrow {
 
     @Override
     public ItemStack getPickupItem() {
-        return new ItemStack(this.referenceItem);
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -43,9 +43,10 @@ public class FireArrowEntity extends AbstractArrow {
         if(!level.isClientSide){
             BlockPos bPos = pBlockRes.getBlockPos();
             BlockState blockstate1 = BaseFireBlock.getState(world, bPos);
-            world.setBlock(bPos.above(), blockstate1, 1);
+            world.setBlock(bPos.above(), blockstate1, 11);
         }
         super.onHitBlock(pBlockRes);
+        this.discard();
     }
 
     @Override

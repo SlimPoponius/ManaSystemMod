@@ -17,9 +17,15 @@ public class SpellList {
             put("flamefireball",ModItems.FLAMESPELL_FIREBALL.get());
             put("flamegolem",ModItems.FLAMESPELL_GOLEM.get());
 
-
+            //ICE
+            put("iceimbue",ModItems.ICESPELL_IMBUE.get());
+            put("iceweapon",ModItems.ICESPELL_WEAPONIZE.get());
+            put("icearmor",ModItems.ICESPELL_ARMOR.get());
+            put("icewolves",ModItems.ICESPELL_WOLF.get());
+            put("icewall",ModItems.ICESPELL_WALL.get());
             //APOCALYPSE
-            //put("apocalypseflame",null);
+            //put("apocalypseflame",ModItems.FLAMESPELL_APOCALYPSE.get());
+            //put("apocalypseice",ModItems.ICESPELL_APOCALYPSE.get());
 
         }
     };
