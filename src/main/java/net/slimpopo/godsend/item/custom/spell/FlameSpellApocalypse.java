@@ -57,11 +57,12 @@ public class FlameSpellApocalypse extends SpellItem{
                                     pLevel.setBlock(newSpot.above(), fBlock, 11);
                             }
 
-                            ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEAPOCALYPSESPELL.getManaCost());
-                            Messages.sendToServer(new PacketManaManagePlayerHandler());
+
                         }
                     }
                 }
+                ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEAPOCALYPSESPELL.getManaCost());
+                Messages.sendToServer(new PacketManaManagePlayerHandler());
             }
         }
         return super.use(pLevel, pPlayer, pUsedHand);

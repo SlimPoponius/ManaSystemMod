@@ -24,6 +24,10 @@ public class ModBlocks {
             () -> new SpellLearnerBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(9f).requiresCorrectToolForDrops()), ModCreativeTab.MAGIC_TAB);
 
+    public static final RegistryObject<Block> SANDTRAP = registerBlock("sand_trap",
+            () -> new SandTrapBlock(BlockBehaviour.Properties.of(Material.SAND)
+                    .strength(9f).requiresCorrectToolForDrops()), ModCreativeTab.MAGIC_TAB);
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block,CreativeModeTab tab){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

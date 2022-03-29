@@ -30,6 +30,7 @@ import net.slimpopo.godsend.setup.ModSetup;
 import net.slimpopo.godsend.util.ModItemProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
 
 import java.util.stream.Collectors;
 
@@ -65,6 +66,7 @@ public class GodSend
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> eventBus.addListener(ClientSetup::init));
+        GeckoLib.initialize();
     }
 
     private void clientSetup(final FMLClientSetupEvent event){

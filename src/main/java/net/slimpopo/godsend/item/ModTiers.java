@@ -12,4 +12,8 @@ public class ModTiers {
     public static final ForgeTier ICE = new ForgeTier(3,300,1.0f,
             5f,0,BlockTags.NEEDS_DIAMOND_TOOL,
             () -> Ingredient.of(ModItems.MONSTERSOUL.get()));
+
+    public static final ForgeTier EARTH = new ForgeTier(3,300,1.0f,
+            5f,0,BlockTags.NEEDS_DIAMOND_TOOL,
+            () -> Ingredient.of(ModItems.MONSTERSOUL.get()));
 }

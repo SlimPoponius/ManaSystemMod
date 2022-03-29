@@ -7,14 +7,18 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.slimpopo.godsend.GodSend;
 import net.slimpopo.godsend.entity.ModEntityType;
+import net.slimpopo.godsend.entity.mobs.EarthWarriorEntity;
 import net.slimpopo.godsend.entity.mobs.FlameGolemEntity;
+import net.slimpopo.godsend.entity.models.EarthWarriorModel;
 import net.slimpopo.godsend.entity.models.FlameGolemModel;
+import net.slimpopo.godsend.entity.render.EarthWarriorRenderer;
 import net.slimpopo.godsend.entity.render.FlameGolemRenderer;
 import net.slimpopo.godsend.entity.render.IceWolfRenderer;
 import net.slimpopo.godsend.item.custom.MonsterSoulItem;
@@ -39,11 +43,20 @@ public class ClientSetup {
     }
 
     @SubscribeEvent
+    public static void registerAttributes(EntityAttributeCreationEvent event){
+        event.put(ModEntityType.EARTHWARRIOR.get(), EarthWarriorEntity.createAttribute().build());
+    }
+
+//    @SubscribeEvent
+//    public static void setupModels(EntityRenderersEvent.RegisterLayerDefinitions event){
+//        event.registerLayerDefinition(EarthWarriorModel.LAYER_LOCATION,EarthWarriorModel::createBodyLayer);
+//    }
+
+    @SubscribeEvent
     public static void setupRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(ModEntityType.FLAMEGOLEM.get(),FlameGolemRenderer::new);
         event.registerEntityRenderer(ModEntityType.ICEWOLF.get(), IceWolfRenderer::new);
-
-
+        event.registerEntityRenderer(ModEntityType.EARTHWARRIOR.get(), EarthWarriorRenderer::new);
     }
 
 }

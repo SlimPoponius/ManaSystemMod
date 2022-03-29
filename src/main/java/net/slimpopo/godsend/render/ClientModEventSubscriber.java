@@ -26,6 +26,9 @@ public class ClientModEventSubscriber {
         event.registerEntityRenderer(ModEntityType.BIGFIREBALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntityType.SMALLFIREBALL.get(), ThrownItemRenderer::new);
 
+        event.registerEntityRenderer(ModEntityType.EXPLORB.get(), ThrownItemRenderer::new);
+
+
         MenuScreens.register(ModContainerEntity.SPELLLEARN_CONTAINER.get(), SpellLearnerScreen::new);
     }
 

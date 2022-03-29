@@ -2,6 +2,7 @@
   "container.godsend.spell_learner": "SPELL LOADER",
 
   "block.godsend.spell_learner": "Spell Learner",
+  "block.godsend.and_trap": "Sand Trap",
 
   "item.godsend.monstersoul": "Monster Soul",
   "item.godsend.soulpaper": "Soul Paper",
@@ -9,13 +10,28 @@
 
   "itemGroup.magictab": "Mana Mod",
 
-  "item.godsend.flame_helmet": " Flame Helmet",
-  "item.godsend.flame_chest": " Flame Chest",
-  "item.godsend.flame_legs": " Flame Legs",
-  "item.godsend.flame_boots": " Flame Boots",
+  "item.godsend.flame_helmet": "Flame Helmet",
+  "item.godsend.flame_chest": "Flame Chest",
+  "item.godsend.flame_legs": "Flame Legs",
+  "item.godsend.flame_boots": "Flame Boots",
+  "item.godsend.ice_helmet": "Ice Helmet",
+  "item.godsend.ice_chest": "Ice Chest",
+  "item.godsend.ice_legs": "Ice Legs",
+  "item.godsend.ice_boots": "Ice Boots",
+  "item.godsend.earth_helmet": "Earth Helmet",
+  "item.godsend.earth_chest": "Earth Chest",
+  "item.godsend.earth_legs": "Earth Legs",
+  "item.godsend.earth_boots": "Earth Boots",
   "item.godsend.flame_greatswd": "Flame Greatsword",
+  "item.godsend.ice_longswd": "Ice Longsword",
+  "item.godsend.icebow": "Ice Bow",
   "item.godsend.firebow": "Flame Bow",
   "item.godsend.firearrow": "Flame Arrow",
+  "item.godsend.icearrow": "Ice Arrow",
+  "item.godsend.smallfireball": "Fireball",
+  "item.godsend.bigfireball": "Critical Fireball",
+  "item.godsend.earth_axe": "Earth Axe",
+  "item.godsend.earth_hammer": "Earth Hammer",
 
   "item.godsend.flame_spell_armor": "Flame Armor Spell",
   "item.godsend.flame_spell_weaponize": "Flame Weapon Spell",
@@ -31,10 +47,19 @@
   "item.godsend.ice_spell_wolves": "Ice Wolves Spell",
   "item.godsend.ice_spell_apocalypse": "Ice Apocalypse: Tundra",
 
+  "item.godsend.earth_spell_armor": "Earth Armor Spell",
+  "item.godsend.earth_spell_weaponize": "Earth Weapon Spell",
+  "item.godsend.earth_spell_quake": "Earth Quake Spell",
+  "item.godsend.earth_spell_imbue": "Earth Imbue Spell",
+  "item.godsend.earth_spell_warrior": "Earth Warrior Spell",
+  "item.godsend.earth_spell_apocalypse": "Earth Apocalypse: Wasteland",
+
 
   "enchantment.godsend.flameimbue": "Flame Imbue",
   "enchantment.godsend.iceimbue": "Ice Imbue",
 
-  "effect.godsend.freeze": "Frozen"
+  "effect.godsend.freeze": "Frozen",
+
+  "entity.godsend.earth_warrior": "Earth Warrior"
 
 }

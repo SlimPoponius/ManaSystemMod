@@ -44,15 +44,15 @@ public class PacketManaManagePlayerHandler {
             int sGiv = ManaManager.get(player.level).getSoulGiven();
 
 
-            if(!player.level.isClientSide){
-                player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
-                    playerMana.setMana(mCur);
-                    playerMana.setMaxMana(mMax);
-                    playerMana.setLevel(mLvl);
-                    playerMana.setSoulGiven(sGiv);
-                    playerMana.setSoulNeeded(sNdd);
-                });
-            }
+//            if(!player.level.isClientSide){
+//                player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
+//                    playerMana.setMana(mCur);
+//                    playerMana.setMaxMana(mMax);
+//                    playerMana.setLevel(mLvl);
+//                    playerMana.setSoulGiven(sGiv);
+//                    playerMana.setSoulNeeded(sNdd);
+//                });
+//            }
         });
         return true;
     }

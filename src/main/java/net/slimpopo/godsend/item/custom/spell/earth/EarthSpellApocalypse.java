@@ -1,9 +1,6 @@
-package net.slimpopo.godsend.item.custom.spell.ice;
+package net.slimpopo.godsend.item.custom.spell.earth;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,12 +10,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
+import net.slimpopo.godsend.block.ModBlocks;
 import net.slimpopo.godsend.capability.mana.ManaCapability;
 import net.slimpopo.godsend.capability.mana.ManaManager;
 import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
@@ -28,16 +24,15 @@ import net.slimpopo.godsend.manasystem.network.PacketManaManagePlayerHandler;
 import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class IceSpellApocalypse extends SpellItem {
-    private static final Spell ICEAPOCALYPSESPELL = new Spell("Ice Apocalypse: Tundra",400,15,
-            "A zone spell that sets everything to below zero.");
+public class EarthSpellApocalypse extends SpellItem {
+    private static final Spell EARTHSPELLAPOCALYPSE = new Spell("Earth Apocalypse: Wasteland",00,15,
+            "A zone spell that sets everything to explosive sand.");
 
-    public IceSpellApocalypse(Properties pProperties) {
-        super(pProperties, ICEAPOCALYPSESPELL);
+    public EarthSpellApocalypse(Properties pProperties) {
+        super(pProperties, EARTHSPELLAPOCALYPSE);
     }
 
     @Override
@@ -47,7 +42,7 @@ public class IceSpellApocalypse extends SpellItem {
                             .map(ManaCapability::getMana)
                                     .orElse(0);
 
-            if(mCur >= ICEAPOCALYPSESPELL.getManaCost()) {
+            if(mCur >= EARTHSPELLAPOCALYPSE.getManaCost()) {
                 BlockPos block = pPlayer.blockPosition().below();
 
                 Random random = new Random();
@@ -56,35 +51,20 @@ public class IceSpellApocalypse extends SpellItem {
                     for (int j = -7; j <= 7; j++) {
                         for(int k = -3; k <= 0; k++) {
                             BlockPos newSpot = block.offset(i, k, j);
-                            BlockState fBlock = Blocks.ICE.defaultBlockState();
-                            BlockState sBlock = Blocks.SNOW_BLOCK.defaultBlockState();
+                            BlockState fBlock = ModBlocks.SANDTRAP.get().defaultBlockState();
                             BlockState thisState = pLevel.getBlockState(newSpot);
                             if (!thisState.isAir()) {
-                                int rand = random.nextInt() % 3;
-                                if (rand == 1)
-                                    pLevel.setBlock(newSpot.above(), fBlock, 11);
-                                else if (rand == 2)
-                                    pLevel.setBlock(newSpot.above(), sBlock, 11);
+                                float rand = random.nextFloat();
 
-                                AABB bounds = AABB.of(new BoundingBox(newSpot.above()));
-                                List<Entity> entities = pLevel.getEntities(null, bounds);
-                                if (!entities.isEmpty()) {
-                                    entities.forEach(le -> {
-                                        if (le instanceof LivingEntity living) {
-                                            if (living != pPlayer) {
-                                                living.addEffect(new MobEffectInstance(ModEffects.FREEZE.get(), 180));
-                                                living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 180, 2000));
-                                                //pPlayer.sendMessage(new TextComponent(le.getName().toString()), pPlayer.getUUID());
-                                            }
-                                        }
-                                    });
-                                }
+                                if (rand >= 0.5f)
+                                    pLevel.setBlock(newSpot, fBlock, 11);
+
                             }
 
                         }
                     }
                 }
-                ManaManager.get(pPlayer.level).loseMana(mCur - ICEAPOCALYPSESPELL.getManaCost());
+                ManaManager.get(pPlayer.level).loseMana(mCur - EARTHSPELLAPOCALYPSE.getManaCost());
                 Messages.sendToServer(new PacketManaManagePlayerHandler());
             }
         }

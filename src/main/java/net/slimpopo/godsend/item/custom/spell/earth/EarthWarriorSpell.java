@@ -1,4 +1,4 @@
-package net.slimpopo.godsend.item.custom.spell.ice;
+package net.slimpopo.godsend.item.custom.spell.earth;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
@@ -11,19 +11,19 @@ import net.slimpopo.godsend.capability.mana.ManaCapability;
 import net.slimpopo.godsend.capability.mana.ManaManager;
 import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.entity.ModEntityType;
+import net.slimpopo.godsend.entity.mobs.EarthWarriorEntity;
 import net.slimpopo.godsend.entity.mobs.FlameGolemEntity;
-import net.slimpopo.godsend.entity.mobs.IceWolfEntity;
 import net.slimpopo.godsend.item.custom.spell.SpellItem;
 import net.slimpopo.godsend.manasystem.network.PacketManaManagePlayerHandler;
 import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
-public class IceWolfSpell extends SpellItem {
-    private static final Spell ICEWOLVESSPELL = new Spell("Ice Wolf Spell",100,10,
-            "Summon wolves that attacks all in it's way. Only appears for a set amount of time.");
+public class EarthWarriorSpell extends SpellItem {
+    private static final Spell EARTHWARRIORSPELL = new Spell("Earth Warrior Spell",400,25,
+            "Summon an earth warrior that attacks all in it's way. Only appears for a set amount of time.");
 
-    public IceWolfSpell(Properties pProperties){
-        super(pProperties, ICEWOLVESSPELL);
+    public EarthWarriorSpell(Properties pProperties){
+        super(pProperties, EARTHWARRIORSPELL);
     }
 
     @Override
@@ -35,20 +35,12 @@ public class IceWolfSpell extends SpellItem {
                     .map(ManaCapability::getMana)
                     .orElse(0);
 
-            if(mCur >= ICEWOLVESSPELL.getManaCost()) {
-                IceWolfEntity wolf1 = new IceWolfEntity(ModEntityType.ICEWOLF.get(), pLevel);
-                IceWolfEntity wolf2 = new IceWolfEntity(ModEntityType.ICEWOLF.get(), pLevel);
-                IceWolfEntity wolf3 = new IceWolfEntity(ModEntityType.ICEWOLF.get(), pLevel);
+            if(mCur >= EARTHWARRIORSPELL.getManaCost()) {
+                EarthWarriorEntity golem = new EarthWarriorEntity(ModEntityType.EARTHWARRIOR.get(), pLevel);
+                golem.setPos(position.getX(), position.getY(), position.getZ());
+                pLevel.addFreshEntity(golem);
 
-                wolf1.setPos(position.getX(), position.getY(), position.getZ());
-                wolf2.setPos(position.getX(), position.getY(), position.getZ());
-                wolf3.setPos(position.getX(), position.getY(), position.getZ());
-
-                pLevel.addFreshEntity(wolf1);
-                pLevel.addFreshEntity(wolf2);
-                pLevel.addFreshEntity(wolf3);
-
-                ManaManager.get(pPlayer.level).loseMana(mCur - ICEWOLVESSPELL.getManaCost());
+                ManaManager.get(pPlayer.level).loseMana(mCur - EARTHWARRIORSPELL.getManaCost());
                 Messages.sendToServer(new PacketManaManagePlayerHandler());
 
             }

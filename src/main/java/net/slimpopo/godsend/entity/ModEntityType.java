@@ -10,10 +10,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.slimpopo.godsend.GodSend;
+import net.slimpopo.godsend.entity.mobs.EarthWarriorEntity;
 import net.slimpopo.godsend.entity.mobs.FlameGolemEntity;
 import net.slimpopo.godsend.entity.mobs.IceWolfEntity;
 import net.slimpopo.godsend.entity.projectile.FireArrowEntity;
 import net.slimpopo.godsend.entity.projectile.IceArrowEntity;
+import net.slimpopo.godsend.item.custom.item.explorb.Explorb;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicLongCharge;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicSmallCharge;
 
@@ -36,6 +38,10 @@ public class ModEntityType {
             ()-> EntityType.Builder.<FireballMagicLongCharge>of(FireballMagicLongCharge::new,
             MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"bigfireball").toString()));
 
+    public static final RegistryObject<EntityType<Explorb>> EXPLORB = ENTITIES.register("explorb",
+            ()-> EntityType.Builder.<Explorb>of(Explorb::new,
+                    MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"explorb").toString()));
+
     public static final RegistryObject<EntityType<FlameGolemEntity>> FLAMEGOLEM =
             ENTITIES.register("flamegolem",
                     () -> EntityType.Builder.<FlameGolemEntity>of(FlameGolemEntity::new, MobCategory.MISC).sized(1.4F, 2.7F)
@@ -48,6 +54,13 @@ public class ModEntityType {
                     () -> EntityType.Builder.<IceWolfEntity>of(IceWolfEntity::new, MobCategory.MISC).sized(0.6F, 0.85F)
                             .clientTrackingRange(10)
                             .build(new ResourceLocation(GodSend.MOD_ID,"icewolf").toString()));
+
+    public static final RegistryObject<EntityType<EarthWarriorEntity>> EARTHWARRIOR=
+            ENTITIES.register("earth_warrior",
+                    () -> EntityType.Builder.<EarthWarriorEntity>of(EarthWarriorEntity::new, MobCategory.MISC).sized(2F, 3F)
+                            .fireImmune()
+                            .clientTrackingRange(10)
+                            .build(new ResourceLocation(GodSend.MOD_ID,"earth_warrior").toString()));
 
     public static void register(IEventBus eventBus){
         ENTITIES.register(eventBus);

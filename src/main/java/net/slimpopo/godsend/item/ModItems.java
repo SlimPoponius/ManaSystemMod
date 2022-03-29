@@ -12,6 +12,10 @@ import net.slimpopo.godsend.item.custom.FlameArrowItem;
 import net.slimpopo.godsend.item.custom.MonsterSoulItem;
 import net.slimpopo.godsend.item.custom.SpellBookItem;
 import net.slimpopo.godsend.item.custom.spell.*;
+import net.slimpopo.godsend.item.custom.spell.earth.*;
+import net.slimpopo.godsend.item.custom.spell.earth.armor.EarthArmorItem;
+import net.slimpopo.godsend.item.custom.spell.earth.weapon.EarthAxeItem;
+import net.slimpopo.godsend.item.custom.spell.earth.weapon.EarthHammerItem;
 import net.slimpopo.godsend.item.custom.spell.ice.*;
 import net.slimpopo.godsend.item.custom.spell.ice.armor.IceArmorItem;
 import net.slimpopo.godsend.item.custom.spell.ice.weapon.IceArrowItem;
@@ -67,11 +71,25 @@ public class ModItems {
     public static final RegistryObject<Item> ICESPELL_WALL = ITEMS.register("ice_spell_wall",
             () -> new IceWallSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
+    //EARTH
+    public static final RegistryObject<Item> EARTHSPELL_ARMOR = ITEMS.register("earth_spell_armor",
+            () -> new EarthArmorSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> EARTHSPELL_WEAPONIZE = ITEMS.register("earth_spell_weaponize",
+            () -> new EarthWeaponSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> EARTHSPELL_IMBUE= ITEMS.register("earth_spell_imbue",
+            () -> new EarthImbueSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> EARTHSPELL_WARRIOR = ITEMS.register("earth_spell_warrior",
+            () -> new EarthWarriorSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> EARTHSPELL_QUAKE = ITEMS.register("earth_spell_quake",
+            () -> new EarthQuakeSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+
     //APOCALYPSE
     public static final RegistryObject<Item> FLAMESPELL_APOCALYPSE= ITEMS.register("flame_spell_apocalypse",
             () -> new FlameSpellApocalypse(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
     public static final RegistryObject<Item> ICESPELL_APOCALYPSE= ITEMS.register("ice_spell_apocalypse",
             () -> new IceSpellApocalypse(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> EARTHSPELL_APOCALYPSE= ITEMS.register("earth_spell_apocalypse",
+            () -> new EarthSpellApocalypse(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
     //WEAPONS
     //FLAME
@@ -87,6 +105,14 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
     public static final RegistryObject<Item> ICE_BOW = ITEMS.register("icebow",
             () -> new IceBowItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1).durability(150)));
+
+    //EARTH
+    public static final RegistryObject<Item> EARTH_AXE = ITEMS.register("earth_axe",
+            () -> new EarthAxeItem(ModTiers.EARTH, 17,1.25f,
+                    new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> EARTH_HAMMER = ITEMS.register("earth_hammer",
+            () -> new EarthHammerItem(ModTiers.EARTH, 17,1.25f,
+                    new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
 
     //ARMORS
@@ -116,6 +142,20 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
     public static final RegistryObject<Item> ICE_BOOT = ITEMS.register("ice_boots",
             () -> new ArmorItem(ModArmorMaterials.ICE, EquipmentSlot.FEET,
+                    new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
+
+    //EARTH
+    public static final RegistryObject<Item> EARTH_HELMET = ITEMS.register("earth_helmet",
+            () -> new ArmorItem(ModArmorMaterials.EARTH, EquipmentSlot.HEAD,
+                    new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
+    public static final RegistryObject<Item> EARTH_CHEST = ITEMS.register("earth_chest",
+            () -> new EarthArmorItem(ModArmorMaterials.EARTH, EquipmentSlot.CHEST,
+                    new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
+    public static final RegistryObject<Item> EARTH_LEG= ITEMS.register("earth_legs",
+            () -> new ArmorItem(ModArmorMaterials.EARTH, EquipmentSlot.LEGS,
+                    new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
+    public static final RegistryObject<Item> EARTH_BOOT = ITEMS.register("earth_boots",
+            () -> new ArmorItem(ModArmorMaterials.EARTH, EquipmentSlot.FEET,
                     new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
 
     public static void register(IEventBus eventBus){

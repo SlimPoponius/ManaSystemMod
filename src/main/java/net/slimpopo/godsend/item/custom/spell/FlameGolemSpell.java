@@ -39,7 +39,6 @@ public class FlameGolemSpell extends SpellItem{
                 golem.setPos(position.getX(), position.getY(), position.getZ());
                 pLevel.addFreshEntity(golem);
 
-                pPlayer.sendMessage(new TextComponent("Sending golem your way at position: " + golem.position()), pPlayer.getUUID());
                 ManaManager.get(pPlayer.level).loseMana(mCur - FLAMEGOLEMSPELL.getManaCost());
                 Messages.sendToServer(new PacketManaManagePlayerHandler());
 

@@ -23,9 +23,18 @@ public class SpellList {
             put("icearmor",ModItems.ICESPELL_ARMOR.get());
             put("icewolves",ModItems.ICESPELL_WOLF.get());
             put("icewall",ModItems.ICESPELL_WALL.get());
+
+            //EARTH
+            put("earthimbue",ModItems.EARTHSPELL_IMBUE.get());
+            put("earthweapon",ModItems.EARTHSPELL_WEAPONIZE.get());
+            put("eartharmor",ModItems.EARTHSPELL_ARMOR.get());
+            put("earthwarrior",ModItems.EARTHSPELL_WARRIOR.get());
+            put("earthquake",ModItems.EARTHSPELL_QUAKE.get());
+
             //APOCALYPSE
             //put("apocalypseflame",ModItems.FLAMESPELL_APOCALYPSE.get());
             //put("apocalypseice",ModItems.ICESPELL_APOCALYPSE.get());
+            //put("apocalypseice",ModItems.EARTHSPELL_APOCALYPSE.get());
 
         }
     };
