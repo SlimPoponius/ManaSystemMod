@@ -9,8 +9,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.slimpopo.godsend.GodSend;
 import net.slimpopo.godsend.container.ModContainerEntity;
 import net.slimpopo.godsend.entity.ModEntityType;
-import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicLongCharge;
-import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicSmallCharge;
 import net.slimpopo.godsend.render.enitity.FlameArrowRenderer;
 import net.slimpopo.godsend.render.enitity.IceArrowRenderer;
 import net.slimpopo.godsend.screen.SpellLearnerScreen;
@@ -25,6 +23,7 @@ public class ClientModEventSubscriber {
 
         event.registerEntityRenderer(ModEntityType.BIGFIREBALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntityType.SMALLFIREBALL.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntityType.WINDSLASH.get(), ThrownItemRenderer::new);
 
         event.registerEntityRenderer(ModEntityType.EXPLORB.get(), ThrownItemRenderer::new);
 

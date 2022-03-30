@@ -16,7 +16,7 @@ import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
 public class EarthWeaponSpell extends SpellItem {
-    public static final Spell EARTHWEAPONSPELL = new Spell("Earth Weapon Spell",15,3,
+    public static final Spell EARTHWEAPONSPELL = new Spell("Earth Weapon Spell",20,5,
             "A spell that allows you to conjure weapons of the earth element. using the spell will conjure a different weapon each time.");
     public static int weaponMode = 0;
 
@@ -160,8 +160,8 @@ public class EarthWeaponSpell extends SpellItem {
     }
 
     public void replaceWeaponToSlot(Player player, ItemStack itemPlace){
-        ItemStack GREATSWD = new ItemStack(ModItems.ICE_LONGSWORD.get());
-        ItemStack BOW = new ItemStack(ModItems.ICE_BOW.get());
+        ItemStack GREATSWD = new ItemStack(ModItems.EARTH_AXE.get());
+        ItemStack BOW = new ItemStack(ModItems.EARTH_HAMMER .get());
         int slotNum = findWeaponType(player);
         if( slotNum == -1){
             return;

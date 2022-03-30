@@ -21,7 +21,7 @@ import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
 public class EarthArmorSpell extends SpellItem {
-    private static final Spell EARTHARMORSPELL = new Spell("Earth Armor Spell",25,5,
+    private static final Spell EARTHARMORSPELL = new Spell("Earth Armor Spell",30,7,
             "A basic armor spell that covers you in earth armor. Can be removed with either the spell or removing the helmet.");
 
     public EarthArmorSpell(Properties pProperties) {

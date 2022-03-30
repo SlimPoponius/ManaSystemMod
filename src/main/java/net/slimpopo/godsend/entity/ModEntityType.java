@@ -10,14 +10,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.slimpopo.godsend.GodSend;
-import net.slimpopo.godsend.entity.mobs.EarthWarriorEntity;
-import net.slimpopo.godsend.entity.mobs.FlameGolemEntity;
-import net.slimpopo.godsend.entity.mobs.IceWolfEntity;
+import net.slimpopo.godsend.entity.mobs.*;
 import net.slimpopo.godsend.entity.projectile.FireArrowEntity;
 import net.slimpopo.godsend.entity.projectile.IceArrowEntity;
 import net.slimpopo.godsend.item.custom.item.explorb.Explorb;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicLongCharge;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicSmallCharge;
+import net.slimpopo.godsend.item.custom.item.windslash.WindSlash;
 
 public class ModEntityType {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, GodSend.MOD_ID);
@@ -38,6 +37,10 @@ public class ModEntityType {
             ()-> EntityType.Builder.<FireballMagicLongCharge>of(FireballMagicLongCharge::new,
             MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"bigfireball").toString()));
 
+    public static final RegistryObject<EntityType<WindSlash>> WINDSLASH = ENTITIES.register("wind_slash",
+            ()-> EntityType.Builder.<WindSlash>of(WindSlash::new,
+                    MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"wind_slash").toString()));
+
     public static final RegistryObject<EntityType<Explorb>> EXPLORB = ENTITIES.register("explorb",
             ()-> EntityType.Builder.<Explorb>of(Explorb::new,
                     MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"explorb").toString()));
@@ -55,12 +58,32 @@ public class ModEntityType {
                             .clientTrackingRange(10)
                             .build(new ResourceLocation(GodSend.MOD_ID,"icewolf").toString()));
 
+    public static final RegistryObject<EntityType<WindBatEntity>> WINDBAT =
+            ENTITIES.register("windbat",
+                    () -> EntityType.Builder.<WindBatEntity>of(WindBatEntity::new, MobCategory.MISC).sized(0.5F, 0.9F)
+                            .clientTrackingRange(10)
+                            .build(new ResourceLocation(GodSend.MOD_ID,"windbat").toString()));
+
     public static final RegistryObject<EntityType<EarthWarriorEntity>> EARTHWARRIOR=
             ENTITIES.register("earth_warrior",
                     () -> EntityType.Builder.<EarthWarriorEntity>of(EarthWarriorEntity::new, MobCategory.MISC).sized(2F, 3F)
                             .fireImmune()
                             .clientTrackingRange(10)
                             .build(new ResourceLocation(GodSend.MOD_ID,"earth_warrior").toString()));
+
+    public static final RegistryObject<EntityType<TornadoEntity>> BIGTORNADO=
+            ENTITIES.register("big_tornado",
+                    () -> EntityType.Builder.<TornadoEntity>of(TornadoEntity::new, MobCategory.MISC).sized(2.4F, 8F)
+                            .fireImmune()
+                            .clientTrackingRange(10)
+                            .build(new ResourceLocation(GodSend.MOD_ID,"big_tornado").toString()));
+
+    public static final RegistryObject<EntityType<TornadoEntity>> SMALLTORNADO=
+            ENTITIES.register("small_tornado",
+                    () -> EntityType.Builder.<TornadoEntity>of(TornadoEntity::new, MobCategory.MISC).sized(0.3F, 1F)
+                            .fireImmune()
+                            .clientTrackingRange(10)
+                            .build(new ResourceLocation(GodSend.MOD_ID,"small_tornado").toString()));
 
     public static void register(IEventBus eventBus){
         ENTITIES.register(eventBus);

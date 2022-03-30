@@ -20,6 +20,10 @@ public class ModEffects {
             MOBEFFECTS.register("freeze",
                     () -> new FreezeEffect(MobEffectCategory.HARMFUL,0x99FFFF));
 
+    public static final RegistryObject<MobEffect> FLYING =
+            MOBEFFECTS.register("flight",
+                    () -> new FreezeEffect(MobEffectCategory.NEUTRAL,0x54dcb4));
+
     public static void register(IEventBus eventBus){
         MOBEFFECTS.register(eventBus);
     }

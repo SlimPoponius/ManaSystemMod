@@ -16,7 +16,14 @@ public enum ModArmorMaterials implements ArmorMaterial {
     }),
     ICE("ice", 25, new int[]{4, 6, 7, 5}, 14, SoundEvents.SNOW_HIT, 0.0F, 0.0F, () -> {
         return Ingredient.of(ModItems.MONSTERSOUL.get());
-    }),EARTH("earth", 25, new int[]{4, 6, 7, 5}, 14, SoundEvents.GRAVEL_BREAK, 0.0F, 0.0F, () -> {
+    }),
+    EARTH("earth", 25, new int[]{4, 6, 7, 5}, 14, SoundEvents.GRAVEL_BREAK, 0.0F, 0.0F, () -> {
+        return Ingredient.of(ModItems.MONSTERSOUL.get());
+    }),
+    WIND("wind", 25, new int[]{4, 6, 7, 5}, 14, null, 0.0F, 0.0F, () -> {
+        return Ingredient.of(ModItems.MONSTERSOUL.get());
+    }),
+    THUNDER("thunder", 25, new int[]{4, 6, 7, 5}, 14, SoundEvents.LIGHTNING_BOLT_THUNDER, 0.0F, 0.0F, () -> {
         return Ingredient.of(ModItems.MONSTERSOUL.get());
     }),;
 

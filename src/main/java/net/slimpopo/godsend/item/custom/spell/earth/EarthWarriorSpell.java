@@ -19,7 +19,7 @@ import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
 public class EarthWarriorSpell extends SpellItem {
-    private static final Spell EARTHWARRIORSPELL = new Spell("Earth Warrior Spell",400,25,
+    private static final Spell EARTHWARRIORSPELL = new Spell("Earth Warrior Spell",400,15,
             "Summon an earth warrior that attacks all in it's way. Only appears for a set amount of time.");
 
     public EarthWarriorSpell(Properties pProperties){

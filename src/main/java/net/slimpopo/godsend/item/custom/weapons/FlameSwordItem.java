@@ -26,11 +26,6 @@ public class FlameSwordItem extends SwordItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        if(!pLevel.isClientSide) {
-            pPlayer.getMainHandItem().setCount(0);
-            pPlayer.sendMessage(new TextComponent("You returned your weapon to the mana void"),
-                    pPlayer.getUUID());
-        }
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 

@@ -19,7 +19,7 @@ import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
 public class EarthImbueSpell extends SpellItem {
-    private static final Spell EARTHIMBUESPELL = new Spell("Earth Imbue Spell",5,1,
+    private static final Spell EARTHIMBUESPELL = new Spell("Earth Imbue Spell",10,3,
             "Imbue your body with the power of the earth.");
 
     public EarthImbueSpell(Properties pProperties) {

@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Random;
 
 public class IceSpellApocalypse extends SpellItem {
-    private static final Spell ICEAPOCALYPSESPELL = new Spell("Ice Apocalypse: Tundra",400,15,
+    private static final Spell ICEAPOCALYPSESPELL = new Spell("Ice Apocalypse: Tundra",400,20,
             "A zone spell that sets everything to below zero.");
 
     public IceSpellApocalypse(Properties pProperties) {

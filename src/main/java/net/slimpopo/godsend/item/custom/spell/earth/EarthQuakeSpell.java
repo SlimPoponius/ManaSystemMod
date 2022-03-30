@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 public class EarthQuakeSpell extends SpellItem {
-    private static final Spell EARTHQUAKESPELL = new Spell("Earth Quake Spell",75,10,
+    private static final Spell EARTHQUAKESPELL = new Spell("Earth Quake Spell",60,12,
             "A spell that causes anyone in the radius to get sent into the air.");
 
     public EarthQuakeSpell(Properties pProperties) {

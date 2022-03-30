@@ -25,7 +25,7 @@ import net.slimpopo.godsend.setup.Messages;
 import java.util.Random;
 
 public class FlameSpellApocalypse extends SpellItem{
-    private static final Spell FLAMEAPOCALYPSESPELL = new Spell("Flame Apocalypse",400,15,
+    private static final Spell FLAMEAPOCALYPSESPELL = new Spell("Flame Apocalypse",400,20,
             "A zone spell that sets everything burning in it's path.");
 
     public FlameSpellApocalypse(Properties pProperties) {

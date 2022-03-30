@@ -22,6 +22,16 @@
   "item.godsend.earth_chest": "Earth Chest",
   "item.godsend.earth_legs": "Earth Legs",
   "item.godsend.earth_boots": "Earth Boots",
+  "item.godsend.wind_helmet": "Wind Helmet",
+  "item.godsend.wind_chest": "Wind Chest",
+  "item.godsend.wind_legs": "Wind Legs",
+  "item.godsend.wind_boots": "Wind Boots",
+  "item.godsend.thunder_helmet": "Thunder Helmet",
+  "item.godsend.thunder_chest": "Thunder Chest",
+  "item.godsend.thunder_legs": "Thunder Legs",
+  "item.godsend.thunder_boots": "Thunder Boots",
+
+
   "item.godsend.flame_greatswd": "Flame Greatsword",
   "item.godsend.ice_longswd": "Ice Longsword",
   "item.godsend.icebow": "Ice Bow",
@@ -32,6 +42,9 @@
   "item.godsend.bigfireball": "Critical Fireball",
   "item.godsend.earth_axe": "Earth Axe",
   "item.godsend.earth_hammer": "Earth Hammer",
+  "item.godsend.wind_slash": "Wind Slash",
+  "item.godsend.wind_dagger": "Wind Dagger",
+  "item.godsend.wind_scythe": "Wind Scythe",
 
   "item.godsend.flame_spell_armor": "Flame Armor Spell",
   "item.godsend.flame_spell_weaponize": "Flame Weapon Spell",
@@ -53,6 +66,13 @@
   "item.godsend.earth_spell_imbue": "Earth Imbue Spell",
   "item.godsend.earth_spell_warrior": "Earth Warrior Spell",
   "item.godsend.earth_spell_apocalypse": "Earth Apocalypse: Wasteland",
+
+  "item.godsend.wind_spell_armor": "Wind Armor Spell",
+  "item.godsend.wind_spell_weaponize": "Wind Weapon Spell",
+  "item.godsend.wind_spell_tornado": "Tornado Spell",
+  "item.godsend.wind_spell_imbue": "Wind Imbue Spell",
+  "item.godsend.wind_spell_bats": "Wind Bat Spell",
+  "item.godsend.wind_spell_apocalypse": "Wind Apocalypse: Twister",
 
 
   "enchantment.godsend.flameimbue": "Flame Imbue",

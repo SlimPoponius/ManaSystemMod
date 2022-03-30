@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Random;
 
 public class EarthSpellApocalypse extends SpellItem {
-    private static final Spell EARTHSPELLAPOCALYPSE = new Spell("Earth Apocalypse: Wasteland",00,15,
+    private static final Spell EARTHSPELLAPOCALYPSE = new Spell("Earth Apocalypse: Wasteland",400,20,
             "A zone spell that sets everything to explosive sand.");
 
     public EarthSpellApocalypse(Properties pProperties) {

@@ -16,11 +16,12 @@ import net.slimpopo.godsend.GodSend;
 import net.slimpopo.godsend.entity.ModEntityType;
 import net.slimpopo.godsend.entity.mobs.EarthWarriorEntity;
 import net.slimpopo.godsend.entity.mobs.FlameGolemEntity;
+import net.slimpopo.godsend.entity.mobs.TornadoEntity;
+import net.slimpopo.godsend.entity.mobs.WindBatEntity;
 import net.slimpopo.godsend.entity.models.EarthWarriorModel;
 import net.slimpopo.godsend.entity.models.FlameGolemModel;
-import net.slimpopo.godsend.entity.render.EarthWarriorRenderer;
-import net.slimpopo.godsend.entity.render.FlameGolemRenderer;
-import net.slimpopo.godsend.entity.render.IceWolfRenderer;
+import net.slimpopo.godsend.entity.models.WindBatModel;
+import net.slimpopo.godsend.entity.render.*;
 import net.slimpopo.godsend.item.custom.MonsterSoulItem;
 import net.slimpopo.godsend.manasystem.client.ManaOverlay;
 import org.apache.logging.log4j.LogManager;
@@ -45,18 +46,27 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event){
         event.put(ModEntityType.EARTHWARRIOR.get(), EarthWarriorEntity.createAttribute().build());
+        event.put(ModEntityType.BIGTORNADO.get(), TornadoEntity.createAttribute().build());
+        event.put(ModEntityType.SMALLTORNADO.get(), TornadoEntity.createAttribute().build());
+
+        event.put(ModEntityType.WINDBAT.get(), WindBatEntity.createAttribute().build());
+
     }
 
-//    @SubscribeEvent
-//    public static void setupModels(EntityRenderersEvent.RegisterLayerDefinitions event){
-//        event.registerLayerDefinition(EarthWarriorModel.LAYER_LOCATION,EarthWarriorModel::createBodyLayer);
-//    }
+    @SubscribeEvent
+    public static void setupModels(EntityRenderersEvent.RegisterLayerDefinitions event){
+        event.registerLayerDefinition(WindBatModel.LAYER_LOCATION,WindBatModel::createBodyLayer);
+    }
 
     @SubscribeEvent
     public static void setupRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(ModEntityType.FLAMEGOLEM.get(),FlameGolemRenderer::new);
         event.registerEntityRenderer(ModEntityType.ICEWOLF.get(), IceWolfRenderer::new);
         event.registerEntityRenderer(ModEntityType.EARTHWARRIOR.get(), EarthWarriorRenderer::new);
+        event.registerEntityRenderer(ModEntityType.BIGTORNADO.get(), BigTornadoRenderer::new);
+        event.registerEntityRenderer(ModEntityType.SMALLTORNADO.get(), SmallTornadoRenderer::new);
+        event.registerEntityRenderer(ModEntityType.WINDBAT.get(), WindBatRenderer::new);
+
     }
 
 }

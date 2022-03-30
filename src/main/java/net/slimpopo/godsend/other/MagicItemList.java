@@ -12,17 +12,14 @@ public class MagicItemList {
     public static List<Item> Weapons = new ArrayList<Item>()
     {
         {
-            //FLAME
             add(ModItems.FLAME_GREATSWORD.get());
             add(ModItems.ICE_LONGSWORD.get());
+            add(ModItems.EARTH_AXE.get());
+            add(ModItems.EARTH_HAMMER.get());
             add(ModItems.FLAME_BOW.get());
             add(ModItems.ICE_BOW.get());
-
-
-
-
-            //APOCALYPSE
-            //put("apocalypseflame",null);
+            add(ModItems.WIND_DAGGER.get());
+            add(ModItems.WIND_SCYTHE.get());
 
         }
     };
