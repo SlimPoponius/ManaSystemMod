@@ -126,7 +126,7 @@ public class ManaCapability implements IManaCapability{
         if(manaLevel < MAXLEVEL) {
             this.manaLevel += 1;
             this.maxMana = this.manaLevel * 100;
-            this.mana += 25;
+            this.mana = maxMana;
             this.monsterSoulGiven = 0;
             this.monsterSoulNeeded += (int) (Math.round(Math.pow(2, this.manaLevel) * 1.3));
         }

@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class FlameFireBallSpell extends SpellItem{
     public static final Spell FLAMEBALLSPELL = new Spell("Flame Ball Spell",30,7,
-            "A spell that lets you launch a flame projectile at your foe for massive fire damage. Hold to charge for bigger effects");
+            "A spell that lets you launch a flame projectile at your foe for massive fire damage.");
 
     public FlameFireBallSpell(Properties pProperties) {
         super(pProperties, FLAMEBALLSPELL);

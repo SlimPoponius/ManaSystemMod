@@ -1,11 +1,10 @@
-package net.slimpopo.godsend.item.custom.spell.earth;
+package net.slimpopo.godsend.item.custom.spell.thunder;
 
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -20,27 +19,27 @@ import net.slimpopo.godsend.manasystem.network.PacketManaManagePlayerHandler;
 import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.setup.Messages;
 
-public class EarthArmorSpell extends SpellItem {
-    private static final Spell EARTHARMORSPELL = new Spell("Earth Armor Spell",30,7,
-            "A basic armor spell that covers you in earth armor. Can be removed with either the spell or removing the helmet.");
+public class ThunderArmorSpell extends SpellItem {
+    private static final Spell THUNDERARMORSPELL = new Spell("Thunder Armor Spell",25,6,
+            "A basic armor spell that covers you in thunder armor. Can be removed with either the spell or removing the helmet.");
 
-    public EarthArmorSpell(Properties pProperties) {
-        super(pProperties, EARTHARMORSPELL);
+    public ThunderArmorSpell(Properties pProperties) {
+        super(pProperties, THUNDERARMORSPELL);
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        ItemStack boots = new ItemStack(ModItems.EARTH_BOOT.get());
-        ItemStack legs = new ItemStack(ModItems.EARTH_LEG.get());
-        ItemStack chest = new ItemStack(ModItems.EARTH_CHEST.get());
-        ItemStack head = new ItemStack(ModItems.EARTH_HELMET.get());
+        ItemStack boots = new ItemStack(ModItems.THUNDER_BOOT.get());
+        ItemStack legs = new ItemStack(ModItems.THUNDER_LEG.get());
+        ItemStack chest = new ItemStack(ModItems.THUNDER_CHEST.get());
+        ItemStack head = new ItemStack(ModItems.THUNDER_HELMET.get());
 
         if(!pLevel.isClientSide){
             int mCur = pPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
                     .map(ManaCapability::getMana)
                     .orElse(0);
 
-            if(mCur >= EARTHARMORSPELL.getManaCost() || AlreadyHasArmorOn(pPlayer)) {
+            if(mCur >= THUNDERARMORSPELL.getManaCost() || AlreadyHasArmorOn(pPlayer)) {
                 //1. Check if player has armor currently on...
                 if (hasArmorOn(pPlayer)) {
                     if (AlreadyHasArmorOn(pPlayer)) {
@@ -49,8 +48,8 @@ public class EarthArmorSpell extends SpellItem {
                         pPlayer.getInventory().armor.set(1, ItemStack.EMPTY);
                         pPlayer.getInventory().armor.set(2, ItemStack.EMPTY);
                         pPlayer.getInventory().armor.set(3, ItemStack.EMPTY);
-                        pPlayer.removeEffect(MobEffects.DAMAGE_RESISTANCE);
-                        pPlayer.removeEffect(MobEffects.REGENERATION);
+                        pPlayer.removeEffect(MobEffects.MOVEMENT_SPEED);
+                        pPlayer.removeEffect(MobEffects.INVISIBILITY);
                         pPlayer.sendMessage(new TextComponent("Spell has been deactivated"), pPlayer.getUUID());
                         return super.use(pLevel, pPlayer, pUsedHand);
                     } else {
@@ -70,7 +69,7 @@ public class EarthArmorSpell extends SpellItem {
                 pPlayer.getInventory().armor.set(2, chest);
                 pPlayer.getInventory().armor.set(3, head);
 
-                ManaManager.get(pPlayer.level).loseMana(mCur - EARTHARMORSPELL.getManaCost());
+                ManaManager.get(pPlayer.level).loseMana(mCur - THUNDERARMORSPELL.getManaCost());
 
                 Messages.sendToServer(new PacketManaManagePlayerHandler());
             }
@@ -89,10 +88,10 @@ public class EarthArmorSpell extends SpellItem {
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        ItemStack boots = new ItemStack(ModItems.EARTH_BOOT.get());
-        ItemStack legs = new ItemStack(ModItems.EARTH_LEG.get());
-        ItemStack chest = new ItemStack(ModItems.EARTH_CHEST.get());
-        ItemStack head = new ItemStack(ModItems.EARTH_HELMET.get());
+        ItemStack boots = new ItemStack(ModItems.THUNDER_BOOT.get());
+        ItemStack legs = new ItemStack(ModItems.THUNDER_LEG.get());
+        ItemStack chest = new ItemStack(ModItems.THUNDER_CHEST.get());
+        ItemStack head = new ItemStack(ModItems.THUNDER_HELMET.get());
 
         if(entity instanceof ServerPlayer sPlayer){
             if(hasArmorOn(sPlayer)){
@@ -102,9 +101,9 @@ public class EarthArmorSpell extends SpellItem {
                     sPlayer.getInventory().armor.set(1,ItemStack.EMPTY);
                     sPlayer.getInventory().armor.set(2,ItemStack.EMPTY);
                     sPlayer.getInventory().armor.set(3,ItemStack.EMPTY);
-                    player.removeEffect(MobEffects.DAMAGE_RESISTANCE);
-                    player.removeEffect(MobEffects.REGENERATION);
-                    sPlayer.sendMessage(new TextComponent(player.getDisplayName() + "has used the " + EARTHARMORSPELL.getSpellName() + " spell on you"),sPlayer.getUUID());
+                    sPlayer.removeEffect(MobEffects.MOVEMENT_SPEED);
+                    sPlayer.removeEffect(MobEffects.INVISIBILITY);
+                    sPlayer.sendMessage(new TextComponent(player.getDisplayName() + "has used the " + THUNDERARMORSPELL.getSpellName() + " spell on you"),sPlayer.getUUID());
                     return super.onLeftClickEntity(stack, player, entity);
                 }
                 else {
@@ -138,8 +137,8 @@ public class EarthArmorSpell extends SpellItem {
             int mCur = ManaManager.get(player.level).getMana();
 
             player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
-                playerMana.setMana(mCur - EARTHARMORSPELL.getManaCost());
-                player.sendMessage(new TextComponent("You activated the  " + EARTHARMORSPELL.getSpellName() + " on " + sPlayer.getDisplayName() +"!"),
+                playerMana.setMana(mCur - THUNDERARMORSPELL.getManaCost());
+                player.sendMessage(new TextComponent("You activated the  " + THUNDERARMORSPELL.getSpellName() + " on " + sPlayer.getDisplayName() +"!"),
                         player.getUUID());
             });
 
@@ -164,7 +163,7 @@ public class EarthArmorSpell extends SpellItem {
         ItemStack chestplate = player.getInventory().getArmor(2);
         ItemStack helmet = player.getInventory().getArmor(3);
 
-        return boots.getItem() == ModItems.EARTH_BOOT.get() && leggings.getItem() == ModItems.EARTH_LEG.get()
-                && chestplate.getItem() == ModItems.EARTH_CHEST.get() && helmet.getItem() == ModItems.EARTH_HELMET.get();
+        return boots.getItem() == ModItems.THUNDER_BOOT.get() && leggings.getItem() == ModItems.THUNDER_LEG.get()
+                && chestplate.getItem() == ModItems.THUNDER_CHEST.get() && helmet.getItem() == ModItems.THUNDER_HELMET.get();
     }
 }

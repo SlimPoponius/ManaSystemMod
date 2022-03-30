@@ -124,6 +124,9 @@ public class EarthArmorItem extends ArmorItem {
                 player.getOffhandItem().getItem() == ModItems.EARTH_HELMET.get() ||player.getOffhandItem().getItem() == ModItems.EARTH_LEG.get() ){
             player.getMainHandItem().setCount(0);
         }
+
+        player.removeEffect(MobEffects.DAMAGE_RESISTANCE);
+        player.removeEffect(MobEffects.REGENERATION);
     }
 
 

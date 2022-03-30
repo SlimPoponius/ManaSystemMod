@@ -24,7 +24,7 @@ public class ClientModEventSubscriber {
         event.registerEntityRenderer(ModEntityType.BIGFIREBALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntityType.SMALLFIREBALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntityType.WINDSLASH.get(), ThrownItemRenderer::new);
-
+        event.registerEntityRenderer(ModEntityType.THUNDERORB.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntityType.EXPLORB.get(), ThrownItemRenderer::new);
 
 

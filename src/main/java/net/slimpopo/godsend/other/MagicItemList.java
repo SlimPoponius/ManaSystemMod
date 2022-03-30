@@ -20,6 +20,8 @@ public class MagicItemList {
             add(ModItems.ICE_BOW.get());
             add(ModItems.WIND_DAGGER.get());
             add(ModItems.WIND_SCYTHE.get());
+            add(ModItems.THUNDER_RAPIER.get());
+            add(ModItems.THUNDER_STAFF.get());
 
         }
     };

@@ -40,11 +40,14 @@
   "item.godsend.icearrow": "Ice Arrow",
   "item.godsend.smallfireball": "Fireball",
   "item.godsend.bigfireball": "Critical Fireball",
+  "item.godsend.thunder_ball": "Thunder Orb",
   "item.godsend.earth_axe": "Earth Axe",
   "item.godsend.earth_hammer": "Earth Hammer",
   "item.godsend.wind_slash": "Wind Slash",
   "item.godsend.wind_dagger": "Wind Dagger",
   "item.godsend.wind_scythe": "Wind Scythe",
+  "item.godsend.thunder_rapier": "Thunder Rapier",
+  "item.godsend.thunder_staff": "Thunder Staff",
 
   "item.godsend.flame_spell_armor": "Flame Armor Spell",
   "item.godsend.flame_spell_weaponize": "Flame Weapon Spell",
@@ -74,9 +77,17 @@
   "item.godsend.wind_spell_bats": "Wind Bat Spell",
   "item.godsend.wind_spell_apocalypse": "Wind Apocalypse: Twister",
 
+  "item.godsend.thunder_spell_armor": "Thunder Armor Spell",
+  "item.godsend.thunder_spell_weaponize": "Thunder Weapon Spell",
+  "item.godsend.thunder_spell_orb": "Thunder Orb Spell",
+  "item.godsend.thunder_spell_imbue": "Thunder Imbue Spell",
+  "item.godsend.thunder_spell_wall": "Thunder Wall Spell",
+  "item.godsend.thunder_spell_apocalypse": "Thunder Apocalypse: Storm",
+
 
   "enchantment.godsend.flameimbue": "Flame Imbue",
   "enchantment.godsend.iceimbue": "Ice Imbue",
+  "enchantment.godsend.thunderimbue": "Thunder Imbue",
 
   "effect.godsend.freeze": "Frozen",
 

@@ -16,6 +16,7 @@ import net.slimpopo.godsend.entity.projectile.IceArrowEntity;
 import net.slimpopo.godsend.item.custom.item.explorb.Explorb;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicLongCharge;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicSmallCharge;
+import net.slimpopo.godsend.item.custom.item.thunderball.ThunderOrb;
 import net.slimpopo.godsend.item.custom.item.windslash.WindSlash;
 
 public class ModEntityType {
@@ -36,6 +37,10 @@ public class ModEntityType {
     public static final RegistryObject<EntityType<FireballMagicLongCharge>> BIGFIREBALL = ENTITIES.register("bigfireball",
             ()-> EntityType.Builder.<FireballMagicLongCharge>of(FireballMagicLongCharge::new,
             MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"bigfireball").toString()));
+
+    public static final RegistryObject<EntityType<ThunderOrb>> THUNDERORB = ENTITIES.register("thunderorb",
+            ()-> EntityType.Builder.<ThunderOrb>of(ThunderOrb::new,
+                    MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"thunderorb").toString()));
 
     public static final RegistryObject<EntityType<WindSlash>> WINDSLASH = ENTITIES.register("wind_slash",
             ()-> EntityType.Builder.<WindSlash>of(WindSlash::new,

@@ -31,17 +31,26 @@ public class SpellList {
             put("earthwarrior",ModItems.EARTHSPELL_WARRIOR.get());
             put("earthquake",ModItems.EARTHSPELL_QUAKE.get());
 
-            //EARTH
+            //WIND
             put("windimbue",ModItems.WINDSPELL_IMBUE.get());
             put("windweapon",ModItems.WINDSPELL_WEAPONIZE.get());
             put("windarmor",ModItems.WINDSPELL_ARMOR.get());
             put("windbats",ModItems.WINDSPELL_BATS.get());
             put("tornado",ModItems.WINDSPELL_TORNADO.get());
 
+            //WIND
+            put("thunderimbue",ModItems.THUNDERSPELL_IMBUE.get());
+            put("thunderweapon",ModItems.THUNDERSPELL_WEAPONIZE.get());
+            put("thunderarmor",ModItems.THUNDERSPELL_ARMOR.get());
+            put("thunderorb",ModItems.THUNDERSPELL_ORB.get());
+            put("thunderwall",ModItems.THUNDERSPELL_WALL.get());
+
             //APOCALYPSE
-            //put("apocalypseflame",ModItems.FLAMESPELL_APOCALYPSE.get());
-            //put("apocalypseice",ModItems.ICESPELL_APOCALYPSE.get());
-            //put("apocalypseice",ModItems.EARTHSPELL_APOCALYPSE.get());
+            put("apocalypseflame",ModItems.FLAMESPELL_APOCALYPSE.get());
+            put("apocalypseice",ModItems.ICESPELL_APOCALYPSE.get());
+            put("apocalypseearth",ModItems.EARTHSPELL_APOCALYPSE.get());
+            put("apocalypsewind",ModItems.WINDSPELL_APOCALYPSE.get());
+            put("apocalypsethunder",ModItems.THUNDERSPELL_APOCALYPSE.get());
 
         }
     };

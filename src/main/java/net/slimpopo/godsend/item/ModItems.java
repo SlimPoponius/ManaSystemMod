@@ -21,6 +21,10 @@ import net.slimpopo.godsend.item.custom.spell.ice.armor.IceArmorItem;
 import net.slimpopo.godsend.item.custom.spell.ice.weapon.IceArrowItem;
 import net.slimpopo.godsend.item.custom.spell.ice.weapon.IceBowItem;
 import net.slimpopo.godsend.item.custom.spell.ice.weapon.IceSwordItem;
+import net.slimpopo.godsend.item.custom.spell.thunder.*;
+import net.slimpopo.godsend.item.custom.spell.thunder.armor.ThunderArmorItem;
+import net.slimpopo.godsend.item.custom.spell.thunder.weapon.ThunderRapierItem;
+import net.slimpopo.godsend.item.custom.spell.thunder.weapon.ThunderStaffItem;
 import net.slimpopo.godsend.item.custom.spell.wind.*;
 import net.slimpopo.godsend.item.custom.spell.wind.armor.WindArmorItem;
 import net.slimpopo.godsend.item.custom.spell.wind.weapon.WindDaggerItem;
@@ -49,6 +53,8 @@ public class ModItems {
     public static final RegistryObject<Item> FIREBALLBIG = ITEMS.register("bigfireball",
             () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
     public static final RegistryObject<Item> WINDSLASH = ITEMS.register("wind_slash",
+            () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
+    public static final RegistryObject<Item> THUNDERBALL = ITEMS.register("thunder_ball",
             () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
     public static final RegistryObject<Item> ICE_ARROW = ITEMS.register("icearrow",
             () -> new IceArrowItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1),1.5f));
@@ -102,6 +108,20 @@ public class ModItems {
     public static final RegistryObject<Item> WINDSPELL_TORNADO = ITEMS.register("wind_spell_tornado",
             () -> new WindTornadoSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
+    //Thunder
+    public static final RegistryObject<Item> THUNDERSPELL_ARMOR = ITEMS.register("thunder_spell_armor",
+            () -> new ThunderArmorSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> THUNDERSPELL_WEAPONIZE = ITEMS.register("thunder_spell_weaponize",
+            () -> new ThunderWeaponSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> THUNDERSPELL_IMBUE= ITEMS.register("thunder_spell_imbue",
+            () -> new ThunderImbueSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> THUNDERSPELL_WALL = ITEMS.register("thunder_spell_wall",
+            () -> new ThunderOrbSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> THUNDERSPELL_ORB = ITEMS.register("thunder_spell_orb",
+            () -> new ThunderWallSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+
+
+
     //APOCALYPSE
     public static final RegistryObject<Item> FLAMESPELL_APOCALYPSE= ITEMS.register("flame_spell_apocalypse",
             () -> new FlameSpellApocalypse(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
@@ -111,6 +131,8 @@ public class ModItems {
             () -> new EarthSpellApocalypse(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
     public static final RegistryObject<Item> WINDSPELL_APOCALYPSE= ITEMS.register("wind_spell_apocalypse",
             () -> new WindSpellApocalypse(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> THUNDERSPELL_APOCALYPSE= ITEMS.register("thunder_spell_apocalypse",
+            () -> new ThunderSpellApocalypse(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
     //WEAPONS
     //FLAME
@@ -141,6 +163,13 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
     public static final RegistryObject<Item> WIND_DAGGER = ITEMS.register("wind_dagger",
             () -> new WindDaggerItem(ModTiers.WIND, 7,8f,
+                    new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    //THUNDER
+    public static final RegistryObject<Item> THUNDER_RAPIER = ITEMS.register("thunder_rapier",
+            () -> new ThunderRapierItem(ModTiers.THUNDER, 13,3f,
+                    new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> THUNDER_STAFF= ITEMS.register("thunder_staff",
+            () -> new ThunderStaffItem(ModTiers.THUNDER, 7,8f,
                     new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
 
@@ -206,7 +235,7 @@ public class ModItems {
             () -> new ArmorItem(ModArmorMaterials.THUNDER, EquipmentSlot.HEAD,
                     new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
     public static final RegistryObject<Item> THUNDER_CHEST = ITEMS.register("thunder_chest",
-            () -> new EarthArmorItem(ModArmorMaterials.THUNDER, EquipmentSlot.CHEST,
+            () -> new ThunderArmorItem(ModArmorMaterials.THUNDER, EquipmentSlot.CHEST,
                     new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
     public static final RegistryObject<Item> THUNDER_LEG= ITEMS.register("thunder_legs",
             () -> new ArmorItem(ModArmorMaterials.THUNDER, EquipmentSlot.LEGS,
