@@ -5,23 +5,19 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.MenuConstructor;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.slimpopo.godsend.block.ModBlocks;
-import net.slimpopo.godsend.capability.mana.ManaCapability;
-import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.entity.block.SpellLearnerEntity;
 import net.slimpopo.godsend.item.ModItems;
 import net.slimpopo.godsend.manasystem.client.ClientManaData;
-import net.slimpopo.godsend.other.Spell;
 import net.slimpopo.godsend.other.SpellList;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
 
 public class SpellLearnerContainer extends AbstractContainerMenu {
     private final ContainerLevelAccess containerAccess;
@@ -29,7 +25,7 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
 
     //Client Constructor
     public SpellLearnerContainer(int pContainerId, Inventory playerInv) {
-        this(pContainerId,playerInv,new ItemStackHandler(29),BlockPos.ZERO);
+        this(pContainerId,playerInv,new ItemStackHandler(33),BlockPos.ZERO);
         updateSlotContainers();
 
     }
@@ -61,8 +57,8 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
             }
         }
         //Player Bottom Inventory
-        for(int column = 0; column < 9; column++){
-            addSlot(new Slot(playerInv,column,8 + column * slotSizePlus2,hotbarY));
+        for(int column = 0; column < 5; column++){
+            addSlot(new SlotItemHandler(slots,28+column,44 + column * slotSizePlus2,hotbarY));
         }
         resetSlotContainers();
         updateSlotContainers();
@@ -95,18 +91,6 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
         if(slot.hasItem()){
             final ItemStack stack = slot.getItem();
             retStack = stack.copy();
-            //Our Inventory(not player's)
-            if( pIndex < 28){
-                if (!moveItemStackTo(stack, 29, 37, false)) {
-                    updateSlotContainers();
-                    return ItemStack.EMPTY;
-                }
-            }
-            //Player Inventory, not ours
-            else if(pIndex >= 28){
-                if (!moveItemStackTo(stack, 28, this.slots.size(), false))
-                    return ItemStack.EMPTY;
-            }
 
             if(stack.isEmpty()){
                 slot.set(stack);
@@ -130,11 +114,12 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
         int manaLevel = ClientManaData.getManaLvl();
 
         int spellListCounter = 0;
-        for(int i = 0; i < 28;i++){
+        for(int i = 0; i < slots.size();i++){
             if(i > 2) {
                 if (spellListCounter < SpellList.Spells.size()) {
-                    if(manaLevel >= SpellList.getSpellLevelReq(spellListCounter))
+                    if(manaLevel >= SpellList.getSpellLevelReq(spellListCounter)) {
                         this.getSlot(i).set(SpellList.getStack(spellListCounter));
+                    }
                     spellListCounter++;
                 }
             }
@@ -144,10 +129,11 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
             }
         }
         this.broadcastChanges();
+
     }
 
     public void resetSlotContainers() {
-        for(int i = 0; i < 2;i++){
+        for(int i = 0; i < 3;i++){
             this.getSlot(i).set(ItemStack.EMPTY);
         }
         updateSlotContainers();
@@ -163,6 +149,7 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
     public int findInstanceOfSpellBook(Player player){
         return player.getInventory().findSlotMatchingItem(new ItemStack(ModItems.SPELLBOOK.get()));
     }
+
 
 //    @Override
 //    public boolean canDragTo(Slot pSlot) {

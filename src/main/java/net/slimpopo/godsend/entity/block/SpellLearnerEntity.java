@@ -25,7 +25,7 @@ public class SpellLearnerEntity extends BaseBlockEntity{
     public static final Component title = new TranslatableComponent("container."+ GodSend.MOD_ID+".spell_learner");
 
     public SpellLearnerEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(pWorldPosition, pBlockState, 29);
+        super(pWorldPosition, pBlockState, 33);
     }
 
     @Override
