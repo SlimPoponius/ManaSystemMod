@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
@@ -38,6 +39,10 @@ public class ThunderWallSpell extends SpellItem {
                     .map(ManaCapability::getMana)
                     .orElse(0);
 
+            if(pPlayer.getItemInHand(pUsedHand).getItem() == this){
+                pPlayer.isInvulnerableTo(DamageSource.LIGHTNING_BOLT);
+            }
+
             if(mCur >= THUNDERWALLSPELL.getManaCost()) {
                 if(pLevel.isRaining())
                     createRainThunderWall(pLevel,pPlayer);
@@ -51,7 +56,7 @@ public class ThunderWallSpell extends SpellItem {
     }
 
     private void createThunderWall(Level level, Player player){
-        BlockPos bPos = player.blockPosition().relative(player.getDirection(),2);
+        BlockPos bPos = player.blockPosition().relative(player.getDirection(),3);
         BlockPos left = bPos,right = bPos;
         if(level instanceof ServerLevel sLevel){
             if(player.getDirection() == Direction.NORTH || player.getDirection() == Direction.SOUTH){

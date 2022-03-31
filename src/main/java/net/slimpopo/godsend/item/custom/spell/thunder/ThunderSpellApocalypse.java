@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -39,6 +40,10 @@ public class ThunderSpellApocalypse extends SpellItem {
             int mCur = pPlayer.getCapability(PlayerManaProvider.PLAYER_MANA)
                             .map(ManaCapability::getMana)
                                     .orElse(0);
+
+            if(pPlayer.getItemInHand(pUsedHand).getItem() == this){
+                pPlayer.isInvulnerableTo(DamageSource.LIGHTNING_BOLT);
+            }
 
             if(mCur >= THUNDERSPELLAPOCALYPSE.getManaCost()) {
                 BlockPos block = pPlayer.blockPosition();

@@ -3,6 +3,7 @@ package net.slimpopo.godsend.item.custom.spell.thunder.weapon;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
@@ -28,6 +29,12 @@ public class ThunderStaffItem extends SwordItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if(!pLevel.isClientSide){
+            if(!pLevel.isClientSide){
+                if(pPlayer.getItemInHand(pUsedHand).getItem() == this){
+                    pPlayer.isInvulnerableTo(DamageSource.LIGHTNING_BOLT);
+                }
+            }
+
             if(pLevel.isRaining()){
                 pLevel.setRainLevel(0);
             }

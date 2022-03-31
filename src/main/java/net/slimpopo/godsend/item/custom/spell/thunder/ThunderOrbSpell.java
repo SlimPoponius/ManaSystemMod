@@ -3,6 +3,7 @@ package net.slimpopo.godsend.item.custom.spell.thunder;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -37,9 +38,13 @@ public class ThunderOrbSpell extends SpellItem {
                     .map(ManaCapability::getMana)
                     .orElse(0);
 
+            if(pPlayer.getItemInHand(pUsedHand).getItem() == this){
+                pPlayer.isInvulnerableTo(DamageSource.LIGHTNING_BOLT);
+            }
+
             if(mCur >= THUNDERORB.getManaCost()) {
                 ThunderOrb thunderOrb = new ThunderOrb(pPlayer, pLevel);
-                thunderOrb.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
+                thunderOrb.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 2.0F, 1.5F, 0.2F);
                 pLevel.addFreshEntity(thunderOrb);
 
                 ManaManager.get(pPlayer.level).loseMana(mCur - THUNDERORB.getManaCost());

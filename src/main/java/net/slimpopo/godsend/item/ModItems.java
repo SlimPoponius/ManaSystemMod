@@ -54,7 +54,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
     public static final RegistryObject<Item> WINDSLASH = ITEMS.register("wind_slash",
             () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
-    public static final RegistryObject<Item> THUNDERBALL = ITEMS.register("thunder_ball",
+    public static final RegistryObject<Item> THUNDERBALL = ITEMS.register("thunder_orb",
             () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
     public static final RegistryObject<Item> ICE_ARROW = ITEMS.register("icearrow",
             () -> new IceArrowItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1),1.5f));
@@ -116,9 +116,9 @@ public class ModItems {
     public static final RegistryObject<Item> THUNDERSPELL_IMBUE= ITEMS.register("thunder_spell_imbue",
             () -> new ThunderImbueSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
     public static final RegistryObject<Item> THUNDERSPELL_WALL = ITEMS.register("thunder_spell_wall",
-            () -> new ThunderOrbSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
-    public static final RegistryObject<Item> THUNDERSPELL_ORB = ITEMS.register("thunder_spell_orb",
             () -> new ThunderWallSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> THUNDERSPELL_ORB = ITEMS.register("thunder_spell_orb",
+            () -> new ThunderOrbSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
 
 

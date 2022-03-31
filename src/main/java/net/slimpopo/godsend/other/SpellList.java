@@ -38,7 +38,7 @@ public class SpellList {
             put("windbats",ModItems.WINDSPELL_BATS.get());
             put("tornado",ModItems.WINDSPELL_TORNADO.get());
 
-            //WIND
+            //THUNDER
             put("thunderimbue",ModItems.THUNDERSPELL_IMBUE.get());
             put("thunderweapon",ModItems.THUNDERSPELL_WEAPONIZE.get());
             put("thunderarmor",ModItems.THUNDERSPELL_ARMOR.get());

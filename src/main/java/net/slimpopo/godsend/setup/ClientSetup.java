@@ -3,11 +3,13 @@ package net.slimpopo.godsend.setup;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.IronGolemModel;
 import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -22,6 +24,7 @@ import net.slimpopo.godsend.entity.models.EarthWarriorModel;
 import net.slimpopo.godsend.entity.models.FlameGolemModel;
 import net.slimpopo.godsend.entity.models.WindBatModel;
 import net.slimpopo.godsend.entity.render.*;
+import net.slimpopo.godsend.item.ModItems;
 import net.slimpopo.godsend.item.custom.MonsterSoulItem;
 import net.slimpopo.godsend.manasystem.client.ManaOverlay;
 import org.apache.logging.log4j.LogManager;
@@ -66,7 +69,6 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntityType.BIGTORNADO.get(), BigTornadoRenderer::new);
         event.registerEntityRenderer(ModEntityType.SMALLTORNADO.get(), SmallTornadoRenderer::new);
         event.registerEntityRenderer(ModEntityType.WINDBAT.get(), WindBatRenderer::new);
-
     }
 
 }

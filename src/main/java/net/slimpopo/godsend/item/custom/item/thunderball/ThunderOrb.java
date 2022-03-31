@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -33,7 +34,8 @@ public class ThunderOrb extends ThrowableItemProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);
-        if (!this.level.isClientSide) {
+        if (!this.level.isClientSide && !(pResult.getEntity() instanceof Player)) {
+            Player player = Minecraft.getInstance().player;
             ServerLevel sLevel = (ServerLevel) level;
             EntityType.LIGHTNING_BOLT.spawn(sLevel,null, null,pResult.getEntity().blockPosition(),
                     MobSpawnType.TRIGGERED,true,true);
@@ -44,17 +46,22 @@ public class ThunderOrb extends ThrowableItemProjectile {
     @Override
     protected void onHitBlock(BlockHitResult bHit) {
         super.onHitBlock(bHit);
+        Player player = Minecraft.getInstance().player;
         Level level = this.level;
-        if(!level.isClientSide) {
-            ServerLevel sLevel = (ServerLevel) level;
-            EntityType.LIGHTNING_BOLT.spawn(sLevel,null, null,bHit.getBlockPos(),
-                    MobSpawnType.TRIGGERED,true,true);
-
-        }
+        strike(bHit.getBlockPos(),player);
     }
 
     @Override
     protected Item getDefaultItem() {
         return ModItems.THUNDERBALL.get();
+    }
+
+    public void strike(BlockPos bPos, Player player){
+        if(!level.isClientSide) {
+            ServerLevel sLevel = (ServerLevel) level;
+            EntityType.LIGHTNING_BOLT.spawn(sLevel,null, null,bPos,
+                    MobSpawnType.TRIGGERED,true,true);
+
+        }
     }
 }
