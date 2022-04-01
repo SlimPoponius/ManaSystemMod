@@ -5,6 +5,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
@@ -42,8 +43,35 @@ public class SpellBookManager extends SavedData {
         return   sc.getSpellThree();
     }
 
-    public void setSpellsForInfo(String i1, String i2, String i3){
-        sc.setSpells(i1,i2,i3);
+    public String getNextSpell(String spell){
+        if(spell == sc.getSpellOne())
+            return getSpellTwo();
+        else if(spell == sc.getSpellTwo())
+            return getSpellThree();
+        else if(spell == sc.getSpellThree())
+            return getSpellOne();
+        else
+            return getSpellOne();
+    }
+
+    public void setSpellsForInfo(ItemStack i1, ItemStack i2, ItemStack i3){
+        String sp1Nm,sp2Nm,sp3Nm;
+        if (i1 != ItemStack.EMPTY)
+            sp1Nm = SpellList.ItemKey(i1.getItem());
+        else
+            sp1Nm = "";
+
+        if (i2 != ItemStack.EMPTY)
+            sp2Nm = SpellList.ItemKey(i2.getItem());
+        else
+            sp2Nm = "";
+
+        if (i3 != ItemStack.EMPTY)
+            sp3Nm = SpellList.ItemKey(i3.getItem());
+        else
+            sp3Nm = "";
+
+        sc.setSpells(sp1Nm,sp2Nm,sp3Nm);
         setDirty();
     }
 
@@ -87,6 +115,7 @@ public class SpellBookManager extends SavedData {
                             .map(SpellBookCapability::getSpellThree)
                             .orElse("");
 
+                    System.out.println(i1 + ", " + i2 + ", " + i3);
                     Messages.sendToPlayer(new PacketSpellBookSyncToClient(i1,i2,i3),sPlayer);
                 }
             });

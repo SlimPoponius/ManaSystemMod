@@ -19,7 +19,7 @@ public class SpellBookCapability implements ISpellBook {
     public SpellBookCapability(String spellOne, String spellTwo, String spellThree){
         this.spellOne = spellOne;
         this.spellTwo = spellTwo;
-        this.spellThree = spellTwo;
+        this.spellThree = spellThree;
     }
 
     @Override

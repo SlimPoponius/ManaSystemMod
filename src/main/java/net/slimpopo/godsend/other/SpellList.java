@@ -69,7 +69,7 @@ public class SpellList {
 
     public static boolean isSpell(Item a){
         for(Map.Entry<String, Item> item: Spells.entrySet()){
-            if(item.getValue() == a){
+            if(item.getValue().equals(a)){
                 return true;
             }
         }
@@ -91,7 +91,7 @@ public class SpellList {
     public static String ItemKey(Item a){
         if(isSpell(a)){
             for(Map.Entry<String, Item> item: Spells.entrySet()){
-                if(item.getValue() == a)
+                if(item.getValue().equals(a))
                     return item.getKey();
             }
         }
@@ -100,7 +100,7 @@ public class SpellList {
 
     public static Item getByItemStack(String spellRegystry){
         for(Map.Entry<String, Item> item: Spells.entrySet()){
-            if(item.getKey() == spellRegystry) {
+            if(item.getKey().equals(spellRegystry)) {
                 return item.getValue();
             }
         }
@@ -109,7 +109,7 @@ public class SpellList {
 
     public static ItemStack getItemStack(String spellName){
         for(Map.Entry<String, Item> item: Spells.entrySet()){
-            if(spellName == item.getKey()){
+            if(item.getKey().equals(spellName)){
                 return new ItemStack(item.getValue());
             }
         }

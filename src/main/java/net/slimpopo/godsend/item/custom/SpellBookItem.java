@@ -18,6 +18,7 @@ import net.slimpopo.godsend.capability.spellbook.SpellBookCapability;
 import net.slimpopo.godsend.capability.spellbook.SpellBookManager;
 import net.slimpopo.godsend.capability.spellbook.SpellBookProvider;
 import net.slimpopo.godsend.item.ModItems;
+import net.slimpopo.godsend.item.custom.spell.SpellItem;
 import net.slimpopo.godsend.manasystem.network.spellbook.PacketSpellBookPlayerHandler;
 import net.slimpopo.godsend.manasystem.network.spellbook.PacketSpellBookSyncToClient;
 import net.slimpopo.godsend.manasystem.network.spellbook.PacketSpellBookSyncToServer;
@@ -30,7 +31,7 @@ import java.util.List;
 
 public class SpellBookItem extends Item {
     ItemStack spellOne, spellTwo, spellThree;
-    public String sp1Nm, sp2Nm, sp3Nm;
+    private String sp1Nm, sp2Nm, sp3Nm, currentSpell, nextSpell;
 
     private boolean spellSet = false;
     private List<ItemStack> mySpells = new ArrayList<ItemStack>();
@@ -50,7 +51,7 @@ public class SpellBookItem extends Item {
             if(!hasSpells){
                 //Check if spNm(1,2,3) has any string in it
                 if(sp1Nm !="" ||sp2Nm != "" || sp3Nm != ""){
-                    SpellBookManager.get(pPlayer.level).setSpellsForInfo(sp1Nm,sp2Nm,sp3Nm);
+//                    SpellBookManager.get(pPlayer.level).setSpellsForInfo(sp1Nm,sp2Nm,sp3Nm);
                 }
                 else{
                     //no spells set to player
@@ -58,21 +59,23 @@ public class SpellBookItem extends Item {
                 }
             }
             else{
-                sp1Nm = pPlayer.getCapability(SpellBookProvider.SPELLBOOK_CAP)
-                        .map(SpellBookCapability::getSpellOne)
-                        .orElse("");
-                sp2Nm = pPlayer.getCapability(SpellBookProvider.SPELLBOOK_CAP)
-                        .map(SpellBookCapability::getSpellTwo)
-                        .orElse("");
-                sp3Nm = pPlayer.getCapability(SpellBookProvider.SPELLBOOK_CAP)
-                        .map(SpellBookCapability::getSpellThree)
-                        .orElse("");
-
                 if(spellSet == false)
                     initSpells(pPlayer);
-                nextSpell(pPlayer);
 
+                if(findIndexOfSpell(pPlayer) == -1) {
+                    currentSpell = SpellBookManager.get(pPlayer.level).getSpellOne();
+                    nextSpell = SpellBookManager.get(pPlayer.level).getNextSpell(currentSpell);
+                    pPlayer.getInventory().add(SpellList.getItemStack(currentSpell));
+                }
+                else{
+                    currentSpell = nextSpell;
+                    nextSpell = SpellBookManager.get(pPlayer.level).getNextSpell(currentSpell);
+
+                    replaceSpell(pPlayer,findIndexOfSpell(pPlayer),SpellList.getItemStack(currentSpell));
+
+                }
             }
+            SpellBookManager.get(pPlayer.level).setSpells(sp1Nm, sp2Nm, sp3Nm);
             Messages.sendToServer(new PacketSpellBookPlayerHandler());
         }
         return super.use(pLevel, pPlayer, pUsedHand);
@@ -86,6 +89,18 @@ public class SpellBookItem extends Item {
     public void initSpells(Player player){
         if(mySpells.size() > 0)
             mySpells.clear();
+
+        sp1Nm = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
+                .map(SpellBookCapability::getSpellOne)
+                .orElse("");
+
+        sp2Nm = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
+                .map(SpellBookCapability::getSpellTwo)
+                .orElse("");
+
+        sp3Nm = player.getCapability(SpellBookProvider.SPELLBOOK_CAP)
+                .map(SpellBookCapability::getSpellThree)
+                .orElse("");
 
         Item spell1 = SpellList.getByItemStack(sp1Nm);
         Item spell2 = SpellList.getByItemStack(sp2Nm);
@@ -107,32 +122,59 @@ public class SpellBookItem extends Item {
 
         spellIndex = 0;
         spellSet = true;
-
-        Messages.sendToServer(new PacketSpellBookPlayerHandler(sp1Nm,sp2Nm,sp3Nm));
-
     }
 
     private void nextSpell(Player player){
+        //find spell index if any exists
         int slotIndexOfSpell = findIndexOfSpell(player);
 
+        //check if any spellIndex is found
         if(!mySpells.isEmpty()){
             if(slotIndexOfSpell == -1){
                 player.getInventory().add(mySpells.get(spellIndex));
             }
-            else {
-                spellIndex++;
-                if (spellIndex >= mySpells.size()) {
+            else{
+                spellIndex += 1;
+                if(spellIndex >= mySpells.size()){
                     spellIndex = 0;
                 }
-                replaceSpell(player, slotIndexOfSpell, mySpells.get(spellIndex));
+
+                replaceSpell(player,slotIndexOfSpell,mySpells.get(spellIndex));
+                player.sendMessage(new TextComponent(""+ spellIndex),
+                    player.getUUID());
             }
         }
         else{
-            removeSpells(player);
             spellIndex = -1;
             player.sendMessage(new TextComponent("No spells equipped."),
                     player.getUUID());
         }
+
+
+//        if(!mySpells.isEmpty()){
+//            if(slotIndexOfSpell == -1){
+//                player.getInventory().add(mySpells.get(spellIndex));
+//            }
+//            else {
+//                if (spellIndex + 1 >= mySpells.size()) {
+//                    spellIndex = 0;
+//                }
+//                else{
+//                    spellIndex++;
+//                }
+//
+//                replaceSpell(player, slotIndexOfSpell, mySpells.get(spellIndex));
+//            }
+//            player.sendMessage(new TextComponent(""+ spellIndex),
+//                    player.getUUID());
+//        }
+//        else{
+//            removeSpells(player);
+//            spellIndex = -1;
+//            player.sendMessage(new TextComponent("No spells equipped."),
+//                    player.getUUID());
+//            spellSet = false;
+//        }
 
     }
 
@@ -150,7 +192,7 @@ public class SpellBookItem extends Item {
     private int findIndexOfSpell(Player player){
         int index = 0;
         for(ItemStack item: player.getInventory().items){
-            if(SpellList.isSpell(item.getItem())){
+            if(item.getItem() instanceof SpellItem){
                 return index;
             }
             index++;
@@ -173,6 +215,9 @@ public class SpellBookItem extends Item {
             sp3Nm = SpellList.ItemKey(i3.getItem());
         else
             sp3Nm = "";
+
+//        SpellBookManager.get(player.level).setSpells(sp1Nm,sp2Nm,sp3Nm);
+//        Messages.sendToServer(new PacketSpellBookPlayerHandler());
     }
 
     @Override
@@ -180,4 +225,12 @@ public class SpellBookItem extends Item {
         return pStack.hasTag();
     }
 
+    @Override
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+
+        if(pEntity instanceof  Player player){
+
+        }
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+    }
 }

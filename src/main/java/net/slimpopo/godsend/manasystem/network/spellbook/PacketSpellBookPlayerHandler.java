@@ -56,10 +56,6 @@ public class PacketSpellBookPlayerHandler {
                     playerSpellBook.setSp1(spella);
                     playerSpellBook.setSp2(spellb);
                     playerSpellBook.setSp3(spellc);
-
-                    player.sendMessage(new TextComponent(spella + "\n" + spellb + "\n" +spellc),
-                            player.getUUID());
-
                 });
             }
         });

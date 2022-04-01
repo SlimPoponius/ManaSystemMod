@@ -47,7 +47,13 @@ public class PacketSyncManaToClient {
         NetworkEvent.Context ctx = supplier.get();
         ctx.enqueueWork(() -> {
             ServerPlayer player = ctx.getSender();
+//            int myMana = ManaManager.get(player.level).getMana();
+//            int myManaM = ManaManager.get(player.level).getManaMax();
+//            int myManaL = ManaManager.get(player.level).getManaLevel();
+//            int mySoulG = ManaManager.get(player.level).getSoulGiven();
+//            int mySoulN = ManaManager.get(player.level).getSoulCalculatedNeeded();
 
+//            ClientManaData.set(myMana,myManaM,myManaL,mySoulG,mySoulN);
             ClientManaData.set(mana,manaMax,manaLvl,soulGiven,soulNeed);
         });
         return true;

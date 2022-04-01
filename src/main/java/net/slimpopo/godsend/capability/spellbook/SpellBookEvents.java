@@ -8,6 +8,9 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.slimpopo.godsend.GodSend;
+import net.slimpopo.godsend.manasystem.network.spellbook.PacketSpellBookPlayerHandler;
+import net.slimpopo.godsend.manasystem.network.spellbook.PacketSpellBookSyncToServer;
+import net.slimpopo.godsend.setup.Messages;
 
 public class SpellBookEvents {
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event){
@@ -26,6 +29,7 @@ public class SpellBookEvents {
                     newStore.copy(oldStore);
                 });
             });
+            Messages.sendToServer(new PacketSpellBookPlayerHandler());
         }
     }
 

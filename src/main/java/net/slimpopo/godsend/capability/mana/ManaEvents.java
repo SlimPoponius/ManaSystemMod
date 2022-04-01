@@ -25,10 +25,11 @@ public class ManaEvents {
     public static void onPlayerCloned(PlayerEvent.Clone event) {
         if (event.isWasDeath()){
             event.getOriginal().getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(oldStore -> {
-                event.getPlayer().getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(newStore ->{
+                event.getPlayer().getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(newStore -> {
                     newStore.copy(oldStore);
                 });
             });
+            Messages.sendToServer(new PacketManaManagePlayerHandler());
         }
     }
 
