@@ -22,7 +22,7 @@ public class SpellItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(new TextComponent(spell.getDescription()));
+        pTooltipComponents.add(new TextComponent("Mana Cost: "+ spell.getManaCost() + "\nDescription: "+spell.getDescription()));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 
