@@ -1,5 +1,5 @@
 {
-  "type": "godsend:monster_soul_in_mobs",
+  "type": "godsend:monster_crystal_in_mobs",
   "conditions": [
     {
       "condition": "minecraft:killed_by_player",
@@ -50,6 +50,6 @@
       "loot_table_id": "minecraft:entities/wither_skeleton"
     }
   ],
-  "addition": "godsend:monstersoul",
-  "chance": 0.2
+  "addition": "godsend:monstercrystal",
+  "chance": 0.65
 }

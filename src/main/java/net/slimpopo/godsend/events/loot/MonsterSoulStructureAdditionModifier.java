@@ -19,11 +19,13 @@ import java.util.List;
 
 public class MonsterSoulStructureAdditionModifier extends LootModifier {
     private final Item addition;
+    private final float chance;
     private static final Logger LOGGER = LogManager.getLogger();
 
-    protected MonsterSoulStructureAdditionModifier(LootItemCondition[] conditionsIn, Item addition) {
+    protected MonsterSoulStructureAdditionModifier(LootItemCondition[] conditionsIn, Item addition, float chance) {
         super(conditionsIn);
         this.addition = addition;
+        this.chance = chance;
     }
 
     @Nonnull
@@ -31,7 +33,7 @@ public class MonsterSoulStructureAdditionModifier extends LootModifier {
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         // generatedLoot is the loot that would be dropped, if we wouldn't add or replace
         // anything!
-        if(context.getRandom().nextFloat() > 0.20f) {
+        if(context.getRandom().nextFloat() > chance) {
             generatedLoot.add(new ItemStack(addition, 1));
         }
         LOGGER.warn("generated loot: " + generatedLoot.toString());
@@ -44,15 +46,18 @@ public class MonsterSoulStructureAdditionModifier extends LootModifier {
         public MonsterSoulStructureAdditionModifier read(ResourceLocation name, JsonObject object, LootItemCondition[] conditionsIn) {
             Item addition = ForgeRegistries.ITEMS.getValue(
                     new ResourceLocation(GsonHelper.getAsString(object,"addition")));
+            float chance = object.get("chance").getAsFloat();
 
-            LOGGER.error("Addition: " + addition);
-            return new MonsterSoulStructureAdditionModifier(conditionsIn, addition);
+            LOGGER.error("Addition: " + addition + "\nChance: " + chance);
+            return new MonsterSoulStructureAdditionModifier(conditionsIn, addition,chance);
         }
 
         @Override
         public JsonObject write(MonsterSoulStructureAdditionModifier instance) {
             JsonObject json = makeConditions(instance.conditions);
             json.addProperty("addition", ForgeRegistries.ITEMS.getKey((instance.addition)).toString());
+            json.addProperty("chance", instance.chance);
+
             LOGGER.error("JSON: "+ json);
             return json;
         }

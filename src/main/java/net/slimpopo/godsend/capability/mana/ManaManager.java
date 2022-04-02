@@ -57,18 +57,16 @@ public class ManaManager extends SavedData {
         return mc.spellBookCrafted();
     }
 
-    public int levelUp(){
-        mc.addSoulGiven(1);
-        int soulLeft = mc.getSoulCalculatedNeeded() - mc.getSoulGiven();
-        if(soulLeft <= 0){
-            mc.addManaLevel();
-            //mana
+    public void addSouls(int souls){
+        mc.addSoulGiven(souls);
+        setDirty();
+    }
 
-            //manaMax
-            //manaLevel
-            //soulNeeded
-            setDirty();
-            return 0;
+    public int levelUp(){
+        int soulLeft = mc.getSoulCalculatedNeeded() - mc.getSoulGiven();
+        while(soulLeft <= 0){
+            mc.addManaLevel();
+            soulLeft += mc.getSoulCalculatedNeeded();
         }
         setDirty();
         return soulLeft;

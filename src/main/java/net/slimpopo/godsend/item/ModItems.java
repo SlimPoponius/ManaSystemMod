@@ -7,10 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.slimpopo.godsend.GodSend;
-import net.slimpopo.godsend.item.custom.FlameArmorItem;
-import net.slimpopo.godsend.item.custom.FlameArrowItem;
-import net.slimpopo.godsend.item.custom.MonsterSoulItem;
-import net.slimpopo.godsend.item.custom.SpellBookItem;
+import net.slimpopo.godsend.item.custom.*;
 import net.slimpopo.godsend.item.custom.spell.*;
 import net.slimpopo.godsend.item.custom.spell.earth.*;
 import net.slimpopo.godsend.item.custom.spell.earth.armor.EarthArmorItem;
@@ -38,6 +35,12 @@ public class ModItems {
 
     public static final RegistryObject<Item> MONSTERSOUL = ITEMS.register("monstersoul",
             () -> new MonsterSoulItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
+    public static final RegistryObject<Item> PURIFIEDMONSTERSOUL = ITEMS.register("purifiedmonstersoul",
+            () -> new PurifiedMonsterSoulItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
+    public static final RegistryObject<Item> MONSTERCRYSTAL = ITEMS.register("monstercrystal",
+            () -> new MonsterCrystalItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
+    public static final RegistryObject<Item> PURIFIEDMONSTERCRYSTAL = ITEMS.register("purifiedmonstercrystal",
+            () -> new PurifiedMonsterCrystalItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
 
     public static final RegistryObject<Item> SOULPAPER = ITEMS.register("soulpaper",
             () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));

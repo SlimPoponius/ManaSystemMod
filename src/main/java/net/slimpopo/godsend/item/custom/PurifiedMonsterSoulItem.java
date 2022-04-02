@@ -12,9 +12,9 @@ import net.slimpopo.godsend.capability.mana.PlayerManaProvider;
 import net.slimpopo.godsend.manasystem.network.PacketManaPlayerHandler;
 import net.slimpopo.godsend.setup.Messages;
 
-public class MonsterSoulItem extends Item {
+public class PurifiedMonsterSoulItem extends Item {
 
-    public MonsterSoulItem(Properties pProperties) {
+    public PurifiedMonsterSoulItem(Properties pProperties) {
         super(pProperties);
     }
 
@@ -26,8 +26,8 @@ public class MonsterSoulItem extends Item {
                     .orElse(0);
 
             pPlayer.getItemInHand(pUsedHand).shrink(1);
-            ManaManager.get(pLevel).loseMana(mCur + 20);
-            ManaManager.get(pLevel).addSouls(1);
+            ManaManager.get(pLevel).loseMana(mCur + 100);
+            ManaManager.get(pLevel).addSouls(10);
             Messages.sendToServer(new PacketManaPlayerHandler());
         }
         return super.use(pLevel, pPlayer, pUsedHand);

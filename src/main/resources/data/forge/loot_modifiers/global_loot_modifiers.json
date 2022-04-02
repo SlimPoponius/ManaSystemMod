@@ -1,6 +1,10 @@
 {
   "replace": false,
   "entries": [
-    "godsend:monster_soul_in_mobs"
+    "godsend:monster_soul_in_mobs",
+    "godsend:purified_monster_soul_in_mobs",
+    "godsend:monster_crystal_in_mobs",
+    "godsend:purified_monster_crystal_in_mobs"
+
   ]
 }

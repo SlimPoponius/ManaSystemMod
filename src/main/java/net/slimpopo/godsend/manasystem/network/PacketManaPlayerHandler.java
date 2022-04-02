@@ -47,23 +47,21 @@ public class PacketManaPlayerHandler {
 
             if(!player.level.isClientSide){
                 player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
-                    if(canLevelUp == 0) {
-                        playerMana.setMana(mCur);
-                        playerMana.setMaxMana(mMax);
+                    playerMana.setMana(mCur);
+                    playerMana.setMaxMana(mMax);
+
+                    playerMana.setSoulGiven(sNdd - canLevelUp);
+                    playerMana.setSoulNeeded(sNdd);
+
+                    if(playerMana.getManaLevel() < mLvl) {
                         playerMana.setLevel(mLvl);
-                        playerMana.setSoulGiven(0);
-                        playerMana.setSoulNeeded(sNdd);
                         player.sendMessage(new TextComponent("You have now reached LEVEL " + playerMana.getManaLevel()),
                                 player.getUUID());
                     }
-                    else{
-                        playerMana.setSoulGiven(sGiv);
-                        playerMana.setSoulNeeded(sNdd);
-
+                    else {
                         player.sendMessage(new TextComponent("To next Level: " + (sNdd - sGiv)),
                                 player.getUUID());
                     }
-
 
                 });
             }
