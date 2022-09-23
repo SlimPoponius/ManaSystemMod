@@ -17,7 +17,7 @@ public class FlameArrowRenderer extends ArrowRenderer<FireArrowEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(FireArrowEntity pEntity) {
-        Item referenceItem = pEntity.getPickupItem().getItem();
+        Item referenceItem = pEntity.getReferenceItem();
         return new ResourceLocation(GodSend.MOD_ID,"textures/entity/projectiles/" + referenceItem.getRegistryName().getPath() +".png");
     }
 }

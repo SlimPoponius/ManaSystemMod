@@ -153,7 +153,7 @@ public class IceWeaponSpell extends SpellItem {
 
     public void deleteItem(Player player){
         for(ItemStack item: player.getInventory().items){
-            if(item.getItem() == ModItems.ICE_LONGSWORD.get() || item.getItem() == ModItems.ICE_BOW.get()){
+            if(item.getItem() == ModItems.ICE_LONGSWORD.get() || item.getItem() == ModItems.ICE_BOW.get() || item.getItem() == ModItems.ICE_ARROW.get()){
                 item.setCount(0);
             }
         }

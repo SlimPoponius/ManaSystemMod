@@ -18,24 +18,14 @@ public class FlyingEffect extends MobEffect {
     public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
         super.applyEffectTick(pLivingEntity, pAmplifier);
 
-        if(this == ModEffects.FLYING.get()){
+        if(!pLivingEntity.level.isClientSide()){
             if(pLivingEntity instanceof Player player)
                 player.getAbilities().flying = true;
-            pLivingEntity.setYRot(0);
         }
-
     }
 
     @Override
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
-        if (this == ModEffects.FLYING.get()) {
-            int k = 30 >> pAmplifier;
-            if (k > 0) {
-                return pDuration % k == 0;
-            } else {
-                return true;
-            }
-        }
-        return super.isDurationEffectTick(pDuration, pAmplifier);
+        return true;
     }
 }

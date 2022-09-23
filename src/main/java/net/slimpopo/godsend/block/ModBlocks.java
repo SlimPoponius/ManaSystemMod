@@ -28,6 +28,10 @@ public class ModBlocks {
             () -> new SandTrapBlock(BlockBehaviour.Properties.of(Material.SAND)
                     .strength(9f).requiresCorrectToolForDrops()), ModCreativeTab.MAGIC_TAB);
 
+    public static final RegistryObject<Block> SHADOWBLOCK = registerBlock("shadow_block",
+            () -> new ShadowBlock(BlockBehaviour.Properties.of(Material.POWDER_SNOW)
+                    .strength(9f).destroyTime(100f)), ModCreativeTab.MAGIC_TAB);
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block,CreativeModeTab tab){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

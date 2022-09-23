@@ -37,6 +37,10 @@ public class FireArrowEntity extends AbstractArrow {
         return ItemStack.EMPTY;
     }
 
+    public Item getReferenceItem() {
+        return referenceItem;
+    }
+
     @Override
     protected void onHitBlock(BlockHitResult pBlockRes) {
         Level world = Minecraft.getInstance().level;

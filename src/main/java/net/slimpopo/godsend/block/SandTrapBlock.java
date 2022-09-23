@@ -23,18 +23,17 @@ public class SandTrapBlock extends Block implements EntityBlock {
     //use this to blow up blocks
     @Override
     public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
+        super.stepOn(pLevel, pPos, pState, pEntity);
         if(!pLevel.isClientSide) {
-            super.stepOn(pLevel, pPos, pState, pEntity);
             pLevel.explode(pEntity, pPos.getX(), pPos.getY(), pPos.getZ(), 5, Explosion.BlockInteraction.DESTROY);
-            pLevel.destroyBlock(pPos,false);
         }
     }
 
 
     @Override
     public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+        super.onBlockExploded(state, level, pos, explosion);
         if(!level.isClientSide) {
-            super.onBlockExploded(state, level, pos, explosion);
             level.destroyBlock(pos,false);
         }
     }

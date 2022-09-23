@@ -22,6 +22,8 @@ public class MagicItemList {
             add(ModItems.WIND_SCYTHE.get());
             add(ModItems.THUNDER_RAPIER.get());
             add(ModItems.THUNDER_STAFF.get());
+            add(ModItems.SAND_HAMMER.get());
+            add(ModItems.LIGHT_BOW.get());
 
         }
     };

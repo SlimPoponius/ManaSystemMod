@@ -13,6 +13,7 @@ import net.slimpopo.godsend.GodSend;
 import net.slimpopo.godsend.entity.mobs.*;
 import net.slimpopo.godsend.entity.projectile.FireArrowEntity;
 import net.slimpopo.godsend.entity.projectile.IceArrowEntity;
+import net.slimpopo.godsend.entity.projectile.LightArrowEntity;
 import net.slimpopo.godsend.item.custom.item.explorb.Explorb;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicLongCharge;
 import net.slimpopo.godsend.item.custom.item.fireball.FireballMagicSmallCharge;
@@ -25,6 +26,11 @@ public class ModEntityType {
     public static final RegistryObject<EntityType<FireArrowEntity>> FLAMEARROW = ENTITIES.register("firearrow",
             ()-> EntityType.Builder.<FireArrowEntity>of(FireArrowEntity::new,
             MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"firearrow").toString()));
+
+    public static final RegistryObject<EntityType<LightArrowEntity>> LIGHTARROW = ENTITIES.register("lightarrow",
+            ()-> EntityType.Builder.<LightArrowEntity>of(LightArrowEntity::new,
+                    MobCategory.MISC).sized(0.5f,0.5f).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(GodSend.MOD_ID,"lightarrow").toString()));
+
 
     public static final RegistryObject<EntityType<IceArrowEntity>> ICEARROW = ENTITIES.register("icearrow",
             ()-> EntityType.Builder.<IceArrowEntity>of(IceArrowEntity::new,
@@ -57,6 +63,18 @@ public class ModEntityType {
                             .clientTrackingRange(10)
                             .build(new ResourceLocation(GodSend.MOD_ID,"flamegolem").toString()));
 
+    public static final RegistryObject<EntityType<ZombieSummonEntity>> ZOMBIESUMMON =
+            ENTITIES.register("zombiesummon",
+                    () -> EntityType.Builder.<ZombieSummonEntity>of(ZombieSummonEntity::new, MobCategory.MISC)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(8)
+                            .build(new ResourceLocation(GodSend.MOD_ID,"zombiesummon").toString()));
+    public static final RegistryObject<EntityType<SkeletonSummonEntity>> SKELETONSUMMON =
+            ENTITIES.register("skeletonsummon",
+                    () -> EntityType.Builder.<SkeletonSummonEntity>of(SkeletonSummonEntity::new, MobCategory.MISC)
+                            .sized(0.6F, 1.99F)
+                            .clientTrackingRange(8)
+                            .build(new ResourceLocation(GodSend.MOD_ID,"skeletonsummon").toString()));
     public static final RegistryObject<EntityType<IceWolfEntity>> ICEWOLF =
             ENTITIES.register("icewolf",
                     () -> EntityType.Builder.<IceWolfEntity>of(IceWolfEntity::new, MobCategory.MISC).sized(0.6F, 0.85F)

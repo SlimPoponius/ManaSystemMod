@@ -17,7 +17,7 @@ public class IceArrowRenderer extends ArrowRenderer<IceArrowEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(IceArrowEntity pEntity) {
-        Item referenceItem = pEntity.getPickupItem().getItem();
+        Item referenceItem = pEntity.getReferenceItem();
         return new ResourceLocation(GodSend.MOD_ID,"textures/entity/projectiles/" + referenceItem.getRegistryName().getPath() +".png");
     }
 }

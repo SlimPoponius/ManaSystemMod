@@ -40,11 +40,14 @@ public class IceArrowEntity extends AbstractArrow {
         return ItemStack.EMPTY;
     }
 
+    public Item getReferenceItem() {
+        return referenceItem;
+    }
+
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         Random rand = new Random();
         if(rand.nextFloat() > 0.25f) {
-            System.out.println("Set this place ablaze");
             if(pResult.getEntity() instanceof  LivingEntity le) {
                 le.addEffect(new MobEffectInstance(ModEffects.FREEZE.get(), 100, 1));
                 le.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 2000));

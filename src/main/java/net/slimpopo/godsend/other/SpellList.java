@@ -55,6 +55,29 @@ public class SpellList {
         }
     };
 
+    public static Map<String,Item> ForbiddenSpells = new LinkedHashMap<String,Item>(){
+        {
+            //SHADOW
+            put("shadowimbue",ModItems.SHADOWSPELL_IMBUE.get());
+            put("shadowaura",ModItems.SHADOWSPELL_AURA.get());
+            put("shadowtrap",ModItems.SHADOWSPELL_CAPTURE.get());
+
+            //LIGHT
+            put("lightimbue",ModItems.LIGHTSPELL_IMBUE.get());
+            put("lightaura",ModItems.LIGHTSPELL_AURA.get());
+            put("lightweapon",ModItems.LIGHTSPELL_WEAPONIZE.get());
+
+            //SAND
+            put("sandtrap",ModItems.SANDSPELL_TRAP.get());
+            put("sandweapon",ModItems.SANDSPELL_WEAPONIZE.get());
+
+            //SAND
+            put("zombiesummon",ModItems.NECROSPELL_ZOMBIE.get());
+            put("skelesummon",ModItems.NECROSPELL_SKELETON.get());
+            put("lifesteal",ModItems.NECROSPELL_LIFESTEAL.get());
+        }
+    };
+
     public static int getSpellLevelReq(int index){
         int counter = 0;
         for(Map.Entry<String, Item> item: Spells.entrySet()){

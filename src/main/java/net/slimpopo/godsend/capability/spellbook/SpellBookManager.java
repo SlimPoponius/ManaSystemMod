@@ -115,7 +115,7 @@ public class SpellBookManager extends SavedData {
                             .map(SpellBookCapability::getSpellThree)
                             .orElse("");
 
-                    System.out.println(i1 + ", " + i2 + ", " + i3);
+                    //System.out.println(i1 + ", " + i2 + ", " + i3);
                     Messages.sendToPlayer(new PacketSpellBookSyncToClient(i1,i2,i3),sPlayer);
                 }
             });

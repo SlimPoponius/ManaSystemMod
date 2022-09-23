@@ -2,7 +2,8 @@
   "container.godsend.spell_learner": "SPELL LOADER",
 
   "block.godsend.spell_learner": "Spell Learner",
-  "block.godsend.and_trap": "Sand Trap",
+  "block.godsend.sand_trap": "Sand Trap",
+  "block.godsend.shadow_block": "Shadow Block",
 
   "item.godsend.monstersoul": "Monster Soul",
   "item.godsend.purifiedmonstersoul": "Purified Monster Soul",
@@ -52,6 +53,9 @@
   "item.godsend.wind_scythe": "Wind Scythe",
   "item.godsend.thunder_rapier": "Thunder Rapier",
   "item.godsend.thunder_staff": "Thunder Staff",
+  "item.godsend.lightbow": "Light Bow",
+  "item.godsend.lightarrow": "Light Arrow",
+  "item.godsend.sand_hammer": "Sand Hammer",
 
   "item.godsend.flame_spell_armor": "Flame Armor Spell",
   "item.godsend.flame_spell_weaponize": "Flame Weapon Spell",
@@ -88,12 +92,31 @@
   "item.godsend.thunder_spell_wall": "Thunder Wall Spell",
   "item.godsend.thunder_spell_apocalypse": "Thunder Apocalypse: Storm",
 
+  "item.godsend.light_spell_aura": "Light Aura Spell",
+  "item.godsend.light_spell_weaponize": "Light Weapon Spell",
+  "item.godsend.light_spell_imbue": "Light Imbue Spell",
+
+  "item.godsend.shadow_spell_aura": "Shadow Aura Spell",
+  "item.godsend.shadow_spell_trap": "Shadow Trap Spell",
+  "item.godsend.shadow_spell_imbue": "Shadow Imbue Spell",
+
+  "item.godsend.sand_spell_weaponize": "Sand Weapon Spell",
+  "item.godsend.sand_spell_trap": "Sand Trap Spell",
+
+  "item.godsend.necro_spell_zombie": "Summon Zombies",
+  "item.godsend.necro_spell_skeleton": "Summon Skeletons",
+  "item.godsend.necro_spell_lifesteal": "Lifesteal Weapon Spell",
 
   "enchantment.godsend.flameimbue": "Flame Imbue",
   "enchantment.godsend.iceimbue": "Ice Imbue",
   "enchantment.godsend.thunderimbue": "Thunder Imbue",
+  "enchantment.godsend.shadowimbue": "Shadow Imbue",
+  "enchantment.godsend.lightimbue": "Light Imbue",
 
   "effect.godsend.freeze": "Frozen",
+  "effect.godsend.flight": "Flight",
+  "effect.godsend.shadowbff": "Shadow Aura",
+  "effect.godsend.shadowpsn": "Dark Afflicted",
 
   "entity.godsend.earth_warrior": "Earth Warrior"
 

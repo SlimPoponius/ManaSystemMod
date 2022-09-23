@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "godsend:item/shadow_spell_aura"
+  }
+}

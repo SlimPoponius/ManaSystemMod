@@ -13,6 +13,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.slimpopo.godsend.capability.mana.ManaCapability;
 import net.slimpopo.godsend.capability.mana.ManaManager;
@@ -98,6 +100,8 @@ public class IceArmorSpell extends SpellItem {
         ItemStack legs = new ItemStack(ModItems.ICE_LEG.get());
         ItemStack chest = new ItemStack(ModItems.ICE_CHEST.get());
         ItemStack head = new ItemStack(ModItems.ICE_HELMET.get());
+
+        boots.enchant(Enchantments.FROST_WALKER,10);
 
         if(hasArmorOn(sPlayer)){
             if(AlreadyHasArmorOn(sPlayer)){

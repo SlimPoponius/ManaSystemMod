@@ -53,10 +53,6 @@ public class IceArmorItem extends ArmorItem {
                 DestroyExcessPieces(player);
             }
 
-            if(player.isInWater()){
-                world.setBlock(blockPos, Blocks.ICE.defaultBlockState(),4);
-            }
-
         }
     }
 

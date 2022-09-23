@@ -16,10 +16,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.slimpopo.godsend.GodSend;
 import net.slimpopo.godsend.entity.ModEntityType;
-import net.slimpopo.godsend.entity.mobs.EarthWarriorEntity;
-import net.slimpopo.godsend.entity.mobs.FlameGolemEntity;
-import net.slimpopo.godsend.entity.mobs.TornadoEntity;
-import net.slimpopo.godsend.entity.mobs.WindBatEntity;
+import net.slimpopo.godsend.entity.mobs.*;
 import net.slimpopo.godsend.entity.models.EarthWarriorModel;
 import net.slimpopo.godsend.entity.models.FlameGolemModel;
 import net.slimpopo.godsend.entity.models.WindBatModel;
@@ -52,8 +49,8 @@ public class ClientSetup {
         event.put(ModEntityType.BIGTORNADO.get(), TornadoEntity.createAttribute().build());
         event.put(ModEntityType.SMALLTORNADO.get(), TornadoEntity.createAttribute().build());
 
-        event.put(ModEntityType.WINDBAT.get(), WindBatEntity.createAttribute().build());
 
+        event.put(ModEntityType.WINDBAT.get(), WindBatEntity.createAttribute().build());
     }
 
     @SubscribeEvent
@@ -63,6 +60,8 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void setupRenderers(EntityRenderersEvent.RegisterRenderers event){
+        event.registerEntityRenderer(ModEntityType.SKELETONSUMMON.get(),SkeletonSummonRenderer::new);
+        event.registerEntityRenderer(ModEntityType.ZOMBIESUMMON.get(),ZombieSummonRenderer::new);
         event.registerEntityRenderer(ModEntityType.FLAMEGOLEM.get(),FlameGolemRenderer::new);
         event.registerEntityRenderer(ModEntityType.ICEWOLF.get(), IceWolfRenderer::new);
         event.registerEntityRenderer(ModEntityType.EARTHWARRIOR.get(), EarthWarriorRenderer::new);

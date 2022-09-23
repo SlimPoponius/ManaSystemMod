@@ -10,6 +10,7 @@ import net.slimpopo.godsend.block.ModBlocks;
 import net.slimpopo.godsend.block.SandTrapBlock;
 import net.slimpopo.godsend.entity.block.BaseBlockEntity;
 import net.slimpopo.godsend.entity.block.SandTrapEntity;
+import net.slimpopo.godsend.entity.block.ShadowBlockEntity;
 import net.slimpopo.godsend.entity.block.SpellLearnerEntity;
 
 public class ModBlockEntity {
@@ -24,6 +25,11 @@ public class ModBlockEntity {
     public static final RegistryObject<BlockEntityType<SandTrapEntity>> SAND_TRAP =
             BLOCK_ENTITIES.register("sand_trap",
                     ()-> BlockEntityType.Builder.of(SandTrapEntity::new, ModBlocks.SANDTRAP.get())
+                            .build(null));
+
+    public static final RegistryObject<BlockEntityType<ShadowBlockEntity>> SHADOW_BLOCK =
+            BLOCK_ENTITIES.register("shadow_block",
+                    ()-> BlockEntityType.Builder.of(ShadowBlockEntity::new, ModBlocks.SHADOWBLOCK.get())
                             .build(null));
 
     public static void register(IEventBus eventBus){

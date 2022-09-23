@@ -26,6 +26,18 @@ public class ModEnchantments {
             ENCHANTMENTS.register("thunderimbue",() -> new EnchantmentThunderImbue(Enchantment.Rarity.VERY_RARE,
                     EnchantmentCategory.WEAPON, EquipmentSlot.MAINHAND));
 
+    public static final RegistryObject<Enchantment> SHADOWIMBUE =
+            ENCHANTMENTS.register("shadowimbue",() -> new EnchantmentShadowImbue(Enchantment.Rarity.VERY_RARE,
+                    EnchantmentCategory.WEAPON, EquipmentSlot.MAINHAND));
+
+    public static final RegistryObject<Enchantment> LIGHTIMBUE =
+            ENCHANTMENTS.register("lightimbue",() -> new EnchantmentLightImbue(Enchantment.Rarity.VERY_RARE,
+                    EnchantmentCategory.WEAPON, EquipmentSlot.MAINHAND));
+
+    public static final RegistryObject<Enchantment> LIFESTEAL =
+            ENCHANTMENTS.register("lifesteal",() -> new EnchantmentLifeSteal(Enchantment.Rarity.VERY_RARE,
+                    EnchantmentCategory.WEAPON, EquipmentSlot.MAINHAND));
+
     public static void register(IEventBus eventBus){
         ENCHANTMENTS.register(eventBus);
     }

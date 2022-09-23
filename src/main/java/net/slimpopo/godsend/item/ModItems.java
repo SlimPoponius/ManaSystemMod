@@ -7,17 +7,35 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.slimpopo.godsend.GodSend;
+import net.slimpopo.godsend.entity.ModEntityType;
+import net.slimpopo.godsend.entity.projectile.FireArrowEntity;
 import net.slimpopo.godsend.item.custom.*;
-import net.slimpopo.godsend.item.custom.spell.*;
 import net.slimpopo.godsend.item.custom.spell.earth.*;
 import net.slimpopo.godsend.item.custom.spell.earth.armor.EarthArmorItem;
 import net.slimpopo.godsend.item.custom.spell.earth.weapon.EarthAxeItem;
 import net.slimpopo.godsend.item.custom.spell.earth.weapon.EarthHammerItem;
+import net.slimpopo.godsend.item.custom.spell.fire.*;
+import net.slimpopo.godsend.item.custom.spell.fire.armor.FlameArmorItem;
+import net.slimpopo.godsend.item.custom.spell.fire.weapons.FlameArrowItem;
 import net.slimpopo.godsend.item.custom.spell.ice.*;
 import net.slimpopo.godsend.item.custom.spell.ice.armor.IceArmorItem;
 import net.slimpopo.godsend.item.custom.spell.ice.weapon.IceArrowItem;
 import net.slimpopo.godsend.item.custom.spell.ice.weapon.IceBowItem;
 import net.slimpopo.godsend.item.custom.spell.ice.weapon.IceSwordItem;
+import net.slimpopo.godsend.item.custom.spell.light.LightAuraSpell;
+import net.slimpopo.godsend.item.custom.spell.light.LightImbueSpell;
+import net.slimpopo.godsend.item.custom.spell.light.LightWeaponSpell;
+import net.slimpopo.godsend.item.custom.spell.light.weapons.LightArrowItem;
+import net.slimpopo.godsend.item.custom.spell.light.weapons.LightBowItem;
+import net.slimpopo.godsend.item.custom.spell.necromancy.LifeStealWeaponSpell;
+import net.slimpopo.godsend.item.custom.spell.necromancy.SkeletonSummonSpell;
+import net.slimpopo.godsend.item.custom.spell.necromancy.ZombieSummonSpell;
+import net.slimpopo.godsend.item.custom.spell.sand.SandTrapSpell;
+import net.slimpopo.godsend.item.custom.spell.sand.SandWeaponSpell;
+import net.slimpopo.godsend.item.custom.spell.sand.weapon.SandHammerItem;
+import net.slimpopo.godsend.item.custom.spell.shadow.ShadowAuraSpell;
+import net.slimpopo.godsend.item.custom.spell.shadow.ShadowCaptureSpell;
+import net.slimpopo.godsend.item.custom.spell.shadow.ShadowImbueSpell;
 import net.slimpopo.godsend.item.custom.spell.thunder.*;
 import net.slimpopo.godsend.item.custom.spell.thunder.armor.ThunderArmorItem;
 import net.slimpopo.godsend.item.custom.spell.thunder.weapon.ThunderRapierItem;
@@ -26,8 +44,8 @@ import net.slimpopo.godsend.item.custom.spell.wind.*;
 import net.slimpopo.godsend.item.custom.spell.wind.armor.WindArmorItem;
 import net.slimpopo.godsend.item.custom.spell.wind.weapon.WindDaggerItem;
 import net.slimpopo.godsend.item.custom.spell.wind.weapon.WindScytheItem;
-import net.slimpopo.godsend.item.custom.weapons.FlameBowItem;
-import net.slimpopo.godsend.item.custom.weapons.FlameSwordItem;
+import net.slimpopo.godsend.item.custom.spell.fire.weapons.FlameBowItem;
+import net.slimpopo.godsend.item.custom.spell.fire.weapons.FlameSwordItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -61,6 +79,8 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB)));
     public static final RegistryObject<Item> ICE_ARROW = ITEMS.register("icearrow",
             () -> new IceArrowItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1),1.5f));
+    public static final RegistryObject<Item> LIGHT_ARROW = ITEMS.register("lightarrow",
+            () -> new LightArrowItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1),1.5f));
 
     //SPELL
     //FIRE
@@ -123,7 +143,38 @@ public class ModItems {
     public static final RegistryObject<Item> THUNDERSPELL_ORB = ITEMS.register("thunder_spell_orb",
             () -> new ThunderOrbSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
+    //SAND
+    public static final RegistryObject<Item> SANDSPELL_WEAPONIZE = ITEMS.register("sand_spell_weaponize",
+            () -> new SandWeaponSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> SANDSPELL_TRAP = ITEMS.register("sand_spell_trap",
+            () -> new SandTrapSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
+    //SHADOW
+    public static final RegistryObject<Item> SHADOWSPELL_AURA = ITEMS.register("shadow_spell_aura",
+            () -> new ShadowAuraSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> SHADOWSPELL_IMBUE = ITEMS.register("shadow_spell_imbue",
+            () -> new ShadowImbueSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> SHADOWSPELL_CAPTURE = ITEMS.register("shadow_spell_trap",
+            () -> new ShadowCaptureSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+
+    //LIGHT
+    public static final RegistryObject<Item> LIGHTSPELL_AURA = ITEMS.register("light_spell_aura",
+            () -> new LightAuraSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> LIGHTSPELL_IMBUE = ITEMS.register("light_spell_imbue",
+            () -> new LightImbueSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> LIGHTSPELL_WEAPONIZE = ITEMS.register("light_spell_weaponize",
+            () -> new LightWeaponSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+
+    //NECROMANCY
+    public static final RegistryObject<Item> NECROSPELL_ZOMBIE = ITEMS.register("necro_spell_zombie",
+            () -> new ZombieSummonSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> NECROSPELL_SKELETON = ITEMS.register("necro_spell_skeleton",
+            () -> new SkeletonSummonSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> NECROSPELL_LIFESTEAL= ITEMS.register("necro_spell_lifesteal",
+            () -> new LifeStealWeaponSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+    //GRAVITY
+
+    //FORBIDDEN
 
     //APOCALYPSE
     public static final RegistryObject<Item> FLAMESPELL_APOCALYPSE= ITEMS.register("flame_spell_apocalypse",
@@ -167,6 +218,7 @@ public class ModItems {
     public static final RegistryObject<Item> WIND_DAGGER = ITEMS.register("wind_dagger",
             () -> new WindDaggerItem(ModTiers.WIND, 7,8f,
                     new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+
     //THUNDER
     public static final RegistryObject<Item> THUNDER_RAPIER = ITEMS.register("thunder_rapier",
             () -> new ThunderRapierItem(ModTiers.THUNDER, 13,3f,
@@ -174,6 +226,15 @@ public class ModItems {
     public static final RegistryObject<Item> THUNDER_STAFF= ITEMS.register("thunder_staff",
             () -> new ThunderStaffItem(ModTiers.THUNDER, 7,8f,
                     new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+
+    //SAND
+    public static final RegistryObject<Item> SAND_HAMMER = ITEMS.register("sand_hammer",
+            () -> new SandHammerItem(ModTiers.SAND, 17,1.25f,
+                    new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
+
+    //LIGHT
+    public static final RegistryObject<Item> LIGHT_BOW = ITEMS.register("lightbow",
+            () -> new LightBowItem(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1).durability(150)));
 
 
     //ARMORS

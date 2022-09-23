@@ -19,25 +19,23 @@ public class FreezeEffect extends MobEffect {
     public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
         super.applyEffectTick(pLivingEntity, pAmplifier);
 
-        if(this == ModEffects.FREEZE.get()){
-            if(pLivingEntity instanceof Mob mob)
+        if(!pLivingEntity.level.isClientSide()) {
+            if (pLivingEntity instanceof Mob mob)
                 mob.setNoAi(true);
-            pLivingEntity.setYRot(0);
-            pLivingEntity.hurt(DamageSource.playerAttack(Minecraft.getInstance().player),0.75F);
+
+            Double x = pLivingEntity.getX();
+            Double y = pLivingEntity.getY();
+            Double z = pLivingEntity.getZ();
+
+            pLivingEntity.teleportTo(x,y,z);
+            pLivingEntity.setDeltaMovement(0,0,0);
+            pLivingEntity.hurt(DamageSource.MAGIC, 0.75F);
         }
 
     }
 
     @Override
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
-        if (this == ModEffects.FREEZE.get()) {
-            int k = 30 >> pAmplifier;
-            if (k > 0) {
-                return pDuration % k == 0;
-            } else {
-                return true;
-            }
-        }
-        return super.isDurationEffectTick(pDuration, pAmplifier);
+        return true;
     }
 }
