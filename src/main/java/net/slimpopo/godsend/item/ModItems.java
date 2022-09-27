@@ -27,6 +27,7 @@ import net.slimpopo.godsend.item.custom.spell.light.LightImbueSpell;
 import net.slimpopo.godsend.item.custom.spell.light.LightWeaponSpell;
 import net.slimpopo.godsend.item.custom.spell.light.weapons.LightArrowItem;
 import net.slimpopo.godsend.item.custom.spell.light.weapons.LightBowItem;
+import net.slimpopo.godsend.item.custom.spell.misc.CloneSummonSpell;
 import net.slimpopo.godsend.item.custom.spell.necromancy.LifeStealWeaponSpell;
 import net.slimpopo.godsend.item.custom.spell.necromancy.SkeletonSummonSpell;
 import net.slimpopo.godsend.item.custom.spell.necromancy.ZombieSummonSpell;
@@ -175,6 +176,8 @@ public class ModItems {
     //GRAVITY
 
     //FORBIDDEN
+    public static final RegistryObject<Item> CLONESUMMONSPELL = ITEMS.register("clone_spell",
+            () -> new CloneSummonSpell(new Item.Properties().tab(ModCreativeTab.MAGIC_TAB).stacksTo(1)));
 
     //APOCALYPSE
     public static final RegistryObject<Item> FLAMESPELL_APOCALYPSE= ITEMS.register("flame_spell_apocalypse",

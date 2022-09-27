@@ -62,6 +62,7 @@ public class ClientSetup {
     public static void setupRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(ModEntityType.SKELETONSUMMON.get(),SkeletonSummonRenderer::new);
         event.registerEntityRenderer(ModEntityType.ZOMBIESUMMON.get(),ZombieSummonRenderer::new);
+        event.registerEntityRenderer(ModEntityType.CLONESUMMON.get(),CloneSummonRenderer::new);
         event.registerEntityRenderer(ModEntityType.FLAMEGOLEM.get(),FlameGolemRenderer::new);
         event.registerEntityRenderer(ModEntityType.ICEWOLF.get(), IceWolfRenderer::new);
         event.registerEntityRenderer(ModEntityType.EARTHWARRIOR.get(), EarthWarriorRenderer::new);

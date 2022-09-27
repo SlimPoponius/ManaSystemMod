@@ -9,6 +9,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuConstructor;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -19,9 +20,12 @@ import net.slimpopo.godsend.item.ModItems;
 import net.slimpopo.godsend.manasystem.client.ClientManaData;
 import net.slimpopo.godsend.other.SpellList;
 
+import java.util.Map;
+
 public class SpellLearnerContainer extends AbstractContainerMenu {
     private final ContainerLevelAccess containerAccess;
     private int spellBookSlot;
+    private static String spellType;
 
     //Client Constructor
     public SpellLearnerContainer(int pContainerId, Inventory playerInv) {
@@ -72,6 +76,7 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
     }
 
     public static MenuConstructor getServerContainer(SpellLearnerEntity spellLearner, BlockPos pos){
+        spellType = String.valueOf(spellLearner.getSpellLearnType());
         return (id,playerInv,player) -> new SpellLearnerContainer(id,playerInv,spellLearner.inventory,pos);
     }
 
@@ -110,21 +115,32 @@ public class SpellLearnerContainer extends AbstractContainerMenu {
 
     public void updateSlotContainers() {
         Player player = Minecraft.getInstance().player;
+        Map<String,Item> myspells = SpellList.Spells;
+        if(spellType == "SAND"){
+            myspells = SpellList.SandSpells;
+        }
+        else if(spellType == "BALANCE"){
+            myspells = SpellList.BalanceSpells;
+        }
+        else if(spellType == "DEATH"){
+            myspells = SpellList.NecroSpells;
+        }
+
 
         int manaLevel = ClientManaData.getManaLvl();
 
         int spellListCounter = 0;
         for(int i = 0; i < slots.size();i++){
             if(i > 2) {
-                if (spellListCounter < SpellList.Spells.size()) {
-                    if(manaLevel >= SpellList.getSpellLevelReq(spellListCounter)) {
-                        this.getSlot(i).set(SpellList.getStack(spellListCounter));
+                if (spellListCounter < myspells.size()) {
+                    if(manaLevel >= SpellList.getSpellLevelReq(spellListCounter,myspells)) {
+                        this.getSlot(i).set(SpellList.getStack(spellListCounter,myspells));
                     }
                     spellListCounter++;
                 }
             }
             this.getSlot(i).setChanged();
-            if(spellListCounter >= SpellList.Spells.size()){
+            if(spellListCounter >= myspells.size()){
                 break;
             }
         }

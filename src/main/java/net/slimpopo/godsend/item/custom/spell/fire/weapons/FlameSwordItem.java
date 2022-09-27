@@ -36,4 +36,9 @@ public class FlameSwordItem extends SwordItem {
             pTarget.setSecondsOnFire(5);
         return super.hurtEnemy(pStack, pTarget, pAttacker);
     }
+
+    @Override
+    public Object getRenderPropertiesInternal() {
+        return super.getRenderPropertiesInternal();
+    }
 }

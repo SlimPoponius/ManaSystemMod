@@ -63,6 +63,12 @@ public class ModEntityType {
                             .clientTrackingRange(10)
                             .build(new ResourceLocation(GodSend.MOD_ID,"flamegolem").toString()));
 
+    public static final RegistryObject<EntityType<CloneSummonEntity>> CLONESUMMON =
+            ENTITIES.register("clonesummon",
+                    () -> EntityType.Builder.<CloneSummonEntity>of(CloneSummonEntity::new, MobCategory.MISC).sized(0.6F, 1.95F)
+                            .clientTrackingRange(10)
+                            .build(new ResourceLocation(GodSend.MOD_ID,"clonesummon").toString()));
+
     public static final RegistryObject<EntityType<ZombieSummonEntity>> ZOMBIESUMMON =
             ENTITIES.register("zombiesummon",
                     () -> EntityType.Builder.<ZombieSummonEntity>of(ZombieSummonEntity::new, MobCategory.MISC)

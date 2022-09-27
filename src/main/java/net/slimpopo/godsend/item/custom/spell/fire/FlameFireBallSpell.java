@@ -1,5 +1,6 @@
 package net.slimpopo.godsend.item.custom.spell.fire;
 
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -70,6 +71,7 @@ public class FlameFireBallSpell extends SpellItem {
             else{
                 pPlayer.sendMessage(new TextComponent("Insufficient mana cost"),pPlayer.getUUID());
             }
+
         }
         return super.use(pLevel,pPlayer,pUsedHand);
     }

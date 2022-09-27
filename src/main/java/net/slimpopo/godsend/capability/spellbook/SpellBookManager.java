@@ -44,11 +44,11 @@ public class SpellBookManager extends SavedData {
     }
 
     public String getNextSpell(String spell){
-        if(spell == sc.getSpellOne())
+        if(spell.equals(sc.getSpellOne()))
             return getSpellTwo();
-        else if(spell == sc.getSpellTwo())
+        else if(spell.equals(sc.getSpellTwo()))
             return getSpellThree();
-        else if(spell == sc.getSpellThree())
+        else if(spell.equals(sc.getSpellThree()))
             return getSpellOne();
         else
             return getSpellOne();
@@ -57,17 +57,17 @@ public class SpellBookManager extends SavedData {
     public void setSpellsForInfo(ItemStack i1, ItemStack i2, ItemStack i3){
         String sp1Nm,sp2Nm,sp3Nm;
         if (i1 != ItemStack.EMPTY)
-            sp1Nm = SpellList.ItemKey(i1.getItem());
+            sp1Nm = SpellList.ItemKey(i1.getItem(),SpellList.AllSpells);
         else
             sp1Nm = "";
 
         if (i2 != ItemStack.EMPTY)
-            sp2Nm = SpellList.ItemKey(i2.getItem());
+            sp2Nm = SpellList.ItemKey(i2.getItem(),SpellList.AllSpells);
         else
             sp2Nm = "";
 
         if (i3 != ItemStack.EMPTY)
-            sp3Nm = SpellList.ItemKey(i3.getItem());
+            sp3Nm = SpellList.ItemKey(i3.getItem(),SpellList.AllSpells);
         else
             sp3Nm = "";
 

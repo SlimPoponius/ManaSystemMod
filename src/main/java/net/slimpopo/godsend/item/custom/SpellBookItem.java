@@ -65,13 +65,13 @@ public class SpellBookItem extends Item {
                 if(findIndexOfSpell(pPlayer) == -1) {
                     currentSpell = SpellBookManager.get(pPlayer.level).getSpellOne();
                     nextSpell = SpellBookManager.get(pPlayer.level).getNextSpell(currentSpell);
-                    pPlayer.getInventory().add(SpellList.getItemStack(currentSpell));
+                    pPlayer.getInventory().add(SpellList.getItemStack(currentSpell,SpellList.AllSpells));
                 }
                 else{
                     currentSpell = nextSpell;
                     nextSpell = SpellBookManager.get(pPlayer.level).getNextSpell(currentSpell);
 
-                    replaceSpell(pPlayer,findIndexOfSpell(pPlayer),SpellList.getItemStack(currentSpell));
+                    replaceSpell(pPlayer,findIndexOfSpell(pPlayer),SpellList.getItemStack(currentSpell,SpellList.AllSpells));
 
                 }
             }
@@ -102,9 +102,9 @@ public class SpellBookItem extends Item {
                 .map(SpellBookCapability::getSpellThree)
                 .orElse("");
 
-        Item spell1 = SpellList.getByItemStack(sp1Nm);
-        Item spell2 = SpellList.getByItemStack(sp2Nm);
-        Item spell3 = SpellList.getByItemStack(sp3Nm);
+        Item spell1 = SpellList.getByItemStack(sp1Nm,SpellList.AllSpells);
+        Item spell2 = SpellList.getByItemStack(sp2Nm,SpellList.AllSpells);
+        Item spell3 = SpellList.getByItemStack(sp3Nm,SpellList.AllSpells);
 
         //Get Spell From List
         if (spell1 != null) {
@@ -202,17 +202,17 @@ public class SpellBookItem extends Item {
 
     public void UpdateSpellList(Player player,ItemStack i1, ItemStack i2, ItemStack i3){
         if (i1 != ItemStack.EMPTY)
-            sp1Nm = SpellList.ItemKey(i1.getItem());
+            sp1Nm = SpellList.ItemKey(i1.getItem(),SpellList.AllSpells);
         else
             sp1Nm = "";
 
         if (i2 != ItemStack.EMPTY)
-            sp2Nm = SpellList.ItemKey(i2.getItem());
+            sp2Nm = SpellList.ItemKey(i2.getItem(),SpellList.AllSpells);
         else
             sp2Nm = "";
 
         if (i3 != ItemStack.EMPTY)
-            sp3Nm = SpellList.ItemKey(i3.getItem());
+            sp3Nm = SpellList.ItemKey(i3.getItem(),SpellList.AllSpells);
         else
             sp3Nm = "";
 

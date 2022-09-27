@@ -89,11 +89,11 @@ public class SpellLearnerScreen extends AbstractContainerScreen<SpellLearnerCont
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
         this.font.draw(pPoseStack,title,this.leftPos + 93 ,this.topPos + 5,0x404040);
-        this.font.draw(pPoseStack,fireLabel,this.leftPos + 137,this.topPos + 47,0xff0000);
-        this.font.draw(pPoseStack,iceLabel,this.leftPos + 17 ,this.topPos + 67,0x87ceeb);
-        this.font.draw(pPoseStack,earthLabel,this.leftPos + 127,this.topPos + 87,0x55ff55);
-        this.font.draw(pPoseStack,windLabel,this.leftPos + 17 ,this.topPos + 107,0x90ee90);
-        this.font.draw(pPoseStack,thunderLabel,this.leftPos + 117,this.topPos + 127,0xffff00);
+//        this.font.draw(pPoseStack,fireLabel,this.leftPos + 137,this.topPos + 47,0xff0000);
+//        this.font.draw(pPoseStack,iceLabel,this.leftPos + 17 ,this.topPos + 67,0x87ceeb);
+//        this.font.draw(pPoseStack,earthLabel,this.leftPos + 127,this.topPos + 87,0x55ff55);
+//        this.font.draw(pPoseStack,windLabel,this.leftPos + 17 ,this.topPos + 107,0x90ee90);
+//        this.font.draw(pPoseStack,thunderLabel,this.leftPos + 117,this.topPos + 127,0xffff00);
     }
 
     @Override
